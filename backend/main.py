@@ -12,6 +12,8 @@ try:
     from .database import Base, SessionLocal, engine
     from .services import query_engine
     from .agents.email_agent import email_agent
+    from .auth import get_or_create_default_admin
+    from .routes.auth import router as auth_router
     from .routes.agent import router as agent_router
     from .routes.analytics import router as analytics_router
     from .routes.upload import router as upload_router
@@ -26,6 +28,8 @@ except ImportError:
     from backend.database import Base, SessionLocal, engine
     from backend.services import query_engine
     from backend.agents.email_agent import email_agent
+    from backend.auth import get_or_create_default_admin
+    from backend.routes.auth import router as auth_router
     from backend.routes.agent import router as agent_router
     from backend.routes.analytics import router as analytics_router
     from backend.routes.upload import router as upload_router
@@ -55,15 +59,18 @@ app.add_middleware(
 app.include_router(upload_router)
 app.include_router(analytics_router)
 app.include_router(agent_router)
+app.include_router(auth_router)
 app.include_router(upload_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
 app.include_router(agent_router, prefix="/api")
+app.include_router(auth_router, prefix="/api")
 
 
 @app.on_event("startup")
 def warm_query_index():
     db = SessionLocal()
     try:
+        get_or_create_default_admin(db)
         students = fetch_students(db)
         if students:
             try:

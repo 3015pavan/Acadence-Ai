@@ -168,9 +168,10 @@ def _sanitize_query(raw: str) -> Optional[str]:
     return cleaned
 
 
-def _cache_key(query: str) -> str:
+def _cache_key(query: str, owner_user_id: Optional[int] = None) -> str:
+    owner_suffix = f":{owner_user_id}" if owner_user_id is not None else ":public"
     digest = hashlib.sha256(query.strip().lower().encode("utf-8")).hexdigest()
-    return f"student-query:{digest}"
+    return f"student-query{owner_suffix}:{digest}"
 
 
 def _empty_response(message: str, *, suggestions: Optional[List[str]] = None, intent: Optional[str] = None, meta: Optional[Dict[str, object]] = None) -> Dict[str, object]:
@@ -464,6 +465,7 @@ def _is_strict_structured_query(query: str) -> bool:
 
 def _infer_usns_from_matching_rows(context: Dict[str, object], limit: int = 3) -> List[str]:
     rows = context.get("matching_results", [])
+    owner_user_id: Optional[int] = None
     if not isinstance(rows, list) or not rows:
         return []
 
@@ -490,23 +492,23 @@ def _normalize_scores(values: Dict[str, float]) -> Dict[str, float]:
     return {key: (value - minimum) / (maximum - minimum) for key, value in values.items()}
 
 
-def _hybrid_lookup_by_name(db: Session, query: str, student_name: str, limit: int = 10) -> Dict[str, object]:
+def _hybrid_lookup_by_name(db: Session, query: str, student_name: str, limit: int = 10, owner_user_id: Optional[int] = None) -> Dict[str, object]:
     es_scores: Dict[str, float] = {}
     try:
         elastic_client = get_elasticsearch_client()
         es_hits = search_students_by_name_ranked(elastic_client, student_name, limit=limit)
         es_scores = _normalize_scores({hit["usn"]: float(hit.get("score") or 0.0) for hit in es_hits})
     except Exception as exc:
-        # Elasticsearch may be down or unreachable; continue with FAISS/local fallbacks.
-        logging.warning("Elasticsearch lookup failed, falling back to FAISS/local search: %s", exc)
+        # Elasticsearch may be down or unreachable; continue with semantic/local fallbacks.
+        logging.warning("Elasticsearch lookup failed, falling back to semantic/local search: %s", exc)
         es_scores = {}
 
-    faiss_scores: Dict[str, float] = {}
+    semantic_scores: Dict[str, float] = {}
     try:
-        faiss_hits = QueryIntelligenceIndex().search(query, top_k=20)
-        # Accept both student summary and detailed student documents from FAISS
-        student_hits = [hit for hit in faiss_hits if str(hit["metadata"].get("type", "")).startswith("student")]
-        faiss_scores = _normalize_scores(
+        semantic_hits = QueryIntelligenceIndex(owner_user_id=owner_user_id).search(query, top_k=20)
+        # Accept both student summary and detailed student documents from the semantic store.
+        student_hits = [hit for hit in semantic_hits if str(hit["metadata"].get("type", "")).startswith("student")]
+        semantic_scores = _normalize_scores(
             {
                 str(hit["metadata"].get("usn")): float(hit["score"])
                 for hit in student_hits
@@ -514,20 +516,20 @@ def _hybrid_lookup_by_name(db: Session, query: str, student_name: str, limit: in
             }
         )
     except Exception:
-        faiss_scores = {}
+        semantic_scores = {}
 
     combined: Dict[str, float] = {}
-    for usn in set([*es_scores.keys(), *faiss_scores.keys()]):
-        combined[usn] = 0.65 * es_scores.get(usn, 0.0) + 0.35 * faiss_scores.get(usn, 0.0)
+    for usn in set([*es_scores.keys(), *semantic_scores.keys()]):
+        combined[usn] = 0.65 * es_scores.get(usn, 0.0) + 0.35 * semantic_scores.get(usn, 0.0)
 
     ranked_usns = [item[0] for item in sorted(combined.items(), key=lambda item: item[1], reverse=True)]
-    students = fetch_students_by_usns(db, ranked_usns)
+    students = fetch_students_by_usns(db, ranked_usns, owner_user_id=owner_user_id)
     return {
         "students": students,
         "meta": {
             "hybrid_scores": {student.usn: round(combined.get(student.usn, 0.0), 4) for student in students},
             "es_candidates": len(es_scores),
-            "faiss_candidates": len(faiss_scores),
+            "semantic_candidates": len(semantic_scores),
         },
     }
 
@@ -562,7 +564,7 @@ def classify_query_type(query: str, history: Optional[Sequence[Dict[str, object]
         return "contextual"
 
     # Fallback to intent detection which maps to types
-    intent_result = detect_intent(query, history=history)
+    intent_result = detect_intent(query, history=history, owner_user_id=owner_user_id)
     intent = intent_result.get("intent")
     if intent:
         return _plan_query(str(intent))
@@ -578,7 +580,7 @@ def _students_from_dataframe(db: Session, dataframe: pd.DataFrame) -> List[objec
     return _filter_students_via_postgres(db, usns)
 
 
-def _latest_history_students(db: Session, history: Optional[Sequence[Dict[str, object]]] = None) -> List[object]:
+def _latest_history_students(db: Session, history: Optional[Sequence[Dict[str, object]]] = None, owner_user_id: Optional[int] = None) -> List[object]:
     recent_usns: List[str] = []
     for item in reversed(list(history or [])):
         usns = item.get("student_usns", []) if isinstance(item, dict) else []
@@ -588,7 +590,7 @@ def _latest_history_students(db: Session, history: Optional[Sequence[Dict[str, o
                 recent_usns.append(normalized)
         if recent_usns:
             break
-    return fetch_students_by_usns(db, recent_usns)
+    return fetch_students_by_usns(db, recent_usns, owner_user_id=owner_user_id)
 
 
 def _is_followup_query(query: str) -> bool:
@@ -611,13 +613,13 @@ def _is_followup_query(query: str) -> bool:
     return any(marker in normalized for marker in followup_markers)
 
 
-def _find_students_from_query_or_history(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None) -> List[object]:
+def _find_students_from_query_or_history(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None, owner_user_id: Optional[int] = None) -> List[object]:
     usn_match = re.search(r"\b[0-9][A-Z0-9]{5,}\b", query.upper())
     if usn_match:
-        student = fetch_student_by_usn(db, usn_match.group(0))
+        student = fetch_student_by_usn(db, usn_match.group(0), owner_user_id=owner_user_id)
         return [student] if student else []
 
-    students = fetch_students(db)
+    students = fetch_students(db, owner_user_id=owner_user_id)
     normalized_query = _normalize_text(query)
     subject_phrase = _extract_subject_phrase(query)
     student_query = normalized_query
@@ -631,7 +633,7 @@ def _find_students_from_query_or_history(db: Session, query: str, history: Optio
     )
     student_query = re.sub(r"\s+", " ", student_query).strip()
     query_tokens = [token for token in student_query.split() if len(token) > 2]
-    history_students = _latest_history_students(db, history)
+    history_students = _latest_history_students(db, history, owner_user_id=owner_user_id)
 
     exact_name_matches = [student for student in students if _normalize_text(student.name) in student_query]
     if exact_name_matches:
@@ -770,7 +772,7 @@ def _find_subject_results(student: object, query: str) -> List[object]:
     return [result for score, result in scored_results if score == best_score][:3]
 
 
-def _execute_subject_for_grade_query(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None) -> Optional[Dict[str, object]]:
+def _execute_subject_for_grade_query(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None, owner_user_id: Optional[int] = None) -> Optional[Dict[str, object]]:
     """Handle reverse subject lookup: 'In which subject did [student] get [grade]?'
     
     Regex-based extraction of student (name/USN) and grade, then database lookup.
@@ -794,7 +796,7 @@ def _execute_subject_for_grade_query(db: Session, query: str, history: Optional[
         return None
     
     # Find student directly using fuzzy matching
-    students = fetch_students(db)
+    students = fetch_students(db, owner_user_id=owner_user_id)
     matched_student = None
     best_score = 0
     
@@ -865,7 +867,7 @@ def _execute_subject_for_grade_query(db: Session, query: str, history: Optional[
     )
 
 
-def _execute_subject_result_query(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None) -> Optional[Dict[str, object]]:
+def _execute_subject_result_query(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None, owner_user_id: Optional[int] = None) -> Optional[Dict[str, object]]:
     normalized_query = _normalize_text(query)
     asks_grade = "grade" in normalized_query
     asks_gp = "gp" in normalized_query or "grade point" in normalized_query
@@ -892,7 +894,7 @@ def _execute_subject_result_query(db: Session, query: str, history: Optional[Seq
 
     detail_meta = {"query_type": "lookup", "include_details": False}
 
-    matched_students = _find_students_from_query_or_history(db, query, history)
+    matched_students = _find_students_from_query_or_history(db, query, history, owner_user_id=owner_user_id)
     if not matched_students:
         return None
 
@@ -970,13 +972,13 @@ def _execute_subject_result_query(db: Session, query: str, history: Optional[Seq
     )
 
 
-def _execute_cross_subject_comparison_query(db: Session, query: str) -> Optional[Dict[str, object]]:
+def _execute_cross_subject_comparison_query(db: Session, query: str, owner_user_id: Optional[int] = None) -> Optional[Dict[str, object]]:
     subject_contrast = _extract_contrast_subject_phrases(query)
     if not subject_contrast:
         return None
 
     stronger_subject, weaker_subject = subject_contrast
-    students = fetch_students(db)
+    students = fetch_students(db, owner_user_id=owner_user_id)
     comparison_rows = []
     for student in students:
         stronger_match = _best_subject_match(student, stronger_subject)
@@ -1448,8 +1450,9 @@ def _build_query_context(
     query: str,
     history: Optional[Sequence[Dict[str, object]]] = None,
     retrieval_mode: str = "hybrid",
+    owner_user_id: Optional[int] = None,
 ) -> Dict[str, object]:
-    students = fetch_students(db)
+    students = fetch_students(db, owner_user_id=owner_user_id)
     scored_students = sorted(
         students,
         key=lambda student: (_student_query_score(query, student), float(student.sgpa)),
@@ -1465,7 +1468,7 @@ def _build_query_context(
                 recent_usns.append(normalized)
         if len(recent_usns) >= 4:
             break
-    for student in fetch_students_by_usns(db, recent_usns):
+    for student in fetch_students_by_usns(db, recent_usns, owner_user_id=owner_user_id):
         if all(existing.usn != student.usn for existing in selected_students):
             selected_students.insert(0, student)
 
@@ -1474,26 +1477,26 @@ def _build_query_context(
 
     if retrieval_mode in {"semantic", "hybrid"}:
         try:
-            faiss_hits = QueryIntelligenceIndex().search(query, top_k=12)
-            faiss_usns = [
+            semantic_hits = QueryIntelligenceIndex(owner_user_id=owner_user_id).search(query, top_k=12)
+            semantic_usns = [
                 str(hit["metadata"].get("usn")).upper()
-                for hit in faiss_hits
+                for hit in semantic_hits
                 if str(hit["metadata"].get("type", "")).startswith("student") and hit["metadata"].get("usn")
             ]
-            for student in fetch_students_by_usns(db, faiss_usns):
+            for student in fetch_students_by_usns(db, semantic_usns, owner_user_id=owner_user_id):
                 if all(existing.usn != student.usn for existing in selected_students):
                     selected_students.append(student)
                 if len(selected_students) >= 8:
                     break
         except Exception:
             pass
-        retrieved_chunks = retrieve_context_documents(query, top_k=10)
+        retrieved_chunks = retrieve_context_documents(query, top_k=10, owner_user_id=owner_user_id)
 
     if retrieval_mode in {"sql", "hybrid"}:
         top_result_rows = _top_result_rows_for_query(students, query, limit=20)
 
-    summary_students = fetch_students(db)
-    topper = fetch_topper(db)
+    summary_students = fetch_students(db, owner_user_id=owner_user_id)
+    topper = fetch_topper(db, owner_user_id=owner_user_id)
     subject_stats = _subject_statistics(summary_students)
     summary = {
         "total_students": len(summary_students),
@@ -1536,9 +1539,9 @@ def _build_query_context(
     }
 
 
-def _lookup_students_by_name_local(db: Session, student_name: str) -> List[object]:
+def _lookup_students_by_name_local(db: Session, student_name: str, owner_user_id: Optional[int] = None) -> List[object]:
     normalized = " ".join(student_name.lower().split())
-    students = fetch_students(db)
+    students = fetch_students(db, owner_user_id=owner_user_id)
 
     exact_matches = [student for student in students if " ".join(student.name.lower().split()) == normalized]
     if exact_matches:
@@ -1915,9 +1918,10 @@ def _execute_direct_dataset_query(
     query: str,
     dataset_ids: Optional[Sequence[int]] = None,
     merge: Optional[str] = None,
+    owner_user_id: Optional[int] = None,
 ) -> Optional[Dict[str, object]]:
     normalized = _normalize_text(query)
-    students = fetch_students(db, dataset_ids=dataset_ids, merge=merge)
+    students = fetch_students(db, dataset_ids=dataset_ids, merge=merge, owner_user_id=owner_user_id)
     results_df = build_results_dataframe(students)
     students_df = build_students_dataframe(students)
     grade_value = _extract_grade_value(query)
@@ -2354,7 +2358,7 @@ def _execute_direct_dataset_query(
     return None
 
 
-def _execute_generic_grounded_filter_query(db: Session, query: str) -> Optional[Dict[str, object]]:
+def _execute_generic_grounded_filter_query(db: Session, query: str, owner_user_id: Optional[int] = None) -> Optional[Dict[str, object]]:
     """Handle common filter queries deterministically without relying on intent creation."""
     lowered = query.lower()
     normalized = _normalize_text(query)
@@ -2363,12 +2367,12 @@ def _execute_generic_grounded_filter_query(db: Session, query: str) -> Optional[
         return None
 
     if ("gp" in normalized or "grade point" in normalized) and re.search(r"\b0(?:\.0+)?\b", normalized):
-        return _execute_filter(db, "GET_GP_ZERO_ANY", {}, confidence=0.95)
+        return _execute_filter(db, "GET_GP_ZERO_ANY", {}, confidence=0.95, owner_user_id=owner_user_id)
 
     if "sgpa" in normalized and _is_sgpa_range_query(query):
         range_entities = _extract_sgpa_range(query)
         if range_entities:
-            return _execute_filter(db, "GET_SGPA_RANGE", range_entities, confidence=0.95)
+            return _execute_filter(db, "GET_SGPA_RANGE", range_entities, confidence=0.95, owner_user_id=owner_user_id)
 
     grade_value = _extract_grade_value(query)
     grade_query_markers = [
@@ -2378,16 +2382,16 @@ def _execute_generic_grounded_filter_query(db: Session, query: str) -> Optional[
         "grade",
     ]
     if grade_value and any(marker in lowered for marker in grade_query_markers):
-        return _execute_filter(db, "GET_STUDENTS_WITH_GRADE", {"grade": grade_value}, confidence=0.95)
+        return _execute_filter(db, "GET_STUDENTS_WITH_GRADE", {"grade": grade_value}, confidence=0.95, owner_user_id=owner_user_id)
 
     return None
 
 
-def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, object], confidence: float) -> Dict[str, object]:
+def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, object], confidence: float, owner_user_id: Optional[int] = None) -> Dict[str, object]:
     if intent == "GET_RESULT_BY_NAME":
         student_name = str(entities.get("name") or "").strip()
         if not student_name:
-            inferred_students = _find_students_from_query_or_history(db, query)
+            inferred_students = _find_students_from_query_or_history(db, query, owner_user_id=owner_user_id)
             if inferred_students:
                 if len(inferred_students) == 1:
                     answer = _answer_for_single_student_query(query, inferred_students[0])
@@ -2406,10 +2410,10 @@ def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, ob
                 intent=intent,
                 meta={"query_type": "lookup"},
             )
-        matched_students = _lookup_students_by_name_local(db, student_name)
-        hybrid_meta = {"hybrid_scores": {}, "es_candidates": 0, "faiss_candidates": 0}
+        matched_students = _lookup_students_by_name_local(db, student_name, owner_user_id=owner_user_id)
+        hybrid_meta = {"hybrid_scores": {}, "es_candidates": 0, "semantic_candidates": 0}
         if not matched_students:
-            hybrid = _hybrid_lookup_by_name(db, query, student_name)
+            hybrid = _hybrid_lookup_by_name(db, query, student_name, owner_user_id=owner_user_id)
             matched_students = hybrid["students"]
             hybrid_meta = hybrid["meta"]
         if not matched_students:
@@ -2433,7 +2437,7 @@ def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, ob
                 intent=intent,
                 meta={"query_type": "lookup"},
             )
-        student = fetch_student_by_usn(db, usn)
+        student = fetch_student_by_usn(db, usn, owner_user_id=owner_user_id)
         if not student:
             return _empty_response(f"No student was found with USN {usn}.", intent=intent, meta={"query_type": "lookup"})
         return _student_response(
@@ -2452,7 +2456,7 @@ def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, ob
                 intent=intent,
                 meta={"query_type": "lookup"},
             )
-        students = fetch_students(db)
+        students = fetch_students(db, owner_user_id=owner_user_id)
         matched_students = [student for student in students if student.usn.upper().startswith(prefix)]
         if not matched_students:
             return _empty_response(f"No students were found with USN prefix {prefix}.", intent=intent, meta={"query_type": "lookup"})
@@ -2472,7 +2476,7 @@ def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, ob
                 intent=intent,
                 meta={"query_type": "lookup"},
             )
-        students = fetch_students(db)
+        students = fetch_students(db, owner_user_id=owner_user_id)
         matched_students = [student for student in students if student.name.lower().startswith(prefix.lower())]
         if not matched_students:
             return _empty_response(f"No students were found with name prefix '{prefix}'.", intent=intent, meta={"query_type": "lookup"})
@@ -2486,8 +2490,8 @@ def _execute_lookup(db: Session, query: str, intent: str, entities: Dict[str, ob
     return _empty_response("That lookup query is not implemented yet.", intent=intent, meta={"query_type": "lookup"})
 
 
-def _execute_filter(db: Session, intent: str, entities: Dict[str, object], confidence: float) -> Dict[str, object]:
-    students = fetch_students(db)
+def _execute_filter(db: Session, intent: str, entities: Dict[str, object], confidence: float, owner_user_id: Optional[int] = None) -> Dict[str, object]:
+    students = fetch_students(db, owner_user_id=owner_user_id)
     students_df = build_students_dataframe(students)
     results_df = build_results_dataframe(students)
 
@@ -2850,11 +2854,11 @@ def _execute_filter(db: Session, intent: str, entities: Dict[str, object], confi
     return _empty_response("That filter query is not implemented yet.", intent=intent, meta={"query_type": "filter"})
 
 
-def _execute_aggregation(db: Session, intent: str, entities: Dict[str, object], confidence: float) -> Dict[str, object]:
-    students = fetch_students(db)
+def _execute_aggregation(db: Session, intent: str, entities: Dict[str, object], confidence: float, owner_user_id: Optional[int] = None) -> Dict[str, object]:
+    students = fetch_students(db, owner_user_id=owner_user_id)
 
     if intent == "GET_TOPPER":
-        topper = fetch_topper(db)
+        topper = fetch_topper(db, owner_user_id=owner_user_id)
         if not topper:
             return _empty_response("No topper could be computed from the current dataset.", intent=intent, meta={"query_type": "aggregation"})
         return _student_response(
@@ -2886,7 +2890,7 @@ def _execute_aggregation(db: Session, intent: str, entities: Dict[str, object], 
 
     if intent == "GET_TOP_N":
         limit = int(entities.get("limit") or 5)
-        top_students = fetch_top_students(db, limit)
+        top_students = fetch_top_students(db, limit, owner_user_id=owner_user_id)
         return _student_response(
             intent,
             f"Showing the top {len(top_students)} students by SGPA.",
@@ -3260,6 +3264,7 @@ def _execute_contextual_answer(
     query: str,
     history: Optional[Sequence[Dict[str, object]]] = None,
     retrieval_mode: str = "hybrid",
+    owner_user_id: Optional[int] = None,
 ) -> Optional[Dict[str, object]]:
     context_start = time.perf_counter()
     use_history = _is_followup_query(query)
@@ -3284,7 +3289,7 @@ def _execute_contextual_answer(
     try:
         name_candidate = _extract_name_value(query)
         if name_candidate:
-            name_matched = _lookup_students_by_name_local(db, name_candidate)
+            name_matched = _lookup_students_by_name_local(db, name_candidate, owner_user_id=owner_user_id)
             if name_matched:
                 allowed_usns = {str(s.usn).upper() for s in name_matched}
                 if llm_response.get("student_usns"):
@@ -3299,7 +3304,7 @@ def _execute_contextual_answer(
     try:
         compact_query = "".join(query.lower().split())
         compact_matches = set()
-        for student in fetch_students(db):
+        for student in fetch_students(db, owner_user_id=owner_user_id):
             compact_name = "".join(student.name.lower().split())
             if compact_name and compact_name in compact_query:
                 compact_matches.add(str(student.usn).upper())
@@ -3330,7 +3335,7 @@ def _execute_contextual_answer(
             usn for usn in inferred_usns if not available_usns or usn in available_usns
         ]
 
-    matched_students = fetch_students_by_usns(db, llm_response.get("student_usns", []))
+    matched_students = fetch_students_by_usns(db, llm_response.get("student_usns", []), owner_user_id=owner_user_id)
     citations = llm_response.get("citations", [])
     llm_usns = [str(usn).upper() for usn in llm_response.get("student_usns", []) if str(usn).strip()]
     context_meta = {
@@ -3427,28 +3432,29 @@ def _execute_structured_database_query(
     mode_plan: Optional[Dict[str, object]] = None,
     dataset_ids: Optional[Sequence[int]] = None,
     merge: Optional[str] = None,
+    owner_user_id: Optional[int] = None,
 ) -> Optional[Dict[str, object]]:
     mode_plan = mode_plan or {"mode": "sql", "confidence": 0.0, "reason": "structured"}
 
     # Try reverse subject lookup first (student + grade → find subjects)
     # This must run before direct_dataset_query to avoid false matches
-    subject_for_grade_response = _execute_subject_for_grade_query(db, query, history=history)
+    subject_for_grade_response = _execute_subject_for_grade_query(db, query, history=history, owner_user_id=owner_user_id)
     if subject_for_grade_response:
         return _annotate_route(subject_for_grade_response, mode_plan=mode_plan, route="sql_database", intent=subject_for_grade_response.get("intent"))
 
-    direct_response = _execute_direct_dataset_query(db, query, dataset_ids=dataset_ids, merge=merge)
+    direct_response = _execute_direct_dataset_query(db, query, dataset_ids=dataset_ids, merge=merge, owner_user_id=owner_user_id)
     if direct_response:
         return _annotate_route(direct_response, mode_plan=mode_plan, route="sql_database", intent=direct_response.get("intent"))
 
-    subject_response = _execute_subject_result_query(db, query, history=history)
+    subject_response = _execute_subject_result_query(db, query, history=history, owner_user_id=owner_user_id)
     if subject_response:
         return _annotate_route(subject_response, mode_plan=mode_plan, route="sql_database", intent=subject_response.get("intent"))
 
-    generic_response = _execute_generic_grounded_filter_query(db, query)
+    generic_response = _execute_generic_grounded_filter_query(db, query, owner_user_id=owner_user_id)
     if generic_response:
         return _annotate_route(generic_response, mode_plan=mode_plan, route="sql_database", intent=generic_response.get("intent"))
 
-    intent_result = detect_intent(query, history=history)
+    intent_result = detect_intent(query, history=history, owner_user_id=owner_user_id)
     intent = intent_result.get("intent")
     if not intent:
         return None
@@ -3468,7 +3474,7 @@ def _execute_structured_database_query(
         )
 
     query_type = _plan_query(intent_str)
-    cache_key = _cache_key(query)
+    cache_key = _cache_key(query, owner_user_id)
     if intent_str in CACHEABLE_INTENTS:
         cached = get_cached_query(cache_key)
         if cached:
@@ -3476,11 +3482,11 @@ def _execute_structured_database_query(
             return _annotate_route(cached, mode_plan=mode_plan, route="sql_database", intent=intent_str, cache_hit=True)
 
     if query_type == "lookup":
-        response = _execute_lookup(db, query, intent_str, entities, confidence)
+        response = _execute_lookup(db, query, intent_str, entities, confidence, owner_user_id=owner_user_id)
     elif query_type == "aggregation":
-        response = _execute_aggregation(db, intent_str, entities, confidence)
+        response = _execute_aggregation(db, intent_str, entities, confidence, owner_user_id=owner_user_id)
     elif query_type == "filter":
-        response = _execute_filter(db, intent_str, entities, confidence)
+        response = _execute_filter(db, intent_str, entities, confidence, owner_user_id=owner_user_id)
     else:
         return None
 
@@ -3490,7 +3496,7 @@ def _execute_structured_database_query(
     return response
 
 
-def execute_query(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None, dataset_ids: Optional[Sequence[int]] = None, merge: Optional[str] = None) -> Dict[str, object]:
+def execute_query(db: Session, query: str, history: Optional[Sequence[Dict[str, object]]] = None, dataset_ids: Optional[Sequence[int]] = None, merge: Optional[str] = None, owner_user_id: Optional[int] = None) -> Dict[str, object]:
     _QUERY_METRICS["total_queries"] += 1
 
     # Basic input validation / sanitization
@@ -3500,7 +3506,7 @@ def execute_query(db: Session, query: str, history: Optional[Sequence[Dict[str, 
         return _empty_response("Please provide a valid query.")
     query = sanitized
 
-    students = fetch_students(db, dataset_ids=dataset_ids, merge=merge)
+    students = fetch_students(db, dataset_ids=dataset_ids, merge=merge, owner_user_id=owner_user_id)
     if not students:
         return _empty_response("No student data is loaded yet. Upload a result file before querying.")
 
@@ -3526,7 +3532,7 @@ def execute_query(db: Session, query: str, history: Optional[Sequence[Dict[str, 
     retrieval_mode = str(mode_plan.get("mode", "hybrid"))
 
     if retrieval_mode == "sql":
-        structured_response = _execute_structured_database_query(db, query, history=history, mode_plan=mode_plan, dataset_ids=dataset_ids, merge=merge)
+        structured_response = _execute_structured_database_query(db, query, history=history, mode_plan=mode_plan, dataset_ids=dataset_ids, merge=merge, owner_user_id=owner_user_id)
         if structured_response:
             _QUERY_METRICS["structured_used"] += 1
             return structured_response
@@ -3535,14 +3541,14 @@ def execute_query(db: Session, query: str, history: Optional[Sequence[Dict[str, 
         mode_plan = {**mode_plan, "mode": "hybrid", "reason": "sql_fallback_to_hybrid"}
 
     if retrieval_mode == "hybrid":
-        structured_response = _execute_structured_database_query(db, query, history=history, mode_plan=mode_plan, dataset_ids=dataset_ids, merge=merge)
+        structured_response = _execute_structured_database_query(db, query, history=history, mode_plan=mode_plan, dataset_ids=dataset_ids, merge=merge, owner_user_id=owner_user_id)
         if structured_response:
             mode_plan = {**mode_plan, "structured_intent": structured_response.get("intent")}
             if str(mode_plan.get("reason", "")) in {"fallback", "sql_fallback_to_hybrid"}:
                 _QUERY_METRICS["structured_used"] += 1
                 return structured_response
 
-    contextual_response = _execute_contextual_answer(db, query, history=history, retrieval_mode=retrieval_mode)
+    contextual_response = _execute_contextual_answer(db, query, history=history, retrieval_mode=retrieval_mode, owner_user_id=owner_user_id)
     contextual_confidence = float(contextual_response.get("meta", {}).get("confidence", 0.0)) if contextual_response else 0.0
     contextual_citations = bool(contextual_response and contextual_response.get("meta", {}).get("citations"))
     contextual_student_refs = bool(contextual_response and contextual_response.get("meta", {}).get("student_usns"))

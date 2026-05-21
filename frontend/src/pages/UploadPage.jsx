@@ -56,7 +56,7 @@ export default function UploadPage() {
           <h2 className="text-2xl font-semibold text-slate-900">Upload Results File</h2>
           <p className="mt-2 text-sm text-slate-600">
             Supported formats are <span className="font-medium">.xlsx</span> and <span className="font-medium">.pdf</span>.
-            The backend detects headers dynamically, cleans the dataset, computes missing SGPA values, and syncs PostgreSQL, Elasticsearch, and the FAISS intent index.
+            The backend detects headers dynamically, cleans the dataset, computes missing SGPA values, and syncs PostgreSQL, Elasticsearch, and the semantic intent store.
           </p>
 
           <form onSubmit={handleUpload} className="mt-6 space-y-4">
@@ -89,7 +89,7 @@ export default function UploadPage() {
           <div className="mt-4 space-y-3 text-sm text-slate-600">
             <p>The parser reads every sheet or table, resolves multi-row headers, removes empty rows, and normalizes student records.</p>
             <p>Pandas computes missing SGPA values, marks failures when any grade equals F, and prepares the processed Excel output.</p>
-            <p>FastAPI stores the clean dataset in PostgreSQL, mirrors searchable student documents into Elasticsearch, and refreshes the FAISS intent map.</p>
+            <p>FastAPI stores the clean dataset in PostgreSQL, mirrors searchable student documents into Elasticsearch, and refreshes the semantic intent map.</p>
           </div>
         </div>
       </div>

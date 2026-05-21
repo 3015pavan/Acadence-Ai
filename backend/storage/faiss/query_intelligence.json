@@ -1,0 +1,3484 @@
+[
+  {
+    "page_content": "topper. Intent: GET_TOPPER. Return the single highest SGPA student.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOPPER",
+      "example": "topper"
+    }
+  },
+  {
+    "page_content": "who is the topper. Intent: GET_TOPPER. Return the single highest SGPA student.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOPPER",
+      "example": "who is the topper"
+    }
+  },
+  {
+    "page_content": "highest sgpa. Intent: GET_TOPPER. Return the single highest SGPA student.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOPPER",
+      "example": "highest sgpa"
+    }
+  },
+  {
+    "page_content": "best student. Intent: GET_TOPPER. Return the single highest SGPA student.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOPPER",
+      "example": "best student"
+    }
+  },
+  {
+    "page_content": "show the first rank student. Intent: GET_TOPPER. Return the single highest SGPA student.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOPPER",
+      "example": "show the first rank student"
+    }
+  },
+  {
+    "page_content": "who failed. Intent: GET_FAILED. Return students with at least one failing grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED",
+      "example": "who failed"
+    }
+  },
+  {
+    "page_content": "failed students. Intent: GET_FAILED. Return students with at least one failing grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED",
+      "example": "failed students"
+    }
+  },
+  {
+    "page_content": "show students who got f. Intent: GET_FAILED. Return students with at least one failing grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED",
+      "example": "show students who got f"
+    }
+  },
+  {
+    "page_content": "students with arrears. Intent: GET_FAILED. Return students with at least one failing grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED",
+      "example": "students with arrears"
+    }
+  },
+  {
+    "page_content": "list failures. Intent: GET_FAILED. Return students with at least one failing grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED",
+      "example": "list failures"
+    }
+  },
+  {
+    "page_content": "students who failed in engineering chemistry lab. Intent: GET_FAILED_IN_SUBJECT. Return students who failed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_IN_SUBJECT",
+      "example": "students who failed in engineering chemistry lab"
+    }
+  },
+  {
+    "page_content": "failed in design thinking. Intent: GET_FAILED_IN_SUBJECT. Return students who failed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_IN_SUBJECT",
+      "example": "failed in design thinking"
+    }
+  },
+  {
+    "page_content": "who failed in advanced calculus. Intent: GET_FAILED_IN_SUBJECT. Return students who failed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_IN_SUBJECT",
+      "example": "who failed in advanced calculus"
+    }
+  },
+  {
+    "page_content": "list failed students in ma11. Intent: GET_FAILED_IN_SUBJECT. Return students who failed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_IN_SUBJECT",
+      "example": "list failed students in ma11"
+    }
+  },
+  {
+    "page_content": "students with f in chemistry. Intent: GET_FAILED_IN_SUBJECT. Return students who failed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_IN_SUBJECT",
+      "example": "students with f in chemistry"
+    }
+  },
+  {
+    "page_content": "students who passed in advanced calculus. Intent: GET_PASSED_IN_SUBJECT. Return students who passed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_PASSED_IN_SUBJECT",
+      "example": "students who passed in advanced calculus"
+    }
+  },
+  {
+    "page_content": "passed in design thinking. Intent: GET_PASSED_IN_SUBJECT. Return students who passed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_PASSED_IN_SUBJECT",
+      "example": "passed in design thinking"
+    }
+  },
+  {
+    "page_content": "who passed in engineering chemistry lab. Intent: GET_PASSED_IN_SUBJECT. Return students who passed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_PASSED_IN_SUBJECT",
+      "example": "who passed in engineering chemistry lab"
+    }
+  },
+  {
+    "page_content": "list passed students in ma11. Intent: GET_PASSED_IN_SUBJECT. Return students who passed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_PASSED_IN_SUBJECT",
+      "example": "list passed students in ma11"
+    }
+  },
+  {
+    "page_content": "students with a in calculus. Intent: GET_PASSED_IN_SUBJECT. Return students who passed in a specific subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_PASSED_IN_SUBJECT",
+      "example": "students with a in calculus"
+    }
+  },
+  {
+    "page_content": "result of abir. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "result of abir"
+    }
+  },
+  {
+    "page_content": "show abir result. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "show abir result"
+    }
+  },
+  {
+    "page_content": "marks for ananya. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "marks for ananya"
+    }
+  },
+  {
+    "page_content": "student result by name. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "student result by name"
+    }
+  },
+  {
+    "page_content": "give me the result of rahul. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "give me the result of rahul"
+    }
+  },
+  {
+    "page_content": "what is the sgpa of brinda jagadeesh. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "what is the sgpa of brinda jagadeesh"
+    }
+  },
+  {
+    "page_content": "what grades did abir goldar receive. Intent: GET_RESULT_BY_NAME. Return detailed result for one student matched by name.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_NAME",
+      "example": "what grades did abir goldar receive"
+    }
+  },
+  {
+    "page_content": "show 1ms21cs001. Intent: GET_RESULT_BY_USN. Return detailed result for one student matched by exact USN.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_USN",
+      "example": "show 1ms21cs001"
+    }
+  },
+  {
+    "page_content": "student with usn 1ms21cs001. Intent: GET_RESULT_BY_USN. Return detailed result for one student matched by exact USN.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_USN",
+      "example": "student with usn 1ms21cs001"
+    }
+  },
+  {
+    "page_content": "show all details of student with usn 1ms21cs001. Intent: GET_RESULT_BY_USN. Return detailed result for one student matched by exact USN.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_RESULT_BY_USN",
+      "example": "show all details of student with usn 1ms21cs001"
+    }
+  },
+  {
+    "page_content": "students with a+. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "students with a+"
+    }
+  },
+  {
+    "page_content": "who got a plus. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "who got a plus"
+    }
+  },
+  {
+    "page_content": "list students with grade a+. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "list students with grade a+"
+    }
+  },
+  {
+    "page_content": "show a+ students. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "show a+ students"
+    }
+  },
+  {
+    "page_content": "students scoring grade o. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "students scoring grade o"
+    }
+  },
+  {
+    "page_content": "students got grade a+ in design thinking. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "students got grade a+ in design thinking"
+    }
+  },
+  {
+    "page_content": "who received a+ in chemistry. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "who received a+ in chemistry"
+    }
+  },
+  {
+    "page_content": "list students with grade o in ma11. Intent: GET_STUDENTS_WITH_GRADE. Return students who received a requested grade like A+.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_STUDENTS_WITH_GRADE",
+      "example": "list students with grade o in ma11"
+    }
+  },
+  {
+    "page_content": "students with usn prefix 1ms22. Intent: GET_USN_PREFIX. Return students filtered by a USN prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_USN_PREFIX",
+      "example": "students with usn prefix 1ms22"
+    }
+  },
+  {
+    "page_content": "show usn starting with 1ms. Intent: GET_USN_PREFIX. Return students filtered by a USN prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_USN_PREFIX",
+      "example": "show usn starting with 1ms"
+    }
+  },
+  {
+    "page_content": "usn prefix 4al. Intent: GET_USN_PREFIX. Return students filtered by a USN prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_USN_PREFIX",
+      "example": "usn prefix 4al"
+    }
+  },
+  {
+    "page_content": "list students whose usn begins with 1rv. Intent: GET_USN_PREFIX. Return students filtered by a USN prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_USN_PREFIX",
+      "example": "list students whose usn begins with 1rv"
+    }
+  },
+  {
+    "page_content": "find usn starts with 2sd. Intent: GET_USN_PREFIX. Return students filtered by a USN prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_USN_PREFIX",
+      "example": "find usn starts with 2sd"
+    }
+  },
+  {
+    "page_content": "name prefix an. Intent: GET_NAME_PREFIX. Return students filtered by a name prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_NAME_PREFIX",
+      "example": "name prefix an"
+    }
+  },
+  {
+    "page_content": "students whose name starts with ra. Intent: GET_NAME_PREFIX. Return students filtered by a name prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_NAME_PREFIX",
+      "example": "students whose name starts with ra"
+    }
+  },
+  {
+    "page_content": "show names beginning with ab. Intent: GET_NAME_PREFIX. Return students filtered by a name prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_NAME_PREFIX",
+      "example": "show names beginning with ab"
+    }
+  },
+  {
+    "page_content": "find students starting with sh. Intent: GET_NAME_PREFIX. Return students filtered by a name prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_NAME_PREFIX",
+      "example": "find students starting with sh"
+    }
+  },
+  {
+    "page_content": "name starts with pooja. Intent: GET_NAME_PREFIX. Return students filtered by a name prefix.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_NAME_PREFIX",
+      "example": "name starts with pooja"
+    }
+  },
+  {
+    "page_content": "average sgpa. Intent: GET_AVERAGE_SGPA. Return the overall average SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_SGPA",
+      "example": "average sgpa"
+    }
+  },
+  {
+    "page_content": "mean sgpa. Intent: GET_AVERAGE_SGPA. Return the overall average SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_SGPA",
+      "example": "mean sgpa"
+    }
+  },
+  {
+    "page_content": "class average. Intent: GET_AVERAGE_SGPA. Return the overall average SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_SGPA",
+      "example": "class average"
+    }
+  },
+  {
+    "page_content": "overall sgpa average. Intent: GET_AVERAGE_SGPA. Return the overall average SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_SGPA",
+      "example": "overall sgpa average"
+    }
+  },
+  {
+    "page_content": "what is the average result. Intent: GET_AVERAGE_SGPA. Return the overall average SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_SGPA",
+      "example": "what is the average result"
+    }
+  },
+  {
+    "page_content": "average gp. Intent: GET_AVERAGE_GP. Return the overall average grade point across all subjects.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_GP",
+      "example": "average gp"
+    }
+  },
+  {
+    "page_content": "what is the average grade point. Intent: GET_AVERAGE_GP. Return the overall average grade point across all subjects.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_GP",
+      "example": "what is the average grade point"
+    }
+  },
+  {
+    "page_content": "average grade point of all students. Intent: GET_AVERAGE_GP. Return the overall average grade point across all subjects.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_AVERAGE_GP",
+      "example": "average grade point of all students"
+    }
+  },
+  {
+    "page_content": "top 5 students. Intent: GET_TOP_N. Return the top N students ordered by SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOP_N",
+      "example": "top 5 students"
+    }
+  },
+  {
+    "page_content": "top five rank holders. Intent: GET_TOP_N. Return the top N students ordered by SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOP_N",
+      "example": "top five rank holders"
+    }
+  },
+  {
+    "page_content": "best 10 students. Intent: GET_TOP_N. Return the top N students ordered by SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOP_N",
+      "example": "best 10 students"
+    }
+  },
+  {
+    "page_content": "show top 3 by sgpa. Intent: GET_TOP_N. Return the top N students ordered by SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOP_N",
+      "example": "show top 3 by sgpa"
+    }
+  },
+  {
+    "page_content": "give me the top students. Intent: GET_TOP_N. Return the top N students ordered by SGPA.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOP_N",
+      "example": "give me the top students"
+    }
+  },
+  {
+    "page_content": "students with sgpa greater than 8. Intent: GET_SGPA_RANGE. Return students with SGPA in a specified range.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_SGPA_RANGE",
+      "example": "students with sgpa greater than 8"
+    }
+  },
+  {
+    "page_content": "sgpa above 8. Intent: GET_SGPA_RANGE. Return students with SGPA in a specified range.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_SGPA_RANGE",
+      "example": "sgpa above 8"
+    }
+  },
+  {
+    "page_content": "students with sgpa between 8 and 9. Intent: GET_SGPA_RANGE. Return students with SGPA in a specified range.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_SGPA_RANGE",
+      "example": "students with sgpa between 8 and 9"
+    }
+  },
+  {
+    "page_content": "sgpa less than 5. Intent: GET_SGPA_RANGE. Return students with SGPA in a specified range.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_SGPA_RANGE",
+      "example": "sgpa less than 5"
+    }
+  },
+  {
+    "page_content": "list students with sgpa from 7 to 10. Intent: GET_SGPA_RANGE. Return students with SGPA in a specified range.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_SGPA_RANGE",
+      "example": "list students with sgpa from 7 to 10"
+    }
+  },
+  {
+    "page_content": "students with a+ but failed in another subject. Intent: GET_GRADE_BUT_FAILED. Return students who have a requested good grade but failed another subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GRADE_BUT_FAILED",
+      "example": "students with a+ but failed in another subject"
+    }
+  },
+  {
+    "page_content": "who has a grade but also failed. Intent: GET_GRADE_BUT_FAILED. Return students who have a requested good grade but failed another subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GRADE_BUT_FAILED",
+      "example": "who has a grade but also failed"
+    }
+  },
+  {
+    "page_content": "students with o grade and also failed. Intent: GET_GRADE_BUT_FAILED. Return students who have a requested good grade but failed another subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GRADE_BUT_FAILED",
+      "example": "students with o grade and also failed"
+    }
+  },
+  {
+    "page_content": "a+ students who still failed. Intent: GET_GRADE_BUT_FAILED. Return students who have a requested good grade but failed another subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GRADE_BUT_FAILED",
+      "example": "a+ students who still failed"
+    }
+  },
+  {
+    "page_content": "good grade but fail elsewhere. Intent: GET_GRADE_BUT_FAILED. Return students who have a requested good grade but failed another subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GRADE_BUT_FAILED",
+      "example": "good grade but fail elsewhere"
+    }
+  },
+  {
+    "page_content": "inconsistent performers. Intent: GET_INCONSISTENT_PERFORMERS. Return students with wide variation between strong and weak subject performance.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_INCONSISTENT_PERFORMERS",
+      "example": "inconsistent performers"
+    }
+  },
+  {
+    "page_content": "students with mixed performance. Intent: GET_INCONSISTENT_PERFORMERS. Return students with wide variation between strong and weak subject performance.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_INCONSISTENT_PERFORMERS",
+      "example": "students with mixed performance"
+    }
+  },
+  {
+    "page_content": "who is inconsistent across subjects. Intent: GET_INCONSISTENT_PERFORMERS. Return students with wide variation between strong and weak subject performance.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_INCONSISTENT_PERFORMERS",
+      "example": "who is inconsistent across subjects"
+    }
+  },
+  {
+    "page_content": "students with very uneven grades. Intent: GET_INCONSISTENT_PERFORMERS. Return students with wide variation between strong and weak subject performance.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_INCONSISTENT_PERFORMERS",
+      "example": "students with very uneven grades"
+    }
+  },
+  {
+    "page_content": "show unstable performers. Intent: GET_INCONSISTENT_PERFORMERS. Return students with wide variation between strong and weak subject performance.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_INCONSISTENT_PERFORMERS",
+      "example": "show unstable performers"
+    }
+  },
+  {
+    "page_content": "gp 0 but also a grades. Intent: GET_GP_ZERO_WITH_A. Return students who have zero grade points in one subject but A or A+ grades in others.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_WITH_A",
+      "example": "gp 0 but also a grades"
+    }
+  },
+  {
+    "page_content": "students with gp zero and a+. Intent: GET_GP_ZERO_WITH_A. Return students who have zero grade points in one subject but A or A+ grades in others.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_WITH_A",
+      "example": "students with gp zero and a+"
+    }
+  },
+  {
+    "page_content": "who has 0 gp and still got a grade. Intent: GET_GP_ZERO_WITH_A. Return students who have zero grade points in one subject but A or A+ grades in others.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_WITH_A",
+      "example": "who has 0 gp and still got a grade"
+    }
+  },
+  {
+    "page_content": "students with zero gp but strong grades. Intent: GET_GP_ZERO_WITH_A. Return students who have zero grade points in one subject but A or A+ grades in others.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_WITH_A",
+      "example": "students with zero gp but strong grades"
+    }
+  },
+  {
+    "page_content": "gp equals 0 and a grades. Intent: GET_GP_ZERO_WITH_A. Return students who have zero grade points in one subject but A or A+ grades in others.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_WITH_A",
+      "example": "gp equals 0 and a grades"
+    }
+  },
+  {
+    "page_content": "students with gp 0. Intent: GET_GP_ZERO_ANY. Return students who have GP equal to zero in at least one subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_ANY",
+      "example": "students with gp 0"
+    }
+  },
+  {
+    "page_content": "find all students whose gp is 0 in any subject. Intent: GET_GP_ZERO_ANY. Return students who have GP equal to zero in at least one subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_ANY",
+      "example": "find all students whose gp is 0 in any subject"
+    }
+  },
+  {
+    "page_content": "who has gp zero. Intent: GET_GP_ZERO_ANY. Return students who have GP equal to zero in at least one subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_GP_ZERO_ANY",
+      "example": "who has gp zero"
+    }
+  },
+  {
+    "page_content": "list all students and their usns. Intent: GET_ALL_STUDENTS. Return all students with their USNs.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_STUDENTS",
+      "example": "list all students and their usns"
+    }
+  },
+  {
+    "page_content": "show all students. Intent: GET_ALL_STUDENTS. Return all students with their USNs.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_STUDENTS",
+      "example": "show all students"
+    }
+  },
+  {
+    "page_content": "list all student records. Intent: GET_ALL_STUDENTS. Return all students with their USNs.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_STUDENTS",
+      "example": "list all student records"
+    }
+  },
+  {
+    "page_content": "how many students failed. Intent: GET_FAILED_COUNT. Return the number of students who failed in at least one subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_COUNT",
+      "example": "how many students failed"
+    }
+  },
+  {
+    "page_content": "count failed students. Intent: GET_FAILED_COUNT. Return the number of students who failed in at least one subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_COUNT",
+      "example": "count failed students"
+    }
+  },
+  {
+    "page_content": "number of failures. Intent: GET_FAILED_COUNT. Return the number of students who failed in at least one subject.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_FAILED_COUNT",
+      "example": "number of failures"
+    }
+  },
+  {
+    "page_content": "count total number of students. Intent: GET_TOTAL_STUDENTS. Return the total number of students.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOTAL_STUDENTS",
+      "example": "count total number of students"
+    }
+  },
+  {
+    "page_content": "how many students are there. Intent: GET_TOTAL_STUDENTS. Return the total number of students.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOTAL_STUDENTS",
+      "example": "how many students are there"
+    }
+  },
+  {
+    "page_content": "total students in the file. Intent: GET_TOTAL_STUDENTS. Return the total number of students.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_TOTAL_STUDENTS",
+      "example": "total students in the file"
+    }
+  },
+  {
+    "page_content": "which grade appears most frequently. Intent: GET_MOST_FREQUENT_GRADE. Return the grade that appears most frequently.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_MOST_FREQUENT_GRADE",
+      "example": "which grade appears most frequently"
+    }
+  },
+  {
+    "page_content": "most common grade. Intent: GET_MOST_FREQUENT_GRADE. Return the grade that appears most frequently.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_MOST_FREQUENT_GRADE",
+      "example": "most common grade"
+    }
+  },
+  {
+    "page_content": "top grade frequency. Intent: GET_MOST_FREQUENT_GRADE. Return the grade that appears most frequently.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_MOST_FREQUENT_GRADE",
+      "example": "top grade frequency"
+    }
+  },
+  {
+    "page_content": "list all subjects. Intent: GET_ALL_SUBJECTS. Return a list of all subjects in the dataset.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_SUBJECTS",
+      "example": "list all subjects"
+    }
+  },
+  {
+    "page_content": "show all subjects. Intent: GET_ALL_SUBJECTS. Return a list of all subjects in the dataset.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_SUBJECTS",
+      "example": "show all subjects"
+    }
+  },
+  {
+    "page_content": "subjects list. Intent: GET_ALL_SUBJECTS. Return a list of all subjects in the dataset.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_SUBJECTS",
+      "example": "subjects list"
+    }
+  },
+  {
+    "page_content": "what subjects are in the dataset. Intent: GET_ALL_SUBJECTS. Return a list of all subjects in the dataset.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_SUBJECTS",
+      "example": "what subjects are in the dataset"
+    }
+  },
+  {
+    "page_content": "which students have all passing grades. Intent: GET_ALL_PASSING. Return students who passed all subjects without any F grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_PASSING",
+      "example": "which students have all passing grades"
+    }
+  },
+  {
+    "page_content": "students with no f. Intent: GET_ALL_PASSING. Return students who passed all subjects without any F grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_PASSING",
+      "example": "students with no f"
+    }
+  },
+  {
+    "page_content": "all pass students. Intent: GET_ALL_PASSING. Return students who passed all subjects without any F grade.",
+    "metadata": {
+      "type": "intent",
+      "intent": "GET_ALL_PASSING",
+      "example": "all pass students"
+    }
+  },
+  {
+    "page_content": "Student S MEENA KUMARI with USN 1MS21CS109 has SGPA 10.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS109",
+      "name": "S MEENA KUMARI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student S MEENA KUMARI with USN 1MS21CS109 has SGPA 10.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade O gp 20.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS109",
+      "name": "S MEENA KUMARI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SAANVI NAIR with USN 1MS21CS110 has SGPA 10.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS110",
+      "name": "SAANVI NAIR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SAANVI NAIR with USN 1MS21CS110 has SGPA 10.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade O gp 20.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS110",
+      "name": "SAANVI NAIR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANANYA N with USN 1MS21CS015 has SGPA 9.90 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS015",
+      "name": "ANANYA N",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANANYA N with USN 1MS21CS015 has SGPA 9.90 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS015",
+      "name": "ANANYA N",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SAHIL KHIRWAL with USN 1MS21CS111 has SGPA 9.90 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS111",
+      "name": "SAHIL KHIRWAL",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SAHIL KHIRWAL with USN 1MS21CS111 has SGPA 9.90 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS111",
+      "name": "SAHIL KHIRWAL",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MIHIKA DHARIWAL with USN 1MS21CS075 has SGPA 9.85 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS075",
+      "name": "MIHIKA DHARIWAL",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MIHIKA DHARIWAL with USN 1MS21CS075 has SGPA 9.85 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade O gp 20.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS075",
+      "name": "MIHIKA DHARIWAL",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMALA RASHMI KUMAR with USN 1MS21CS144 has SGPA 9.80 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS144",
+      "name": "AMALA RASHMI KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMALA RASHMI KUMAR with USN 1MS21CS144 has SGPA 9.80 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade O gp 20.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS144",
+      "name": "AMALA RASHMI KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AJAY JAYAPRAKASH with USN 1MS21CS009 has SGPA 9.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS009",
+      "name": "AJAY JAYAPRAKASH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AJAY JAYAPRAKASH with USN 1MS21CS009 has SGPA 9.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS009",
+      "name": "AJAY JAYAPRAKASH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRACHI JAIDEEP GOPSITKAR with USN 1MS21CS093 has SGPA 9.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS093",
+      "name": "PRACHI JAIDEEP GOPSITKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRACHI JAIDEEP GOPSITKAR with USN 1MS21CS093 has SGPA 9.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS093",
+      "name": "PRACHI JAIDEEP GOPSITKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRATEEK M VERNEKAR with USN 1MS21CS098 has SGPA 9.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS098",
+      "name": "PRATEEK M VERNEKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRATEEK M VERNEKAR with USN 1MS21CS098 has SGPA 9.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS098",
+      "name": "PRATEEK M VERNEKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VISHAL CHAURASIA with USN 1MS21CS138 has SGPA 9.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS138",
+      "name": "VISHAL CHAURASIA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VISHAL CHAURASIA with USN 1MS21CS138 has SGPA 9.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS138",
+      "name": "VISHAL CHAURASIA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ADHITHI M with USN 1MS21CS004 has SGPA 9.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS004",
+      "name": "ADHITHI M",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ADHITHI M with USN 1MS21CS004 has SGPA 9.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS004",
+      "name": "ADHITHI M",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANEESH M SOMAYAJI with USN 1MS21CS016 has SGPA 9.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS016",
+      "name": "ANEESH M SOMAYAJI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANEESH M SOMAYAJI with USN 1MS21CS016 has SGPA 9.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS016",
+      "name": "ANEESH M SOMAYAJI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRATHAMESH MAHANTESH DEVARAMANI with USN 1MS21CS099 has SGPA 9.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS099",
+      "name": "PRATHAMESH MAHANTESH DEVARAMANI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRATHAMESH MAHANTESH DEVARAMANI with USN 1MS21CS099 has SGPA 9.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS099",
+      "name": "PRATHAMESH MAHANTESH DEVARAMANI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANOOP NAGARAJ with USN 1MS21CS023 has SGPA 9.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS023",
+      "name": "ANOOP NAGARAJ",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANOOP NAGARAJ with USN 1MS21CS023 has SGPA 9.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS023",
+      "name": "ANOOP NAGARAJ",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student KRISHNA RANGANATHAN with USN 1MS21CS065 has SGPA 9.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS065",
+      "name": "KRISHNA RANGANATHAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student KRISHNA RANGANATHAN with USN 1MS21CS065 has SGPA 9.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade O gp 20.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS065",
+      "name": "KRISHNA RANGANATHAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SANATH S with USN 1MS21CS113 has SGPA 9.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS113",
+      "name": "SANATH S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SANATH S with USN 1MS21CS113 has SGPA 9.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS113",
+      "name": "SANATH S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMOGH S K with USN 1MS21CS014 has SGPA 9.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS014",
+      "name": "AMOGH S K",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMOGH S K with USN 1MS21CS014 has SGPA 9.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS014",
+      "name": "AMOGH S K",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BHARMAL HAMZA ABBAS with USN 1MS21CS037 has SGPA 9.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS037",
+      "name": "BHARMAL HAMZA ABBAS",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BHARMAL HAMZA ABBAS with USN 1MS21CS037 has SGPA 9.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS037",
+      "name": "BHARMAL HAMZA ABBAS",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student M VINAY with USN 1MS21CS068 has SGPA 9.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS068",
+      "name": "M VINAY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student M VINAY with USN 1MS21CS068 has SGPA 9.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS068",
+      "name": "M VINAY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANKIT JANGID with USN 1MS21CS019 has SGPA 9.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS019",
+      "name": "ANKIT JANGID",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANKIT JANGID with USN 1MS21CS019 has SGPA 9.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS019",
+      "name": "ANKIT JANGID",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MANOJ V L with USN 1MS21CS072 has SGPA 9.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS072",
+      "name": "MANOJ V L",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MANOJ V L with USN 1MS21CS072 has SGPA 9.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS072",
+      "name": "MANOJ V L",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SHASHANK S with USN 1MS21CS116 has SGPA 9.45 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS116",
+      "name": "SHASHANK S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SHASHANK S with USN 1MS21CS116 has SGPA 9.45 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS116",
+      "name": "SHASHANK S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student TAVISHI S SHETTY with USN 1MS21CS129 has SGPA 9.45 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS129",
+      "name": "TAVISHI S SHETTY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student TAVISHI S SHETTY with USN 1MS21CS129 has SGPA 9.45 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS129",
+      "name": "TAVISHI S SHETTY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student YASHWANTH S with USN 1MS21CS141 has SGPA 9.45 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS141",
+      "name": "YASHWANTH S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student YASHWANTH S with USN 1MS21CS141 has SGPA 9.45 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS141",
+      "name": "YASHWANTH S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMAN RAJ with USN 1MS21CS011 has SGPA 9.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS011",
+      "name": "AMAN RAJ",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMAN RAJ with USN 1MS21CS011 has SGPA 9.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS011",
+      "name": "AMAN RAJ",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANNUITH NITIN with USN 1MS21CS022 has SGPA 9.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS022",
+      "name": "ANNUITH NITIN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANNUITH NITIN with USN 1MS21CS022 has SGPA 9.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS022",
+      "name": "ANNUITH NITIN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student JYOTHI YADAV with USN 1MS21CS056 has SGPA 9.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS056",
+      "name": "JYOTHI YADAV",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student JYOTHI YADAV with USN 1MS21CS056 has SGPA 9.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS056",
+      "name": "JYOTHI YADAV",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MENDU YASHWANTH RAM NAIDU with USN 1MS21CS074 has SGPA 9.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS074",
+      "name": "MENDU YASHWANTH RAM NAIDU",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MENDU YASHWANTH RAM NAIDU with USN 1MS21CS074 has SGPA 9.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS074",
+      "name": "MENDU YASHWANTH RAM NAIDU",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SHRADDHA VINOD PRABHU with USN 1MS21CS118 has SGPA 9.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS118",
+      "name": "SHRADDHA VINOD PRABHU",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SHRADDHA VINOD PRABHU with USN 1MS21CS118 has SGPA 9.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS118",
+      "name": "SHRADDHA VINOD PRABHU",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VINOD SAJJAN with USN 1MS21CS137 has SGPA 9.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS137",
+      "name": "VINOD SAJJAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VINOD SAJJAN with USN 1MS21CS137 has SGPA 9.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS137",
+      "name": "VINOD SAJJAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SIDDHARTH SATYAVOLU with USN 1MS21CS120 has SGPA 9.30 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS120",
+      "name": "SIDDHARTH SATYAVOLU",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SIDDHARTH SATYAVOLU with USN 1MS21CS120 has SGPA 9.30 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS120",
+      "name": "SIDDHARTH SATYAVOLU",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMMAN BAHETI with USN 1MS21CS012 has SGPA 9.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS012",
+      "name": "AMMAN BAHETI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMMAN BAHETI with USN 1MS21CS012 has SGPA 9.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS012",
+      "name": "AMMAN BAHETI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARNAV RAI with USN 1MS21CS029 has SGPA 9.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS029",
+      "name": "ARNAV RAI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARNAV RAI with USN 1MS21CS029 has SGPA 9.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS029",
+      "name": "ARNAV RAI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARYAN GUPTA with USN 1MS21CS031 has SGPA 9.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS031",
+      "name": "ARYAN GUPTA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARYAN GUPTA with USN 1MS21CS031 has SGPA 9.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS031",
+      "name": "ARYAN GUPTA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ATHARVA R KULKARNI with USN 1MS21CS033 has SGPA 9.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS033",
+      "name": "ATHARVA R KULKARNI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ATHARVA R KULKARNI with USN 1MS21CS033 has SGPA 9.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS033",
+      "name": "ATHARVA R KULKARNI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PAVAN KUMAR K with USN 1MS21CS088 has SGPA 9.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS088",
+      "name": "PAVAN KUMAR K",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PAVAN KUMAR K with USN 1MS21CS088 has SGPA 9.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS088",
+      "name": "PAVAN KUMAR K",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student RAHUL KUMAR with USN 1MS21CS105 has SGPA 9.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS105",
+      "name": "RAHUL KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student RAHUL KUMAR with USN 1MS21CS105 has SGPA 9.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS105",
+      "name": "RAHUL KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NIKITH GANGA with USN 1MS21CS084 has SGPA 9.20 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS084",
+      "name": "NIKITH GANGA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NIKITH GANGA with USN 1MS21CS084 has SGPA 9.20 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS084",
+      "name": "NIKITH GANGA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student KALPI SINGH GHALOT with USN 1MS21CS060 has SGPA 9.15 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS060",
+      "name": "KALPI SINGH GHALOT",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student KALPI SINGH GHALOT with USN 1MS21CS060 has SGPA 9.15 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS060",
+      "name": "KALPI SINGH GHALOT",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student LAYA BIRENDRA KUMAR ARUN with USN 1MS21CS067 has SGPA 9.15 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS067",
+      "name": "LAYA BIRENDRA KUMAR ARUN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student LAYA BIRENDRA KUMAR ARUN with USN 1MS21CS067 has SGPA 9.15 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS067",
+      "name": "LAYA BIRENDRA KUMAR ARUN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PERAMANA CHETHANA with USN 1MS21CS089 has SGPA 9.15 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS089",
+      "name": "PERAMANA CHETHANA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PERAMANA CHETHANA with USN 1MS21CS089 has SGPA 9.15 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS089",
+      "name": "PERAMANA CHETHANA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PIYUSH KHODBOLE with USN 1MS21CS091 has SGPA 9.15 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS091",
+      "name": "PIYUSH KHODBOLE",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PIYUSH KHODBOLE with USN 1MS21CS091 has SGPA 9.15 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS091",
+      "name": "PIYUSH KHODBOLE",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRANAY SHARMA with USN 1MS21CS097 has SGPA 9.15 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS097",
+      "name": "PRANAY SHARMA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRANAY SHARMA with USN 1MS21CS097 has SGPA 9.15 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS097",
+      "name": "PRANAY SHARMA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARYAN ANCHALIA with USN 1MS21CS030 has SGPA 9.10 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS030",
+      "name": "ARYAN ANCHALIA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARYAN ANCHALIA with USN 1MS21CS030 has SGPA 9.10 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade O gp 30.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS030",
+      "name": "ARYAN ANCHALIA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student K ROHIT BHASKAR with USN 1MS21CS058 has SGPA 9.10 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS058",
+      "name": "K ROHIT BHASKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student K ROHIT BHASKAR with USN 1MS21CS058 has SGPA 9.10 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS058",
+      "name": "K ROHIT BHASKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRACHI PATIL with USN 1MS21CS094 has SGPA 9.10 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS094",
+      "name": "PRACHI PATIL",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRACHI PATIL with USN 1MS21CS094 has SGPA 9.10 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS094",
+      "name": "PRACHI PATIL",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VASUMAN MISHRA with USN 1MS21CS133 has SGPA 9.10 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS133",
+      "name": "VASUMAN MISHRA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VASUMAN MISHRA with USN 1MS21CS133 has SGPA 9.10 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS133",
+      "name": "VASUMAN MISHRA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DIVYA S with USN 1MS21CS045 has SGPA 9.05 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS045",
+      "name": "DIVYA S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DIVYA S with USN 1MS21CS045 has SGPA 9.05 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS045",
+      "name": "DIVYA S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MALAVIKA DILEEP with USN 1MS21CS069 has SGPA 9.05 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS069",
+      "name": "MALAVIKA DILEEP",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MALAVIKA DILEEP with USN 1MS21CS069 has SGPA 9.05 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade O gp 20.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS069",
+      "name": "MALAVIKA DILEEP",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRUTVI PRAKASH SHETTY with USN 1MS21CS103 has SGPA 9.05 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS103",
+      "name": "PRUTVI PRAKASH SHETTY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRUTVI PRAKASH SHETTY with USN 1MS21CS103 has SGPA 9.05 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS103",
+      "name": "PRUTVI PRAKASH SHETTY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AKASH SURESH BADADANI with USN 1MS21CS010 has SGPA 9.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS010",
+      "name": "AKASH SURESH BADADANI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AKASH SURESH BADADANI with USN 1MS21CS010 has SGPA 9.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS010",
+      "name": "AKASH SURESH BADADANI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student UDAY CHOWDARY K with USN 1MS21CS059 has SGPA 9.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS059",
+      "name": "UDAY CHOWDARY K",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student UDAY CHOWDARY K with USN 1MS21CS059 has SGPA 9.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS059",
+      "name": "UDAY CHOWDARY K",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NEERAJ MAYUR with USN 1MS21CS083 has SGPA 9.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS083",
+      "name": "NEERAJ MAYUR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NEERAJ MAYUR with USN 1MS21CS083 has SGPA 9.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS083",
+      "name": "NEERAJ MAYUR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRANAV KANDULA with USN 1MS21CS095 has SGPA 9.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS095",
+      "name": "PRANAV KANDULA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRANAV KANDULA with USN 1MS21CS095 has SGPA 9.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS095",
+      "name": "PRANAV KANDULA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student GAGAN with USN 1MS21CS048 has SGPA 8.95 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS048",
+      "name": "GAGAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student GAGAN with USN 1MS21CS048 has SGPA 8.95 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS048",
+      "name": "GAGAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SHIVANSH GUPTA with USN 1MS21CS117 has SGPA 8.95 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS117",
+      "name": "SHIVANSH GUPTA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SHIVANSH GUPTA with USN 1MS21CS117 has SGPA 8.95 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS117",
+      "name": "SHIVANSH GUPTA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student N GOWRI VISWANATH with USN 1MS21CS079 has SGPA 8.90 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS079",
+      "name": "N GOWRI VISWANATH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student N GOWRI VISWANATH with USN 1MS21CS079 has SGPA 8.90 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS079",
+      "name": "N GOWRI VISWANATH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PHADKE NEERAJ DEEPAK with USN 1MS21CS082 has SGPA 8.90 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS082",
+      "name": "PHADKE NEERAJ DEEPAK",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PHADKE NEERAJ DEEPAK with USN 1MS21CS082 has SGPA 8.90 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS082",
+      "name": "PHADKE NEERAJ DEEPAK",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PETER M J with USN 1MS21CS090 has SGPA 8.90 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS090",
+      "name": "PETER M J",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PETER M J with USN 1MS21CS090 has SGPA 8.90 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS090",
+      "name": "PETER M J",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SATISH with USN 1MS21CS114 has SGPA 8.90 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS114",
+      "name": "SATISH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SATISH with USN 1MS21CS114 has SGPA 8.90 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS114",
+      "name": "SATISH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VINAY G N with USN 1MS21CS136 has SGPA 8.85 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS136",
+      "name": "VINAY G N",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VINAY G N with USN 1MS21CS136 has SGPA 8.85 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS136",
+      "name": "VINAY G N",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ABDULMAJEED OTHMAN ABDULLAH AL SHAWEA with USN 1MS21CS001 has SGPA 8.80 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS001",
+      "name": "ABDULMAJEED OTHMAN ABDULLAH AL SHAWEA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ABDULMAJEED OTHMAN ABDULLAH AL SHAWEA with USN 1MS21CS001 has SGPA 8.80 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS001",
+      "name": "ABDULMAJEED OTHMAN ABDULLAH AL SHAWEA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HEMACHANDRA with USN 1MS21CS052 has SGPA 8.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS052",
+      "name": "HEMACHANDRA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HEMACHANDRA with USN 1MS21CS052 has SGPA 8.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS052",
+      "name": "HEMACHANDRA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRUTHVIRAJ M SAVANUR with USN 1MS21CS102 has SGPA 8.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS102",
+      "name": "PRUTHVIRAJ M SAVANUR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRUTHVIRAJ M SAVANUR with USN 1MS21CS102 has SGPA 8.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS102",
+      "name": "PRUTHVIRAJ M SAVANUR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student YASHASHWINI S with USN 1MS21CS140 has SGPA 8.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS140",
+      "name": "YASHASHWINI S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student YASHASHWINI S with USN 1MS21CS140 has SGPA 8.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS140",
+      "name": "YASHASHWINI S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANKIT KUMAR SINGH with USN 1MS21CS020 has SGPA 8.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS020",
+      "name": "ANKIT KUMAR SINGH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANKIT KUMAR SINGH with USN 1MS21CS020 has SGPA 8.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS020",
+      "name": "ANKIT KUMAR SINGH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ATMURI SAI MOULI with USN 1MS21CS034 has SGPA 8.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS034",
+      "name": "ATMURI SAI MOULI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ATMURI SAI MOULI with USN 1MS21CS034 has SGPA 8.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS034",
+      "name": "ATMURI SAI MOULI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRATISH KUMAR with USN 1MS21CS100 has SGPA 8.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS100",
+      "name": "PRATISH KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PRATISH KUMAR with USN 1MS21CS100 has SGPA 8.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS100",
+      "name": "PRATISH KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HARSHAD PUNDALIK JOGADANKAR with USN 1MS21CS051 has SGPA 8.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS051",
+      "name": "HARSHAD PUNDALIK JOGADANKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HARSHAD PUNDALIK JOGADANKAR with USN 1MS21CS051 has SGPA 8.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS051",
+      "name": "HARSHAD PUNDALIK JOGADANKAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student KAVYASRI R with USN 1MS21CS063 has SGPA 8.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS063",
+      "name": "KAVYASRI R",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student KAVYASRI R with USN 1MS21CS063 has SGPA 8.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS063",
+      "name": "KAVYASRI R",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MANIK ANIMESH AJIT with USN 1MS21CS071 has SGPA 8.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS071",
+      "name": "MANIK ANIMESH AJIT",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MANIK ANIMESH AJIT with USN 1MS21CS071 has SGPA 8.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade O gp 30.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS071",
+      "name": "MANIK ANIMESH AJIT",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DUDE BHARATH VAMSI with USN 1MS21CS046 has SGPA 8.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS046",
+      "name": "DUDE BHARATH VAMSI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DUDE BHARATH VAMSI with USN 1MS21CS046 has SGPA 8.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade O gp 30.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS046",
+      "name": "DUDE BHARATH VAMSI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student YOGESH HANAMANT NAVI with USN 1MS21CS142 has SGPA 8.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS142",
+      "name": "YOGESH HANAMANT NAVI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student YOGESH HANAMANT NAVI with USN 1MS21CS142 has SGPA 8.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS142",
+      "name": "YOGESH HANAMANT NAVI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ZAZ ARSALAN KHURSHEED with USN 1MS21CS143 has SGPA 8.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS143",
+      "name": "ZAZ ARSALAN KHURSHEED",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ZAZ ARSALAN KHURSHEED with USN 1MS21CS143 has SGPA 8.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS143",
+      "name": "ZAZ ARSALAN KHURSHEED",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AFIYA KHADIR with USN 1MS21CS006 has SGPA 8.55 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS006",
+      "name": "AFIYA KHADIR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AFIYA KHADIR with USN 1MS21CS006 has SGPA 8.55 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS006",
+      "name": "AFIYA KHADIR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMOGH A N with USN 1MS21CS013 has SGPA 8.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS013",
+      "name": "AMOGH A N",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AMOGH A N with USN 1MS21CS013 has SGPA 8.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS013",
+      "name": "AMOGH A N",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student CHARISHMA REDDY MALLEM with USN 1MS21CS040 has SGPA 8.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS040",
+      "name": "CHARISHMA REDDY MALLEM",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student CHARISHMA REDDY MALLEM with USN 1MS21CS040 has SGPA 8.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS040",
+      "name": "CHARISHMA REDDY MALLEM",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HITESH KUMAR with USN 1MS21CS054 has SGPA 8.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS054",
+      "name": "HITESH KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HITESH KUMAR with USN 1MS21CS054 has SGPA 8.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS054",
+      "name": "HITESH KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NISHITA SATHISH KUMAR with USN 1MS21CS085 has SGPA 8.45 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS085",
+      "name": "NISHITA SATHISH KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NISHITA SATHISH KUMAR with USN 1MS21CS085 has SGPA 8.45 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS085",
+      "name": "NISHITA SATHISH KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VANSH NAHAR with USN 1MS21CS132 has SGPA 8.45 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS132",
+      "name": "VANSH NAHAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VANSH NAHAR with USN 1MS21CS132 has SGPA 8.45 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade C gp 10.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS132",
+      "name": "VANSH NAHAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SAHIL SANJEEV KULKARNI with USN 1MS21CS112 has SGPA 8.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS112",
+      "name": "SAHIL SANJEEV KULKARNI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SAHIL SANJEEV KULKARNI with USN 1MS21CS112 has SGPA 8.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS112",
+      "name": "SAHIL SANJEEV KULKARNI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SUNITHA BHANDARA KAVATHE with USN 1MS21CS123 has SGPA 8.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS123",
+      "name": "SUNITHA BHANDARA KAVATHE",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SUNITHA BHANDARA KAVATHE with USN 1MS21CS123 has SGPA 8.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS123",
+      "name": "SUNITHA BHANDARA KAVATHE",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PREETHAM M P with USN 1MS21CS101 has SGPA 8.35 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS101",
+      "name": "PREETHAM M P",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student PREETHAM M P with USN 1MS21CS101 has SGPA 8.35 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS101",
+      "name": "PREETHAM M P",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SYED SADATH ULLA with USN 1MS21CS125 has SGPA 8.35 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS125",
+      "name": "SYED SADATH ULLA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SYED SADATH ULLA with USN 1MS21CS125 has SGPA 8.35 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A+ gp 27.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS125",
+      "name": "SYED SADATH ULLA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VAMSI P with USN 1MS21CS131 has SGPA 8.35 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS131",
+      "name": "VAMSI P",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VAMSI P with USN 1MS21CS131 has SGPA 8.35 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade O gp 40.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS131",
+      "name": "VAMSI P",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BENADIN BENNY with USN 1MS21CS036 has SGPA 8.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS036",
+      "name": "BENADIN BENNY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BENADIN BENNY with USN 1MS21CS036 has SGPA 8.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS036",
+      "name": "BENADIN BENNY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student G AISHWARYA with USN 1MS21CS047 has SGPA 8.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS047",
+      "name": "G AISHWARYA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student G AISHWARYA with USN 1MS21CS047 has SGPA 8.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS047",
+      "name": "G AISHWARYA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student TANVI RAO with USN 1MS21CS127 has SGPA 8.25 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS127",
+      "name": "TANVI RAO",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student TANVI RAO with USN 1MS21CS127 has SGPA 8.25 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS127",
+      "name": "TANVI RAO",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AISHWARYA BHAGAT with USN 1MS21CS007 has SGPA 8.20 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS007",
+      "name": "AISHWARYA BHAGAT",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student AISHWARYA BHAGAT with USN 1MS21CS007 has SGPA 8.20 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS007",
+      "name": "AISHWARYA BHAGAT",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DHANRAJ PANDYA with USN 1MS21CS087 has SGPA 8.10 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS087",
+      "name": "DHANRAJ PANDYA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DHANRAJ PANDYA with USN 1MS21CS087 has SGPA 8.10 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS087",
+      "name": "DHANRAJ PANDYA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANIRUDH SANAL KUMAR with USN 1MS21CS017 has SGPA 8.05 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS017",
+      "name": "ANIRUDH SANAL KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANIRUDH SANAL KUMAR with USN 1MS21CS017 has SGPA 8.05 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS017",
+      "name": "ANIRUDH SANAL KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANURAG HAZARIKA with USN 1MS21CS024 has SGPA 7.95 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS024",
+      "name": "ANURAG HAZARIKA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANURAG HAZARIKA with USN 1MS21CS024 has SGPA 7.95 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS024",
+      "name": "ANURAG HAZARIKA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student POLEPALLI NIMAI CHARAN with USN 1MS21CS092 has SGPA 7.95 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS092",
+      "name": "POLEPALLI NIMAI CHARAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student POLEPALLI NIMAI CHARAN with USN 1MS21CS092 has SGPA 7.95 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS092",
+      "name": "POLEPALLI NIMAI CHARAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VENNELA KOTHARI with USN 1MS21CS134 has SGPA 7.95 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS134",
+      "name": "VENNELA KOTHARI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VENNELA KOTHARI with USN 1MS21CS134 has SGPA 7.95 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A gp 24.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS134",
+      "name": "VENNELA KOTHARI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ASHEESH ANIL TRIKANNAD with USN 1MS21CS032 has SGPA 7.75 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS032",
+      "name": "ASHEESH ANIL TRIKANNAD",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ASHEESH ANIL TRIKANNAD with USN 1MS21CS032 has SGPA 7.75 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS032",
+      "name": "ASHEESH ANIL TRIKANNAD",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BABA IBRAHIM with USN 1MS21CS035 has SGPA 7.70 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS035",
+      "name": "BABA IBRAHIM",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BABA IBRAHIM with USN 1MS21CS035 has SGPA 7.70 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS035",
+      "name": "BABA IBRAHIM",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DANISH BASHIR with USN 1MS21CS043 has SGPA 7.60 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS043",
+      "name": "DANISH BASHIR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student DANISH BASHIR with USN 1MS21CS043 has SGPA 7.60 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B gp 18.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS043",
+      "name": "DANISH BASHIR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student OMKAR SHREEMANT NAGANASURA with USN 1MS21CS086 has SGPA 7.55 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS086",
+      "name": "OMKAR SHREEMANT NAGANASURA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student OMKAR SHREEMANT NAGANASURA with USN 1MS21CS086 has SGPA 7.55 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS086",
+      "name": "OMKAR SHREEMANT NAGANASURA",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student K A VARUN BALAJI with USN 1MS21CS057 has SGPA 7.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS057",
+      "name": "K A VARUN BALAJI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student K A VARUN BALAJI with USN 1MS21CS057 has SGPA 7.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS057",
+      "name": "K A VARUN BALAJI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANISH RAMKRISHNA KULKARNI with USN 1MS21CS018 has SGPA 7.45 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS018",
+      "name": "ANISH RAMKRISHNA KULKARNI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ANISH RAMKRISHNA KULKARNI with USN 1MS21CS018 has SGPA 7.45 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade O gp 10.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A+ gp 27.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS018",
+      "name": "ANISH RAMKRISHNA KULKARNI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student CHANDRASHEKAR S with USN 1MS21CS039 has SGPA 7.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS039",
+      "name": "CHANDRASHEKAR S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student CHANDRASHEKAR S with USN 1MS21CS039 has SGPA 7.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS039",
+      "name": "CHANDRASHEKAR S",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NANAIAH KS with USN 1MS21CS080 has SGPA 7.35 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS080",
+      "name": "NANAIAH KS",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student NANAIAH KS with USN 1MS21CS080 has SGPA 7.35 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS080",
+      "name": "NANAIAH KS",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HET RUTUL JOSHI with USN 1MS21CS053 has SGPA 7.15 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS053",
+      "name": "HET RUTUL JOSHI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student HET RUTUL JOSHI with USN 1MS21CS053 has SGPA 7.15 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS053",
+      "name": "HET RUTUL JOSHI",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student VIJENDER with USN 1MS21CS135 has SGPA 7.10 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS135",
+      "name": "VIJENDER",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student VIJENDER with USN 1MS21CS135 has SGPA 7.10 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade A+ gp 27.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade A+ gp 36.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade A gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS135",
+      "name": "VIJENDER",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MOHAMMAD ATEEB TANTRAY with USN 1MS21CS076 has SGPA 6.95 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS076",
+      "name": "MOHAMMAD ATEEB TANTRAY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MOHAMMAD ATEEB TANTRAY with USN 1MS21CS076 has SGPA 6.95 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS076",
+      "name": "MOHAMMAD ATEEB TANTRAY",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SUHANI PRADHAN with USN 1MS21CS122 has SGPA 6.80 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS122",
+      "name": "SUHANI PRADHAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SUHANI PRADHAN with USN 1MS21CS122 has SGPA 6.80 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade C gp 20.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS122",
+      "name": "SUHANI PRADHAN",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SYED UMAR FAROOQ with USN 1MS21CS126 has SGPA 6.80 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS126",
+      "name": "SYED UMAR FAROOQ",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SYED UMAR FAROOQ with USN 1MS21CS126 has SGPA 6.80 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade B gp 6.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B gp 18.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade A gp 32.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS126",
+      "name": "SYED UMAR FAROOQ",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ADARSH with USN 1MS21CS003 has SGPA 6.75 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS003",
+      "name": "ADARSH",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ADARSH with USN 1MS21CS003 has SGPA 6.75 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade O gp 30.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS003",
+      "name": "ADARSH",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RACHNA RAMESH with USN 1MS21CS104 has SGPA 6.65 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS104",
+      "name": "RACHNA RAMESH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student RACHNA RAMESH with USN 1MS21CS104 has SGPA 6.65 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B+ gp 21.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade C gp 15.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS104",
+      "name": "RACHNA RAMESH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student LAKSHAY MAHINDRO with USN 1MS21CS066 has SGPA 6.50 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS066",
+      "name": "LAKSHAY MAHINDRO",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student LAKSHAY MAHINDRO with USN 1MS21CS066 has SGPA 6.50 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B gp 18.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade C gp 20.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS066",
+      "name": "LAKSHAY MAHINDRO",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SIDDHARTH with USN 1MS21CS119 has SGPA 6.40 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS119",
+      "name": "SIDDHARTH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student SIDDHARTH with USN 1MS21CS119 has SGPA 6.40 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS119",
+      "name": "SIDDHARTH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student TAVISHA SAXENA with USN 1MS21CS128 has SGPA 6.40 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS128",
+      "name": "TAVISHA SAXENA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student TAVISHA SAXENA with USN 1MS21CS128 has SGPA 6.40 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS128",
+      "name": "TAVISHA SAXENA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ARCHIT KIRAN KUMAR with USN 1MS21CS027 has SGPA 6.30 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS027",
+      "name": "ARCHIT KIRAN KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student ARCHIT KIRAN KUMAR with USN 1MS21CS027 has SGPA 6.30 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade C gp 20.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A+ gp 27.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS027",
+      "name": "ARCHIT KIRAN KUMAR",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BRINDA JAGADEESH with USN 1MS16CS029 has SGPA 6.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS16CS029",
+      "name": "BRINDA JAGADEESH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student BRINDA JAGADEESH with USN 1MS16CS029 has SGPA 6.00 and overall status PASS. Subject details: CV101 Basic Civil Engineering and Mechanics 3:1:0:0: grade C gp 24.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS16CS029",
+      "name": "BRINDA JAGADEESH",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MANASI PRIYA with USN 1MS21CS070 has SGPA 5.50 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS070",
+      "name": "MANASI PRIYA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MANASI PRIYA with USN 1MS21CS070 has SGPA 5.50 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade P gp 12.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS070",
+      "name": "MANASI PRIYA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ABID MODI with USN 1MS21CS002 has SGPA 5.40 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS002",
+      "name": "ABID MODI",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ABID MODI with USN 1MS21CS002 has SGPA 5.40 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B gp 18.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B gp 18.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade B gp 18.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS002",
+      "name": "ABID MODI",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student CHRIS BIJU with USN 1MS21CS042 has SGPA 5.00 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS042",
+      "name": "CHRIS BIJU",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student CHRIS BIJU with USN 1MS21CS042 has SGPA 5.00 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade A gp 24.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B+ gp 28.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS042",
+      "name": "CHRIS BIJU",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student AISIRI SUNIL PATIL with USN 1MS21CS008 has SGPA 4.90 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS008",
+      "name": "AISIRI SUNIL PATIL",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student AISIRI SUNIL PATIL with USN 1MS21CS008 has SGPA 4.90 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade A gp 24.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS008",
+      "name": "AISIRI SUNIL PATIL",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student KRITIKA SAH with USN 1MS21CS064 has SGPA 4.80 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS064",
+      "name": "KRITIKA SAH",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student KRITIKA SAH with USN 1MS21CS064 has SGPA 4.80 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade P gp 16.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade C gp 15.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS064",
+      "name": "KRITIKA SAH",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MRINAL.S with USN 1MS21CS078 has SGPA 4.65 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS078",
+      "name": "MRINAL.S",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MRINAL.S with USN 1MS21CS078 has SGPA 4.65 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade P gp 12.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade P gp 16.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade B+ gp 21.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS078",
+      "name": "MRINAL.S",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student GARVITA GUPTA with USN 1MS21CS049 has SGPA 4.35 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS049",
+      "name": "GARVITA GUPTA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student GARVITA GUPTA with USN 1MS21CS049 has SGPA 4.35 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B gp 18.00; EE13 Basic Electrical Engineering 2:1:0:0: grade B+ gp 21.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade C gp 15.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS049",
+      "name": "GARVITA GUPTA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student NATASHA SURESH SARAVANA with USN 1MS21CS081 has SGPA 4.25 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS081",
+      "name": "NATASHA SURESH SARAVANA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student NATASHA SURESH SARAVANA with USN 1MS21CS081 has SGPA 4.25 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade C gp 15.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS081",
+      "name": "NATASHA SURESH SARAVANA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student PRANAV MAHADIKAR RAJEEV KUMAR with USN 1MS21CS096 has SGPA 4.15 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS096",
+      "name": "PRANAV MAHADIKAR RAJEEV KUMAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student PRANAV MAHADIKAR RAJEEV KUMAR with USN 1MS21CS096 has SGPA 4.15 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B gp 6.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade P gp 12.00; HS12 Communicativ e English 1:0:1:0: grade P gp 8.00; MA11 Advanced Calculus 3:1:0:0: grade P gp 16.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS096",
+      "name": "PRANAV MAHADIKAR RAJEEV KUMAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student SUSHEEL SEERVI H with USN 1MS21CS124 has SGPA 4.10 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS124",
+      "name": "SUSHEEL SEERVI H",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student SUSHEEL SEERVI H with USN 1MS21CS124 has SGPA 4.10 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade B gp 18.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade C gp 10.00; MA11 Advanced Calculus 3:1:0:0: grade C gp 20.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS124",
+      "name": "SUSHEEL SEERVI H",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RIDDHIKA SAI MANOHAR with USN 1MS21CS108 has SGPA 3.75 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS108",
+      "name": "RIDDHIKA SAI MANOHAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RIDDHIKA SAI MANOHAR with USN 1MS21CS108 has SGPA 3.75 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade P gp 12.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS108",
+      "name": "RIDDHIKA SAI MANOHAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student UDITANSHU KAMAL with USN 1MS21CS130 has SGPA 3.55 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS130",
+      "name": "UDITANSHU KAMAL",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student UDITANSHU KAMAL with USN 1MS21CS130 has SGPA 3.55 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade P gp 12.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B gp 18.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS130",
+      "name": "UDITANSHU KAMAL",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student JENISH OJHA with USN 1MS21CS055 has SGPA 3.45 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS055",
+      "name": "JENISH OJHA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student JENISH OJHA with USN 1MS21CS055 has SGPA 3.45 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade B gp 24.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS055",
+      "name": "JENISH OJHA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MAXON M KITTUR with USN 1MS21CS073 has SGPA 3.40 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS073",
+      "name": "MAXON M KITTUR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MAXON M KITTUR with USN 1MS21CS073 has SGPA 3.40 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS073",
+      "name": "MAXON M KITTUR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student SHARA RAVIRAJ SHETTY with USN 1MS21CS115 has SGPA 3.15 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS115",
+      "name": "SHARA RAVIRAJ SHETTY",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student SHARA RAVIRAJ SHETTY with USN 1MS21CS115 has SGPA 3.15 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade B+ gp 21.00; PY15 Engineering Physics 2:1:0:0: grade P gp 12.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS115",
+      "name": "SHARA RAVIRAJ SHETTY",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student DHARSHINI VENKATESAN with USN 1MS21CS044 has SGPA 3.05 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS044",
+      "name": "DHARSHINI VENKATESAN",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student DHARSHINI VENKATESAN with USN 1MS21CS044 has SGPA 3.05 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A+ gp 9.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A+ gp 18.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade C gp 15.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS044",
+      "name": "DHARSHINI VENKATESAN",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ADITHYA VIJAYKUMAR with USN 1MS21CS005 has SGPA 2.35 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS005",
+      "name": "ADITHYA VIJAYKUMAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ADITHYA VIJAYKUMAR with USN 1MS21CS005 has SGPA 2.35 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade P gp 4.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade C gp 15.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B gp 12.00; MA11 Advanced Calculus 3:1:0:0: grade P gp 16.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade NE; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS005",
+      "name": "ADITHYA VIJAYKUMAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ARJUN M with USN 1MS21CS028 has SGPA 2.15 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS028",
+      "name": "ARJUN M",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ARJUN M with USN 1MS21CS028 has SGPA 2.15 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS028",
+      "name": "ARJUN M",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student VISHNU KALLIHAL RAJ with USN 1MS21CS139 has SGPA 2.10 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS139",
+      "name": "VISHNU KALLIHAL RAJ",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student VISHNU KALLIHAL RAJ with USN 1MS21CS139 has SGPA 2.10 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS139",
+      "name": "VISHNU KALLIHAL RAJ",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student CHIRAYU KAJE with USN 1MS21CS041 has SGPA 1.95 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS041",
+      "name": "CHIRAYU KAJE",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student CHIRAYU KAJE with USN 1MS21CS041 has SGPA 1.95 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade A gp 16.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS041",
+      "name": "CHIRAYU KAJE",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student KANUMURI SAI RAMA RAHUL VARMA with USN 1MS21CS061 has SGPA 1.95 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS061",
+      "name": "KANUMURI SAI RAMA RAHUL VARMA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student KANUMURI SAI RAMA RAHUL VARMA with USN 1MS21CS061 has SGPA 1.95 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade NE; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS061",
+      "name": "KANUMURI SAI RAMA RAHUL VARMA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ANUSHKA BAJPAI with USN 1MS21CS025 has SGPA 1.70 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS025",
+      "name": "ANUSHKA BAJPAI",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ANUSHKA BAJPAI with USN 1MS21CS025 has SGPA 1.70 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade A gp 8.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade C gp 10.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade NE; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS025",
+      "name": "ANUSHKA BAJPAI",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student BHOOMIKA R with USN 1MS21CS038 has SGPA 1.50 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS038",
+      "name": "BHOOMIKA R",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student BHOOMIKA R with USN 1MS21CS038 has SGPA 1.50 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS038",
+      "name": "BHOOMIKA R",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RAHUL RACHIPA with USN 1MS21CS106 has SGPA 1.50 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS106",
+      "name": "RAHUL RACHIPA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RAHUL RACHIPA with USN 1MS21CS106 has SGPA 1.50 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B+ gp 14.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS106",
+      "name": "RAHUL RACHIPA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student KARAN PATHAK with USN 1MS21CS062 has SGPA 1.45 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS062",
+      "name": "KARAN PATHAK",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student KARAN PATHAK with USN 1MS21CS062 has SGPA 1.45 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade C gp 5.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade P gp 12.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade P gp 8.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS062",
+      "name": "KARAN PATHAK",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RAKSHITHA P with USN 1MS21CS107 has SGPA 1.35 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS107",
+      "name": "RAKSHITHA P",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student RAKSHITHA P with USN 1MS21CS107 has SGPA 1.35 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B gp 12.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS107",
+      "name": "RAKSHITHA P",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student HARI YOSHITHA with USN 1MS21CS050 has SGPA 1.25 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS050",
+      "name": "HARI YOSHITHA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student HARI YOSHITHA with USN 1MS21CS050 has SGPA 1.25 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B+ gp 7.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade B gp 12.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS050",
+      "name": "HARI YOSHITHA",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student APOORVA M with USN 1MS21CS026 has SGPA 0.80 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS026",
+      "name": "APOORVA M",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student APOORVA M with USN 1MS21CS026 has SGPA 0.80 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B gp 6.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade C gp 10.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS026",
+      "name": "APOORVA M",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ANKUSH with USN 1MS21CS021 has SGPA 0.55 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS021",
+      "name": "ANKUSH",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ANKUSH with USN 1MS21CS021 has SGPA 0.55 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade P gp 4.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade F gp 0.00; HS12 Communicativ e English 1:0:1:0: grade F gp 0.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade F gp 0.00; PY15 Engineering Physics 2:1:0:0: grade F gp 0.00",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS021",
+      "name": "ANKUSH",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student SUCHIR OTTURU with USN 1MS21CS121 has SGPA 0.50 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS121",
+      "name": "SUCHIR OTTURU",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student SUCHIR OTTURU with USN 1MS21CS121 has SGPA 0.50 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade B gp 6.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade NE; EE13 Basic Electrical Engineering 2:1:0:0: grade NE; HS12 Communicativ e English 1:0:1:0: grade F gp 0.00; MA11 Advanced Calculus 3:1:0:0: grade NE; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade NE; PY15 Engineering Physics 2:1:0:0: grade NE",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS121",
+      "name": "SUCHIR OTTURU",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ABIR GOLDAR with USN 1MS20CS005 has SGPA 0.20 and overall status FAIL.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS20CS005",
+      "name": "ABIR GOLDAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student ABIR GOLDAR with USN 1MS20CS005 has SGPA 0.20 and overall status FAIL. Subject details: AEC16 Design Thinking 1:0:0:0: grade P gp 4.00; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade F gp 0.00; EE13 Basic Electrical Engineering 2:1:0:0: grade NE; HS12 Communicativ e English 1:0:1:0: grade F gp 0.00; MA11 Advanced Calculus 3:1:0:0: grade F gp 0.00; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade NE; PY15 Engineering Physics 2:1:0:0: grade NE",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS20CS005",
+      "name": "ABIR GOLDAR",
+      "pass_fail": "FAIL"
+    }
+  },
+  {
+    "page_content": "Student MOHAMMED NIHAL JAFFER with USN 1MS21CS077 has SGPA 0.00 and overall status PASS.",
+    "metadata": {
+      "type": "student_summary",
+      "usn": "1MS21CS077",
+      "name": "MOHAMMED NIHAL JAFFER",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Student MOHAMMED NIHAL JAFFER with USN 1MS21CS077 has SGPA 0.00 and overall status PASS. Subject details: AEC16 Design Thinking 1:0:0:0: grade NE; CV14 Basics of Civil Engineering & Mechanics 3:0:0:0: grade NE; EE13 Basic Electrical Engineering 2:1:0:0: grade NE; HS12 Communicativ e English 1:0:1:0: grade NE; MA11 Advanced Calculus 3:1:0:0: grade NE; MEL17 Computer Aided Engineering Drawing 2:0:1:0: grade NE; PY15 Engineering Physics 2:1:0:0: grade NE",
+    "metadata": {
+      "type": "student_details",
+      "usn": "1MS21CS077",
+      "name": "MOHAMMED NIHAL JAFFER",
+      "pass_fail": "PASS"
+    }
+  },
+  {
+    "page_content": "Cohort summary: total students 146. Average SGPA 7.38. Topper is S MEENA KUMARI with USN 1MS21CS109 and SGPA 10.00. Students with at least one F grade: 34.",
+    "metadata": {
+      "type": "cohort_summary"
+    }
+  },
+  {
+    "page_content": "students table stores usn, name, and sgpa for each student record",
+    "metadata": {
+      "type": "schema"
+    }
+  },
+  {
+    "page_content": "results table stores per subject grade and grade points linked to a student",
+    "metadata": {
+      "type": "schema"
+    }
+  },
+  {
+    "page_content": "pass fail status is derived from result grades where F means fail",
+    "metadata": {
+      "type": "schema"
+    }
+  },
+  {
+    "page_content": "elasticsearch is used for search and prefix filtering by name usn and grades",
+    "metadata": {
+      "type": "schema"
+    }
+  }
+]

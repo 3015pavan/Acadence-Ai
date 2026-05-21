@@ -290,7 +290,8 @@ def run_processing_pipeline(db: Session, attachment: SavedAttachment) -> Pipelin
         report_path.write_bytes(_generate_report_pdf(students, summary))
         report_ms = int((time.perf_counter() - report_start) * 1000)
 
-        all_students = fetch_students(db)
+        from ..tenant_context import get_current_user_id
+        all_students = fetch_students(db, owner_user_id=get_current_user_id())
         try:
             elastic_client = get_elasticsearch_client()
             sync_students(elastic_client, all_students)

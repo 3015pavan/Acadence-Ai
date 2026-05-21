@@ -46,6 +46,10 @@ Base = declarative_base()
 
 with engine.begin() as connection:
     connection.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{DB_SCHEMA}" AUTHORIZATION CURRENT_USER'))
+    try:
+        connection.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
+    except Exception:
+        pass
 
 
 def get_db():

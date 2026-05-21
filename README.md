@@ -20,6 +20,9 @@ python -m venv .venv
 # install backend deps
 python -m pip install -r requirements.txt
 
+# apply database migrations
+alembic upgrade head
+
 # run backend (development)
 cd backend
 python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
@@ -39,19 +42,26 @@ API endpoints:
 Data storage and indexes:
 
 - Processed workbook: `backend/storage/processed_results.xlsx`
-- FAISS index: `backend/storage/faiss/` (vector index files)
+- Semantic store: `semantic_documents` in PostgreSQL with pgvector embeddings
 - Database: configured via `DATABASE_URL` (Postgres)
 
 Environment variables (add to `.env`):
 
 ```
 DATABASE_URL=postgresql://user:password@localhost:5432/acadence_ai_db
+AUTH_SECRET=change-me-in-production
+BOOTSTRAP_ADMIN_EMAIL=admin@example.com
+BOOTSTRAP_ADMIN_PASSWORD=change-me
 GCP_GEMINI_KEY=your_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
 GEMINI_THINKING_LEVEL=low
 GMAIL_SERVICE_ACCOUNT_JSON=path/to/credentials.json
 ELASTICSEARCH_URL=http://localhost:9200
+ACCESS_TOKEN_TTL_SECONDS=1800
+REFRESH_TOKEN_TTL_SECONDS=1209600
 ```
+
+For production, run the app behind Docker Compose with PostgreSQL + pgvector, the backend, frontend, and Nginx reverse proxy. Set HTTPS secrets and deploy with the provided GitHub Actions workflow.
 
 ---
 # Acadence AI

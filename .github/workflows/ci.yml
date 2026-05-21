@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: acadence_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready -U postgres -d acadence_test
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Install Python deps
+        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+
+      - name: Run tests
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/acadence_test
+          PGVECTOR_ENABLED: 'false'
+        run: |
+          # Wait until Postgres is ready
+          until pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done
+
+          # Start the API server in the background for integration tests that hit /health and endpoints.
+          nohup python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 &>/dev/null &
+
+          # Wait for the app to be responsive
+          for i in {1..30}; do
+            if curl -sSf http://localhost:8000/health >/dev/null; then
+              echo "API is up" && break
+            fi
+            sleep 1
+          done
+
+          python -m pytest -q

@@ -3,6 +3,43 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 
 
+class UserProfile(BaseModel):
+    id: int
+    email: str
+    role: str
+    display_name: str
+    tenant_key: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class SignUpRequest(BaseModel):
+    email: str
+    password: str
+    display_name: Optional[str] = None
+    role: Optional[str] = "teacher"
+    tenant_key: Optional[str] = None
+
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
+
+
+class TokenPair(BaseModel):
+    access_token: str
+    refresh_token: str
+
+
+class AuthResponse(TokenPair):
+    user: UserProfile
+
+
 class ResultItem(BaseModel):
     subject: str
     grade: str

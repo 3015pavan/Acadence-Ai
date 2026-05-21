@@ -7,7 +7,7 @@ const highlights = [
   },
   {
     title: "Search with context",
-    description: "Use hybrid retrieval across the local FAISS index and Elasticsearch when it is available.",
+    description: "Use hybrid retrieval across the PostgreSQL semantic store and Elasticsearch when it is available.",
   },
   {
     title: "Automated replies",
@@ -17,7 +17,7 @@ const highlights = [
 
 const stats = [
   { label: "Data sources", value: "Excel + PDF" },
-  { label: "Retrieval", value: "FAISS + ES" },
+  { label: "Retrieval", value: "pgvector + ES" },
   { label: "Delivery", value: "Reports + Replies" },
   { label: "Automation", value: "Gmail Agent" },
 ];

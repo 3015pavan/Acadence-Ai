@@ -102,7 +102,9 @@ def build_insights(summary: dict, top_students: list, failed_students: list, gra
 
 
 def generate_report_pdf(db: Session) -> bytes:
-    students = fetch_students(db)
+    from .analyzer import fetch_students as _fetch_students
+    from ..tenant_context import get_current_user_id
+    students = _fetch_students(db, owner_user_id=get_current_user_id())
     if not students:
         raise ValueError("No student data is available for report generation.")
 

@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session, selectinload
 from ..agent_models import AgentProcessedDataset
 from .. import models
 from .parser import ParsedStudent
+from ..tenant_context import get_current_user_id
 from ..utils.monitoring import send_alert
 
 
@@ -52,12 +53,23 @@ def _legacy_semester_payload(student: models.Student, results: Sequence[models.R
     }
 
 
-def _get_or_create_dataset(db: Session, dataset_name: str) -> models.Dataset:
+def _tenant_owner_id(owner_user_id: Optional[int] = None) -> int:
+    resolved = owner_user_id if owner_user_id is not None else get_current_user_id()
+    if resolved is None:
+        raise RuntimeError("Tenant context is required for this operation")
+    return int(resolved)
+
+
+def _get_or_create_dataset(db: Session, dataset_name: str, owner_user_id: Optional[int] = None) -> models.Dataset:
     """Get existing dataset or create new one."""
-    stmt = select(models.Dataset).where(models.Dataset.name == dataset_name)
+    resolved_owner_id = _tenant_owner_id(owner_user_id)
+    stmt = select(models.Dataset).where(
+        models.Dataset.name == dataset_name,
+        models.Dataset.owner_user_id == resolved_owner_id,
+    )
     dataset = db.scalar(stmt)
     if not dataset:
-        dataset = models.Dataset(name=dataset_name)
+        dataset = models.Dataset(name=dataset_name, owner_user_id=resolved_owner_id)
         db.add(dataset)
         db.flush()
     return dataset
@@ -72,7 +84,7 @@ def _extract_semester_from_filename(filename: str) -> int:
     return 1
 
 
-def persist_students(db: Session, students: List[ParsedStudent], dataset_name: Optional[str] = None) -> None:
+def persist_students(db: Session, students: List[ParsedStudent], dataset_name: Optional[str] = None, owner_user_id: Optional[int] = None) -> None:
     """
     Persist students with multi-semester support.
     
@@ -85,7 +97,8 @@ def persist_students(db: Session, students: List[ParsedStudent], dataset_name: O
         dataset_name = "default"
     
     try:
-        dataset = _get_or_create_dataset(db, dataset_name)
+        resolved_owner_id = _tenant_owner_id(owner_user_id)
+        dataset = _get_or_create_dataset(db, dataset_name, resolved_owner_id)
 
         for student in students:
             # Basic validation to avoid persisting corrupt rows
@@ -100,15 +113,19 @@ def persist_students(db: Session, students: List[ParsedStudent], dataset_name: O
             except Exception:
                 send_alert("Invalid SGPA", f"SGPA parse error for USN={student.usn}: {student.sgpa}")
                 continue
-            stmt = select(models.Student).where(models.Student.usn == student.usn)
+            stmt = select(models.Student).where(
+                models.Student.usn == student.usn,
+                models.Student.owner_user_id == resolved_owner_id,
+            )
             db_student = db.scalar(stmt)
 
             if not db_student:
-                db_student = models.Student(usn=student.usn, name=student.name, sgpa=student.sgpa)
+                db_student = models.Student(usn=student.usn, name=student.name, sgpa=student.sgpa, owner_user_id=resolved_owner_id)
                 db.add(db_student)
                 db.flush()
 
             student_semester = models.StudentSemester(
+                owner_user_id=resolved_owner_id,
                 student_id=db_student.id,
                 dataset_id=dataset.id,
                 semester=student.semester,
@@ -126,6 +143,7 @@ def persist_students(db: Session, students: List[ParsedStudent], dataset_name: O
                     continue
                 db.add(
                     models.Result(
+                        owner_user_id=resolved_owner_id,
                         student_semester_id=student_semester.id,
                         student_id=db_student.id,
                         subject=result["subject"],
@@ -143,14 +161,17 @@ def persist_students(db: Session, students: List[ParsedStudent], dataset_name: O
 
         # Legacy fallback: keep the existing flat schema working.
         for student in students:
-            stmt = select(models.Student).where(models.Student.usn == student.usn)
+            stmt = select(models.Student).where(
+                models.Student.usn == student.usn,
+                models.Student.owner_user_id == resolved_owner_id,
+            )
             db_student = db.scalar(stmt)
 
             if db_student:
                 db_student.name = student.name
                 db_student.sgpa = student.sgpa
             else:
-                db_student = models.Student(usn=student.usn, name=student.name, sgpa=student.sgpa)
+                db_student = models.Student(usn=student.usn, name=student.name, sgpa=student.sgpa, owner_user_id=resolved_owner_id)
                 db.add(db_student)
                 db.flush()
 
@@ -158,6 +179,7 @@ def persist_students(db: Session, students: List[ParsedStudent], dataset_name: O
             for result in student.results:
                 db.add(
                     models.Result(
+                        owner_user_id=resolved_owner_id,
                         student_id=db_student.id,
                         subject=result["subject"],
                         grade=result["grade"],
@@ -173,11 +195,12 @@ def save_processed_excel(processed_df: pd.DataFrame, output_path: Path) -> None:
     processed_df.to_excel(output_path, index=False)
 
 
-def delete_dataset(db: Session, dataset_id: int) -> Dict[str, object]:
+def delete_dataset(db: Session, dataset_id: int, owner_user_id: Optional[int] = None) -> Dict[str, object]:
+    resolved_owner_id = _tenant_owner_id(owner_user_id)
     dataset = db.scalar(
         select(models.Dataset)
         .options(selectinload(models.Dataset.student_semesters))
-        .where(models.Dataset.id == dataset_id)
+        .where(models.Dataset.id == dataset_id, models.Dataset.owner_user_id == resolved_owner_id)
     )
     if dataset is None:
         raise ValueError(f"Dataset {dataset_id} was not found.")
@@ -239,6 +262,8 @@ def delete_dataset(db: Session, dataset_id: int) -> Dict[str, object]:
 
     db.commit()
 
+    # Return remaining students for this tenant explicitly
+    remaining = fetch_students(db, owner_user_id=resolved_owner_id)
     return {
         "dataset_id": dataset_id,
         "dataset_name": dataset_name,
@@ -247,11 +272,11 @@ def delete_dataset(db: Session, dataset_id: int) -> Dict[str, object]:
         "deleted_results": result_count,
         "deleted_students": deleted_students,
         "files_removed": files_removed,
-        "remaining_students": fetch_students(db),
+        "remaining_students": remaining,
     }
 
 
-def fetch_students(db: Session, semester: Optional[int] = None, dataset_id: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None, merge: Optional[str] = None) -> List[models.Student]:
+def fetch_students(db: Session, semester: Optional[int] = None, dataset_id: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None, merge: Optional[str] = None, owner_user_id: Optional[int] = None) -> List[models.Student]:
     """Fetch students, optionally filtered by semester and/or dataset(s).
 
     Args:
@@ -261,10 +286,13 @@ def fetch_students(db: Session, semester: Optional[int] = None, dataset_id: Opti
         dataset_ids: optional sequence of dataset ids to filter by (preferred)
         merge: optional merge policy when multiple datasets are selected. Supported: 'union' (default), 'prefer_latest'
     """
+    resolved_owner_id = owner_user_id if owner_user_id is not None else get_current_user_id()
     stmt = select(models.Student).options(
         selectinload(models.Student.student_semesters).selectinload(models.StudentSemester.results),
         selectinload(models.Student.results),
     )
+    if resolved_owner_id is not None:
+        stmt = stmt.where(models.Student.owner_user_id == int(resolved_owner_id))
     
     students = list(db.scalars(stmt).all())
     
@@ -313,10 +341,11 @@ def fetch_students(db: Session, semester: Optional[int] = None, dataset_id: Opti
     return students
 
 
-def fetch_students_by_usns(db: Session, usns: Sequence[str], semester: Optional[int] = None) -> List[models.Student]:
+def fetch_students_by_usns(db: Session, usns: Sequence[str], semester: Optional[int] = None, owner_user_id: Optional[int] = None) -> List[models.Student]:
     if not usns:
         return []
     ordered_usns = [usn.upper() for usn in usns]
+    resolved_owner_id = owner_user_id if owner_user_id is not None else get_current_user_id()
     stmt = (
         select(models.Student)
         .options(
@@ -325,15 +354,18 @@ def fetch_students_by_usns(db: Session, usns: Sequence[str], semester: Optional[
         )
         .where(models.Student.usn.in_(ordered_usns))
     )
+    if resolved_owner_id is not None:
+        stmt = stmt.where(models.Student.owner_user_id == int(resolved_owner_id))
     students = list(db.scalars(stmt).all())
     student_map = {student.usn: student for student in students}
     return [student_map[usn] for usn in ordered_usns if usn in student_map]
 
 
-def fetch_student_by_usn(db: Session, usn: str) -> Optional[models.Student]:
+def fetch_student_by_usn(db: Session, usn: str, owner_user_id: Optional[int] = None) -> Optional[models.Student]:
     normalized = usn.strip().upper()
     if not normalized:
         return None
+    resolved_owner_id = owner_user_id if owner_user_id is not None else get_current_user_id()
     stmt = (
         select(models.Student)
         .options(
@@ -342,36 +374,38 @@ def fetch_student_by_usn(db: Session, usn: str) -> Optional[models.Student]:
         )
         .where(models.Student.usn == normalized)
     )
+    if resolved_owner_id is not None:
+        stmt = stmt.where(models.Student.owner_user_id == int(resolved_owner_id))
     return db.scalar(stmt)
 
 
-def fetch_top_students(db: Session, limit: int, semester: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None) -> List[models.Student]:
+def fetch_top_students(db: Session, limit: int, semester: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None, owner_user_id: Optional[int] = None) -> List[models.Student]:
     """Fetch top students by CGPA/SGPA, optionally filtered by semester and/or dataset(s)."""
-    students = fetch_students(db, semester=semester, dataset_ids=dataset_ids)
+    students = fetch_students(db, semester=semester, dataset_ids=dataset_ids, owner_user_id=owner_user_id)
     return students[:limit]
 
 
-def fetch_topper(db: Session, semester: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None) -> Optional[models.Student]:
+def fetch_topper(db: Session, semester: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None, owner_user_id: Optional[int] = None) -> Optional[models.Student]:
     """Get top student (topper) by CGPA, optionally for specific semester and/or dataset(s)."""
-    top_students = fetch_top_students(db, 1, semester=semester, dataset_ids=dataset_ids)
+    top_students = fetch_top_students(db, 1, semester=semester, dataset_ids=dataset_ids, owner_user_id=owner_user_id)
     return top_students[0] if top_students else None
 
 
-def fetch_failed_students(db: Session, usns: Optional[Sequence[str]] = None, semester: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None) -> List[models.Student]:
+def fetch_failed_students(db: Session, usns: Optional[Sequence[str]] = None, semester: Optional[int] = None, dataset_ids: Optional[Sequence[int]] = None, owner_user_id: Optional[int] = None) -> List[models.Student]:
     """Fetch students who failed (have grade F), optionally filtered by semester and/or dataset(s)."""
-    students = fetch_students(db, semester=semester, dataset_ids=dataset_ids)
+    students = fetch_students(db, semester=semester, dataset_ids=dataset_ids, owner_user_id=owner_user_id)
     if usns:
         allowed = {usn.upper() for usn in usns}
         students = [student for student in students if student.usn in allowed]
     return [student for student in students if any((result.grade or "").upper() == "F" for result in _student_results(student))]
 
 
-def compute_average_sgpa(db: Session, usns: Optional[Sequence[str]] = None) -> float:
+def compute_average_sgpa(db: Session, usns: Optional[Sequence[str]] = None, owner_user_id: Optional[int] = None) -> float:
     # Compute average SGPA over students' latest semester SGPA
     if usns:
-        students = fetch_students_by_usns(db, usns)
+        students = fetch_students_by_usns(db, usns, owner_user_id=owner_user_id)
     else:
-        students = fetch_students(db)
+        students = fetch_students(db, owner_user_id=owner_user_id)
     if not students:
         return 0.0
     vals = [float(student.sgpa or 0.0) for student in students]
@@ -441,11 +475,11 @@ def build_results_dataframe(students: Sequence[models.Student]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def build_summary(db: Session, dataset_ids: Optional[Sequence[int]] = None) -> Dict[str, object]:
-    students = fetch_students(db, dataset_ids=dataset_ids)
+def build_summary(db: Session, dataset_ids: Optional[Sequence[int]] = None, owner_user_id: Optional[int] = None) -> Dict[str, object]:
+    students = fetch_students(db, dataset_ids=dataset_ids, owner_user_id=owner_user_id)
     total_students = len(students)
-    average_sgpa = compute_average_sgpa(db) if not dataset_ids else (sum(float(s.sgpa or 0) for s in students) / len(students) if students else 0.0)
-    topper = fetch_topper(db, dataset_ids=dataset_ids)
+    average_sgpa = compute_average_sgpa(db, owner_user_id=owner_user_id) if not dataset_ids else (sum(float(s.sgpa or 0) for s in students) / len(students) if students else 0.0)
+    topper = fetch_topper(db, dataset_ids=dataset_ids, owner_user_id=owner_user_id)
     failed_count = len(
         [student for student in students if any((result.grade or "").upper() == "F" for result in _student_results(student))]
     )

@@ -32,8 +32,8 @@ backend/logs/
 *.jsonl
 
 # Persistent storage artifacts (vector indexes, tokens)
-backend/storage/faiss/*.index
-backend/storage/faiss/*.json
+backend/storage/semantic/*.json
+backend/storage/semantic/*.index
 backend/storage/gmail_token.json
 backend/storage/*.db
 backend/storage/*.sqlite*

@@ -1,5 +1,4 @@
 import hashlib
-import importlib
 import json
 import os
 import re
@@ -11,8 +10,12 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 import numpy as np
 import requests
 from dotenv import load_dotenv
+from sqlalchemy import delete, select
 
+from ..database import SessionLocal
+from .. import models
 from ..models import Student
+from ..tenant_context import get_current_user_id
 
 try:
     from langchain_core.documents import Document
@@ -36,11 +39,16 @@ GEMINI_TEMPERATURE = os.getenv("GEMINI_TEMPERATURE", "").strip()
 INTENT_THRESHOLD = float(os.getenv("AI_INTENT_THRESHOLD", "0.2"))
 SEMANTIC_FALLBACK_THRESHOLD = max(INTENT_THRESHOLD, 0.55)
 VECTOR_DIMENSION = int(os.getenv("AI_VECTOR_DIMENSION", "384"))
-INDEX_DIR = Path(__file__).resolve().parents[1] / "storage" / "faiss"
-INDEX_FILE = INDEX_DIR / "query_intelligence.index"
-METADATA_FILE = INDEX_DIR / "query_intelligence.json"
-_FAISS_MODULE = None
-_FAISS_IMPORT_ERROR: Optional[Exception] = None
+INDEX_DIR = Path(__file__).resolve().parents[1] / "storage" / "semantic"
+INDEX_FILE = INDEX_DIR / "query_intelligence.json"
+METADATA_FILE = INDEX_DIR / "query_intelligence.metadata.json"
+PGVECTOR_AVAILABLE = False
+try:  # pragma: no cover - optional dependency
+    from pgvector.sqlalchemy import Vector as PGVector  # type: ignore
+
+    PGVECTOR_AVAILABLE = True
+except Exception:  # pragma: no cover - optional dependency
+    PGVector = None
 
 INTENT_LIBRARY: Dict[str, Dict[str, object]] = {
     "GET_TOPPER": {
@@ -545,33 +553,20 @@ def build_documents(students: Iterable[Student]) -> List[Document]:
     return _intent_documents() + _student_documents(student_list) + _cohort_documents(student_list) + _schema_documents()
 
 
-def _get_faiss():
-    global _FAISS_MODULE, _FAISS_IMPORT_ERROR
-    if _FAISS_MODULE is not None:
-        return _FAISS_MODULE
-    if _FAISS_IMPORT_ERROR is not None:
-        raise RuntimeError(
-            "FAISS is unavailable. Reinstall dependencies with numpy==1.26.4 and faiss-cpu."
-        ) from _FAISS_IMPORT_ERROR
-
-    try:
-        _FAISS_MODULE = importlib.import_module("faiss")
-        return _FAISS_MODULE
-    except Exception as exc:  # pragma: no cover - depends on local wheel compatibility
-        _FAISS_IMPORT_ERROR = exc
-        raise RuntimeError(
-            "FAISS is unavailable. Reinstall dependencies with numpy==1.26.4 and faiss-cpu."
-        ) from exc
-
-
 class QueryIntelligenceIndex:
-    def __init__(self) -> None:
+    def __init__(self, owner_user_id: int | None = None) -> None:
+        """Index helper for semantic query intelligence.
+
+        If `owner_user_id` is not provided, the current tenant user id from
+        the request context will be used.
+        """
         self.index_dir = INDEX_DIR
         self.index_file = INDEX_FILE
         self.metadata_file = METADATA_FILE
+        # Prefer explicit owner_user_id, else fall back to request context
+        self.owner_user_id = owner_user_id if owner_user_id is not None else get_current_user_id()
 
     def rebuild(self, students: Iterable[Student]) -> None:
-        faiss = _get_faiss()
         documents = build_documents(students)
         texts = [document.page_content for document in documents]
         vectors = embed_texts(texts)
@@ -579,54 +574,86 @@ class QueryIntelligenceIndex:
             return
 
         self.index_dir.mkdir(parents=True, exist_ok=True)
-        dimension = int(vectors.shape[1])
-        index = faiss.IndexFlatIP(dimension)
-        index.add(vectors)
-        faiss.write_index(index, str(self.index_file))
+        metadata = []
+        with SessionLocal() as db:
+            owner_clause = models.SemanticDocument.owner_user_id == self.owner_user_id if self.owner_user_id is not None else models.SemanticDocument.owner_user_id.is_(None)
+            db.execute(delete(models.SemanticDocument).where(owner_clause))
+            for document, vector in zip(documents, vectors):
+                content = document.page_content
+                metadata_item = dict(document.metadata or {})
+                metadata_item["owner_user_id"] = self.owner_user_id
+                semantic_document = models.SemanticDocument(
+                    owner_user_id=self.owner_user_id,
+                    dataset_id=metadata_item.get("dataset_id"),
+                    student_id=metadata_item.get("student_id"),
+                    content_type=str(metadata_item.get("type") or "student"),
+                    content=content,
+                    content_hash=hashlib.sha256(content.encode("utf-8")).hexdigest(),
+                    metadata_json=metadata_item,
+                    embedding=vector.tolist(),
+                )
+                db.add(semantic_document)
+                metadata.append({"page_content": content, "metadata": metadata_item})
+            db.commit()
 
-        metadata = [
-            {"page_content": document.page_content, "metadata": document.metadata}
-            for document in documents
-        ]
+        self.index_file.write_text(json.dumps({"owner_user_id": self.owner_user_id, "documents": len(metadata)}, indent=2), encoding="utf-8")
         self.metadata_file.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
     def exists(self) -> bool:
-        return self.index_file.exists() and self.metadata_file.exists()
+        with SessionLocal() as db:
+            owner_clause = models.SemanticDocument.owner_user_id == self.owner_user_id if self.owner_user_id is not None else models.SemanticDocument.owner_user_id.is_(None)
+            return bool(db.scalar(select(models.SemanticDocument.id).where(owner_clause).limit(1)))
 
     def load(self) -> Tuple[Any, List[Dict[str, object]]]:
-        faiss = _get_faiss()
         if not self.exists():
-            raise FileNotFoundError("FAISS index is not available.")
-        index = faiss.read_index(str(self.index_file))
-        metadata = json.loads(self.metadata_file.read_text(encoding="utf-8"))
-        return index, metadata
+            raise FileNotFoundError("Semantic index is not available.")
+        metadata = json.loads(self.metadata_file.read_text(encoding="utf-8")) if self.metadata_file.exists() else []
+        return None, metadata
 
     def search(self, query: str, top_k: int = 5) -> List[Dict[str, object]]:
-        index, metadata = self.load()
-        query_vector = embed_texts([query])
-        scores, positions = index.search(query_vector, top_k)
+        query_vector = embed_texts([query])[0].tolist()
         hits: List[Dict[str, object]] = []
-        for score, position in zip(scores[0], positions[0]):
-            if position < 0:
+        with SessionLocal() as db:
+            owner_clause = models.SemanticDocument.owner_user_id == self.owner_user_id if self.owner_user_id is not None else models.SemanticDocument.owner_user_id.is_(None)
+            documents = list(db.scalars(select(models.SemanticDocument).where(owner_clause)).all())
+
+        if not documents:
+            return []
+
+        query_norm = float(np.linalg.norm(np.array(query_vector, dtype="float32"))) or 1.0
+        scored_documents: List[Tuple[float, models.SemanticDocument]] = []
+        for document in documents:
+            embedding_value = document.embedding or []
+            if isinstance(embedding_value, str):
+                try:
+                    embedding_value = json.loads(embedding_value)
+                except Exception:
+                    embedding_value = []
+            vector = np.array(list(embedding_value), dtype="float32")
+            if vector.size == 0:
                 continue
-            item = metadata[position]
+            similarity = float(np.dot(np.array(query_vector, dtype="float32"), vector) / (query_norm * (float(np.linalg.norm(vector)) or 1.0)))
+            scored_documents.append((similarity, document))
+
+        scored_documents.sort(key=lambda item: item[0], reverse=True)
+        for score, document in scored_documents[:top_k]:
             hits.append(
                 {
                     "score": float(score),
-                    "page_content": item["page_content"],
-                    "metadata": item["metadata"],
+                    "page_content": document.content,
+                    "metadata": document.metadata_json or {},
                 }
             )
         return hits
 
 
-def ensure_query_index(students: Iterable[Student]) -> None:
-    QueryIntelligenceIndex().rebuild(students)
+def ensure_query_index(students: Iterable[Student], owner_user_id: int | None = None) -> None:
+    QueryIntelligenceIndex(owner_user_id=owner_user_id).rebuild(students)
 
 
-def retrieve_context_documents(query: str, top_k: int = 8) -> List[Dict[str, object]]:
+def retrieve_context_documents(query: str, top_k: int = 8, owner_user_id: int | None = None) -> List[Dict[str, object]]:
     try:
-        hits = QueryIntelligenceIndex().search(query, top_k=top_k)
+        hits = QueryIntelligenceIndex(owner_user_id=owner_user_id).search(query, top_k=top_k)
     except (FileNotFoundError, RuntimeError):
         return []
     documents: List[Dict[str, object]] = []
@@ -1088,7 +1115,7 @@ def answer_query_from_context(
     }
 
 
-def detect_intent(query: str, history: Optional[Sequence[Dict[str, object]]] = None) -> Dict[str, object]:
+def detect_intent(query: str, history: Optional[Sequence[Dict[str, object]]] = None, owner_user_id: int | None = None) -> Dict[str, object]:
     if not query.strip():
         return {
             "intent": None,
@@ -1108,7 +1135,7 @@ def detect_intent(query: str, history: Optional[Sequence[Dict[str, object]]] = N
         return llm_match
 
     try:
-        hits = QueryIntelligenceIndex().search(query, top_k=5)
+        hits = QueryIntelligenceIndex(owner_user_id=owner_user_id).search(query, top_k=5)
     except (FileNotFoundError, RuntimeError):
         hits = []
     intent_hits = [hit for hit in hits if hit["metadata"].get("type") == "intent"]
