@@ -13,6 +13,12 @@ ELASTICSEARCH_URL = os.getenv("ELASTICSEARCH_URL", "http://localhost:9200")
 INDEX_NAME = os.getenv("ELASTICSEARCH_INDEX", "students_index")
 
 
+def _index_name(owner_user_id: int | None = None) -> str:
+    if owner_user_id is None:
+        return INDEX_NAME
+    return f"{INDEX_NAME}_user_{owner_user_id}"
+
+
 def get_elasticsearch_client() -> str:
     return ELASTICSEARCH_URL.rstrip("/")
 
@@ -25,15 +31,16 @@ def _request(method: str, path: str, *, client: Optional[str] = None, **kwargs):
     return response
 
 
-def ensure_index(client: str) -> None:
-    exists_response = requests.head(f"{client}/{INDEX_NAME}", timeout=10)
+def ensure_index(client: str, owner_user_id: int | None = None) -> None:
+    index_name = _index_name(owner_user_id)
+    exists_response = requests.head(f"{client}/{index_name}", timeout=10)
     if exists_response.status_code == 200:
         return
     if exists_response.status_code not in {200, 404}:
         exists_response.raise_for_status()
 
     create_response = requests.put(
-        f"{client}/{INDEX_NAME}",
+        f"{client}/{index_name}",
         json={
             "mappings": {
                 "properties": {
@@ -56,11 +63,12 @@ def ensure_index(client: str) -> None:
     create_response.raise_for_status()
 
 
-def sync_students(client: str, students: Iterable[Student]) -> None:
-    ensure_index(client)
+def sync_students(client: str, students: Iterable[Student], owner_user_id: int | None = None) -> None:
+    index_name = _index_name(owner_user_id)
+    ensure_index(client, owner_user_id=owner_user_id)
 
     delete_response = requests.post(
-        f"{client}/{INDEX_NAME}/_delete_by_query",
+        f"{client}/{index_name}/_delete_by_query",
         json={"query": {"match_all": {}}},
         timeout=30,
     )
@@ -68,7 +76,7 @@ def sync_students(client: str, students: Iterable[Student]) -> None:
 
     for student in students:
         index_response = requests.put(
-            f"{client}/{INDEX_NAME}/_doc/{student.usn}?refresh=true",
+            f"{client}/{index_name}/_doc/{student.usn}?refresh=true",
             json={
                 "usn": student.usn,
                 "name": student.name,
@@ -104,10 +112,11 @@ def _extract_ranked_hits(payload: dict) -> List[Dict[str, object]]:
     return ranked_hits
 
 
-def search_failed_students(client: str, limit: int = 100) -> List[str]:
+def search_failed_students(client: str, limit: int = 100, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -120,10 +129,11 @@ def search_failed_students(client: str, limit: int = 100) -> List[str]:
     return _extract_usns(response.json())
 
 
-def search_students_by_grade(client: str, grade: str, limit: int = 200) -> List[str]:
+def search_students_by_grade(client: str, grade: str, limit: int = 200, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -136,10 +146,11 @@ def search_students_by_grade(client: str, grade: str, limit: int = 200) -> List[
     return _extract_usns(response.json())
 
 
-def search_students_by_name(client: str, name: str, limit: int = 20) -> List[str]:
+def search_students_by_name(client: str, name: str, limit: int = 20, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -161,10 +172,11 @@ def search_students_by_name(client: str, name: str, limit: int = 20) -> List[str
     return _extract_usns(response.json())
 
 
-def search_students_by_name_ranked(client: str, name: str, limit: int = 20) -> List[Dict[str, object]]:
+def search_students_by_name_ranked(client: str, name: str, limit: int = 20, owner_user_id: int | None = None) -> List[Dict[str, object]]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -186,10 +198,11 @@ def search_students_by_name_ranked(client: str, name: str, limit: int = 20) -> L
     return _extract_ranked_hits(response.json())
 
 
-def search_students_by_name_prefix(client: str, prefix: str, limit: int = 100) -> List[str]:
+def search_students_by_name_prefix(client: str, prefix: str, limit: int = 100, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -202,10 +215,11 @@ def search_students_by_name_prefix(client: str, prefix: str, limit: int = 100) -
     return _extract_usns(response.json())
 
 
-def search_students_by_usn_prefix(client: str, prefix: str, limit: int = 100) -> List[str]:
+def search_students_by_usn_prefix(client: str, prefix: str, limit: int = 100, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -218,10 +232,11 @@ def search_students_by_usn_prefix(client: str, prefix: str, limit: int = 100) ->
     return _extract_usns(response.json())
 
 
-def search_students_by_grade_and_failure(client: str, grade: str, limit: int = 200) -> List[str]:
+def search_students_by_grade_and_failure(client: str, grade: str, limit: int = 200, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,
@@ -240,10 +255,11 @@ def search_students_by_grade_and_failure(client: str, grade: str, limit: int = 2
     return _extract_usns(response.json())
 
 
-def search_students_with_gp_zero(client: str, limit: int = 200) -> List[str]:
+def search_students_with_gp_zero(client: str, limit: int = 200, owner_user_id: int | None = None) -> List[str]:
+    index_name = _index_name(owner_user_id)
     response = _request(
         "POST",
-        f"{INDEX_NAME}/_search",
+        f"{index_name}/_search",
         client=client,
         json={
             "size": limit,

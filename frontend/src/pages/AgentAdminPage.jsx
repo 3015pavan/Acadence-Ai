@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api";
+import { useAuth } from "../context/AuthContext";
 
 function StatusPill({ running, status }) {
   const tone = running
@@ -20,34 +21,45 @@ function formatTimestamp(value) {
 }
 
 export default function AgentAdminPage() {
+  const { user } = useAuth();
   const [status, setStatus] = useState(null);
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [logsLoading, setLogsLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState("");
   const [connectLoading, setConnectLoading] = useState(false);
   const [error, setError] = useState("");
 
   const loadAgentData = async () => {
     try {
-      const [statusResponse, logsResponse] = await Promise.all([
-        api.get("/agent/status"),
-        api.get("/agent/logs", { params: { limit: 100 } }),
-      ]);
+      const statusResponse = await api.get("/agent/status");
       setStatus(statusResponse.data);
-      setLogs(Array.isArray(logsResponse.data.logs) ? logsResponse.data.logs : []);
       setError("");
     } catch (requestError) {
       setError(requestError.response?.data?.detail || "Unable to load agent status.");
     } finally {
       setLoading(false);
     }
+
+    try {
+      const logsResponse = await api.get("/agent/logs", { params: { limit: 100 } });
+      setLogs(Array.isArray(logsResponse.data.logs) ? logsResponse.data.logs : []);
+    } catch {
+      setLogs([]);
+    } finally {
+      setLogsLoading(false);
+    }
   };
 
   useEffect(() => {
+    setStatus(null);
+    setLogs([]);
+    setLoading(true);
+    setLogsLoading(true);
     loadAgentData();
     const intervalId = window.setInterval(loadAgentData, 10000);
     return () => window.clearInterval(intervalId);
-  }, []);
+  }, [user?.id]);
 
   const runAction = async (path, loadingKey) => {
     setActionLoading(loadingKey);
@@ -97,7 +109,12 @@ export default function AgentAdminPage() {
   }
 
   if (!status) {
-    return <div className="rounded-3xl bg-rose-50 p-10 text-center text-rose-700 shadow-soft">Agent status is unavailable.</div>;
+    return (
+      <div className="rounded-3xl bg-rose-50 p-10 text-center text-rose-700 shadow-soft">
+        <p className="font-semibold">Agent status is unavailable.</p>
+        {error ? <p className="mt-2 text-sm text-rose-600">{error}</p> : null}
+      </div>
+    );
   }
 
   return (
@@ -112,6 +129,18 @@ export default function AgentAdminPage() {
             </p>
           </div>
           <StatusPill running={status.running} status={status.status} />
+        </div>
+
+        <div className="mt-5 rounded-3xl border border-slate-200 bg-slate-50 p-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-slate-900">Current account</p>
+              <p className="text-sm text-slate-600">
+                {user?.display_name || user?.email} · {user?.role} · {user?.tenant_key || "no tenant key"}
+              </p>
+            </div>
+            <div className="text-sm font-semibold text-slate-700">Only this account’s Gmail and logs are shown here.</div>
+          </div>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -142,7 +171,7 @@ export default function AgentAdminPage() {
             <div>
               <p className="text-sm font-semibold text-slate-900">Gmail connection</p>
               <p className="mt-1 text-sm text-slate-600">
-                {status.connected ? `Connected to ${status.connected_email || "a Gmail account"}.` : "Connect a Gmail account to enable inbox polling and automatic replies."}
+                {status.connected ? `Connected to ${status.connected_email || "your Gmail account"}.` : "Connect your Gmail account to enable inbox polling and automatic replies."}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -213,7 +242,7 @@ export default function AgentAdminPage() {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-xl font-semibold text-slate-900">Agent Logs</h3>
-            <p className="mt-1 text-sm text-slate-600">Recent polling, processing, and error events from `backend/logs/agent.log`.</p>
+            <p className="mt-1 text-sm text-slate-600">Recent polling, processing, and error events from this account's isolated agent log.</p>
           </div>
           <button
             type="button"
@@ -234,10 +263,16 @@ export default function AgentAdminPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 bg-white">
-              {logs.length === 0 ? (
+              {logsLoading ? (
                 <tr>
                   <td colSpan="3" className="px-4 py-8 text-center text-slate-500">
-                    No log entries yet.
+                    Loading logs...
+                  </td>
+                </tr>
+              ) : logs.length === 0 ? (
+                <tr>
+                  <td colSpan="3" className="px-4 py-8 text-center text-slate-500">
+                    No log entries for this account yet.
                   </td>
                 </tr>
               ) : (

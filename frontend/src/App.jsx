@@ -18,9 +18,9 @@ function AppShell() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-brand-100">Academic Intelligence</p>
-              <h1 className="mt-2 text-3xl font-semibold">Student Result Analytics</h1>
+              <h1 className="mt-2 text-3xl font-semibold">AI Workspace</h1>
               <p className="mt-2 max-w-2xl text-sm text-brand-50">
-                Upload Excel or PDF results, normalize them, analyze SGPA and pass status, and explore the processed dataset.
+                Upload Excel or PDF results, normalize them, analyze SGPA and pass status, and explore grounded answers inside each account's isolated workspace.
               </p>
             </div>
             <div className="flex flex-col gap-3 md:items-end">

@@ -553,6 +553,12 @@ def build_documents(students: Iterable[Student]) -> List[Document]:
     return _intent_documents() + _student_documents(student_list) + _cohort_documents(student_list) + _schema_documents()
 
 
+def _owner_scoped_path(base_path: Path, owner_user_id: int | None) -> Path:
+    if owner_user_id is None:
+        return base_path
+    return base_path.with_name(f"{base_path.stem}_user_{owner_user_id}{base_path.suffix}")
+
+
 class QueryIntelligenceIndex:
     def __init__(self, owner_user_id: int | None = None) -> None:
         """Index helper for semantic query intelligence.
@@ -561,10 +567,10 @@ class QueryIntelligenceIndex:
         the request context will be used.
         """
         self.index_dir = INDEX_DIR
-        self.index_file = INDEX_FILE
-        self.metadata_file = METADATA_FILE
         # Prefer explicit owner_user_id, else fall back to request context
         self.owner_user_id = owner_user_id if owner_user_id is not None else get_current_user_id()
+        self.index_file = _owner_scoped_path(INDEX_FILE, self.owner_user_id)
+        self.metadata_file = _owner_scoped_path(METADATA_FILE, self.owner_user_id)
 
     def rebuild(self, students: Iterable[Student]) -> None:
         documents = build_documents(students)

@@ -27,6 +27,7 @@ class MailSender:
         attachments: Iterable[Path],
         in_reply_to: str = "",
         thread_id: str = "",
+        owner_user_id: int | None = None,
     ) -> None:
         if self.provider == "gmail":
             self.gmail.send_reply(
@@ -36,6 +37,7 @@ class MailSender:
                 attachments=list(attachments),
                 in_reply_to=in_reply_to,
                 thread_id=thread_id,
+                owner_user_id=owner_user_id,
             )
             return
 

@@ -1,4 +1,6 @@
 import base64
+import hashlib
+import hmac
 import json
 import os
 import time
@@ -9,6 +11,8 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import requests
+
+from ..tenant_context import get_current_user_id, get_current_user_role
 
 
 GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
@@ -38,6 +42,7 @@ SUBJECT_KEYWORDS = (
     "semester",
     "report",
 )
+AUTH_SECRET = os.getenv("AUTH_SECRET") or os.getenv("JWT_SECRET") or "acadence-dev-secret-change-me"
 
 
 def _is_result_related_subject(subject: str) -> bool:
@@ -68,40 +73,103 @@ class GmailMessageEnvelope:
 
 
 class GmailOAuthClient:
-    def __init__(self) -> None:
+    def __init__(self, owner_user_id: int | None = None, owner_role: str | None = None) -> None:
         self.client_id = os.getenv("GOOGLE_CLIENT_ID", "").strip()
         self.client_secret = os.getenv("GOOGLE_CLIENT_SECRET", "").strip()
         self.redirect_uri = os.getenv("GOOGLE_REDIRECT_URI", "http://127.0.0.1:8000/agent/gmail/callback").strip()
         self.scopes = os.getenv("GOOGLE_GMAIL_SCOPES", " ").split() if os.getenv("GOOGLE_GMAIL_SCOPES") else DEFAULT_SCOPES
+        self.owner_user_id = owner_user_id
+        self.owner_role = (owner_role or "").strip().lower() or None
         token_path = os.getenv("GMAIL_TOKEN_PATH", "").strip()
         if token_path:
             self.token_path = Path(token_path)
         else:
             self.token_path = Path(__file__).resolve().parents[1] / "storage" / "gmail_token.json"
 
+    def set_owner_context(self, owner_user_id: int | None = None, owner_role: str | None = None) -> None:
+        self.owner_user_id = owner_user_id
+        self.owner_role = (owner_role or "").strip().lower() or None
+
+    def _resolved_owner_user_id(self) -> int | None:
+        current_user_id = get_current_user_id()
+    def _resolved_owner_user_id(self, owner_user_id: int | None = None) -> int | None:
+        if owner_user_id is not None:
+            return owner_user_id
+        current_user_id = get_current_user_id()
+        if current_user_id is not None:
+            return current_user_id
+        return self.owner_user_id
+
+    def _resolved_owner_role(self) -> str | None:
+        current_user_role = get_current_user_role()
+        if current_user_role:
+            return current_user_role
+        return self.owner_role
+
+    def _resolve_token_path(self, owner_user_id: int | None = None) -> Path:
+        owner_user_id = self._resolved_owner_user_id(owner_user_id)
+        if owner_user_id is None:
+            return self.token_path
+        return self.token_path.with_name(f"{self.token_path.stem}_user_{owner_user_id}{self.token_path.suffix}")
+
+    def _encode_state(self, payload: Dict[str, object]) -> str:
+        serialized = json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8")
+        data_segment = base64.urlsafe_b64encode(serialized).rstrip(b"=").decode("ascii")
+        signature = hmac.new(AUTH_SECRET.encode("utf-8"), data_segment.encode("ascii"), hashlib.sha256).digest()
+        signature_segment = base64.urlsafe_b64encode(signature).rstrip(b"=").decode("ascii")
+        return f"{data_segment}.{signature_segment}"
+
+    def _decode_state(self, state: str) -> Dict[str, object]:
+        try:
+            data_segment, signature_segment = state.split(".", 1)
+        except ValueError as exc:
+            raise RuntimeError("Invalid Gmail OAuth state.") from exc
+
+        expected = hmac.new(AUTH_SECRET.encode("utf-8"), data_segment.encode("ascii"), hashlib.sha256).digest()
+        signature_padding = "=" * (-len(signature_segment) % 4)
+        signature = base64.urlsafe_b64decode(signature_segment + signature_padding)
+        if not hmac.compare_digest(expected, signature):
+            raise RuntimeError("Invalid Gmail OAuth state.")
+
+        data_padding = "=" * (-len(data_segment) % 4)
+        payload = json.loads(base64.urlsafe_b64decode(data_segment + data_padding).decode("utf-8"))
+        if not isinstance(payload, dict):
+            raise RuntimeError("Invalid Gmail OAuth state.")
+        return payload
+
     def is_configured(self) -> bool:
         return bool(self.client_id and self.client_secret and self.redirect_uri)
 
-    def _read_token_data(self) -> Dict[str, object]:
-        if not self.token_path.exists():
+    def _read_token_data(self, owner_user_id: int | None = None) -> Dict[str, object]:
+        token_path = self._resolve_token_path(owner_user_id)
+        if not token_path.exists():
             return {}
         try:
-            return json.loads(self.token_path.read_text(encoding="utf-8"))
+            return json.loads(token_path.read_text(encoding="utf-8"))
         except Exception:
             return {}
 
-    def _write_token_data(self, data: Dict[str, object]) -> None:
-        self.token_path.parent.mkdir(parents=True, exist_ok=True)
-        self.token_path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
+    def _write_token_data(self, data: Dict[str, object], owner_user_id: int | None = None) -> None:
+        token_path = self._resolve_token_path(owner_user_id)
+        token_path.parent.mkdir(parents=True, exist_ok=True)
+        token_path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
 
-    def disconnect(self) -> None:
-        if self.token_path.exists():
-            self.token_path.unlink()
+    def disconnect(self, owner_user_id: int | None = None) -> None:
+        token_path = self._resolve_token_path(owner_user_id)
+        if token_path.exists():
+            token_path.unlink()
 
-    def connect_url(self) -> str:
+    def connect_url(self, state_payload: Dict[str, object] | None = None) -> str:
         if not self.is_configured():
             raise RuntimeError("Google OAuth is not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT_URI.")
         scope = " ".join(self.scopes)
+        payload = state_payload or {
+            "user_id": self._resolved_owner_user_id(),
+            "role": self._resolved_owner_role(),
+            "ts": int(time.time()),
+        }
+        if payload.get("user_id") is None:
+            raise RuntimeError("Unable to determine the Gmail owner for this connection.")
         params = {
             "client_id": self.client_id,
             "redirect_uri": self.redirect_uri,
@@ -110,11 +178,22 @@ class GmailOAuthClient:
             "access_type": "offline",
             "prompt": "consent",
             "include_granted_scopes": "true",
+            "state": self._encode_state(payload),
         }
         request = requests.Request("GET", GOOGLE_AUTH_URL, params=params).prepare()
         return request.url
 
-    def exchange_code(self, code: str) -> Dict[str, object]:
+    def parse_state(self, state: str) -> Dict[str, object]:
+        payload = self._decode_state(state)
+        owner_user_id = int(payload.get("user_id") or 0)
+        if owner_user_id <= 0:
+            raise RuntimeError("Invalid Gmail OAuth state.")
+        return {
+            "user_id": owner_user_id,
+            "role": str(payload.get("role") or "").strip().lower() or None,
+        }
+
+    def exchange_code(self, code: str, owner_user_id: int | None = None) -> Dict[str, object]:
         if not self.is_configured():
             raise RuntimeError("Google OAuth is not configured.")
         response = requests.post(
@@ -135,12 +214,12 @@ class GmailOAuthClient:
         expires_in = int(payload.get("expires_in") or 0)
         payload["expires_at"] = int(time.time()) + max(expires_in - 60, 0)
         if "refresh_token" not in payload:
-            current = self._read_token_data()
+            current = self._read_token_data(owner_user_id)
             if current.get("refresh_token"):
                 payload["refresh_token"] = current["refresh_token"]
         profile = self.get_profile(payload.get("access_token") or "")
         payload["email_address"] = profile.get("emailAddress") or profile.get("email_address")
-        self._write_token_data(payload)
+        self._write_token_data(payload, owner_user_id)
         return payload
 
     def _refresh_access_token(self, refresh_token: str) -> Dict[str, object]:
@@ -162,8 +241,8 @@ class GmailOAuthClient:
         payload["refresh_token"] = refresh_token
         return payload
 
-    def get_token_data(self, refresh: bool = True) -> Dict[str, object]:
-        token_data = self._read_token_data()
+    def get_token_data(self, refresh: bool = True, owner_user_id: int | None = None) -> Dict[str, object]:
+        token_data = self._read_token_data(owner_user_id)
         if not token_data:
             return {}
 
@@ -173,21 +252,22 @@ class GmailOAuthClient:
 
         if refresh and refresh_token and (not access_token or time.time() >= expires_at):
             refreshed = self._refresh_access_token(refresh_token)
+            refreshed = self._refresh_access_token(refresh_token)
             token_data.update(refreshed)
             token_data["refresh_token"] = refresh_token
             if not token_data.get("email_address"):
                 profile = self.get_profile(str(token_data.get("access_token") or refreshed.get("access_token") or ""))
                 token_data["email_address"] = profile.get("emailAddress") or profile.get("email_address")
-            self._write_token_data(token_data)
+            self._write_token_data(token_data, owner_user_id)
 
         return token_data
 
-    def is_connected(self) -> bool:
-        return bool(self.get_token_data())
+    def is_connected(self, owner_user_id: int | None = None) -> bool:
+        return bool(self.get_token_data(owner_user_id=owner_user_id))
 
-    def get_profile(self, access_token: str = "") -> Dict[str, object]:
+    def get_profile(self, access_token: str = "", owner_user_id: int | None = None) -> Dict[str, object]:
         if not access_token:
-            token_data = self.get_token_data()
+            token_data = self.get_token_data(owner_user_id=owner_user_id)
             access_token = str(token_data.get("access_token") or "")
         if not access_token:
             return {}
@@ -200,17 +280,17 @@ class GmailOAuthClient:
             raise RuntimeError(f"Unable to fetch Gmail profile: {response.text}")
         return response.json()
 
-    def _authorized_headers(self) -> Dict[str, str]:
-        token_data = self.get_token_data()
+    def _authorized_headers(self, owner_user_id: int | None = None) -> Dict[str, str]:
+        token_data = self.get_token_data(owner_user_id=owner_user_id)
         access_token = str(token_data.get("access_token") or "")
         if not access_token:
             raise RuntimeError("Gmail account is not connected. Use the email connection option to authorize access.")
         return {"Authorization": f"Bearer {access_token}"}
 
-    def _api_get(self, path: str, params: Optional[Dict[str, object]] = None) -> Dict[str, object]:
+    def _api_get(self, path: str, params: Optional[Dict[str, object]] = None, owner_user_id: int | None = None) -> Dict[str, object]:
         response = requests.get(
             f"{GOOGLE_GMAIL_API}{path}",
-            headers=self._authorized_headers(),
+            headers=self._authorized_headers(owner_user_id),
             params=params,
             timeout=30,
         )
@@ -218,10 +298,10 @@ class GmailOAuthClient:
             raise RuntimeError(f"Gmail API request failed: {response.text}")
         return response.json()
 
-    def _api_post(self, path: str, payload: Dict[str, object]) -> Dict[str, object]:
+    def _api_post(self, path: str, payload: Dict[str, object], owner_user_id: int | None = None) -> Dict[str, object]:
         response = requests.post(
             f"{GOOGLE_GMAIL_API}{path}",
-            headers={**self._authorized_headers(), "Content-Type": "application/json"},
+            headers={**self._authorized_headers(owner_user_id), "Content-Type": "application/json"},
             json=payload,
             timeout=30,
         )
@@ -273,14 +353,14 @@ class GmailOAuthClient:
             )
         return attachments
 
-    def fetch_unread_result_emails(self) -> List[GmailMessageEnvelope]:
-        token_data = self.get_token_data()
+    def fetch_unread_result_emails(self, owner_user_id: int | None = None) -> List[GmailMessageEnvelope]:
+        token_data = self.get_token_data(owner_user_id=owner_user_id)
         if not token_data:
             raise RuntimeError("Gmail account is not connected. Use the email connection option to authorize access.")
         connected_email = str(token_data.get("email_address") or "").strip()
 
         query = "has:attachment newer_than:60d"
-        payload = self._api_get("/messages", params={"q": query, "maxResults": 20, "labelIds": "INBOX"})
+        payload = self._api_get("/messages", params={"q": query, "maxResults": 20, "labelIds": "INBOX"}, owner_user_id=owner_user_id)
         messages = payload.get("messages") or []
 
         envelopes: List[GmailMessageEnvelope] = []
@@ -288,7 +368,7 @@ class GmailOAuthClient:
             message_id = str(message.get("id") or "").strip()
             if not message_id:
                 continue
-            full_message = self._api_get(f"/messages/{message_id}", params={"format": "full"})
+            full_message = self._api_get(f"/messages/{message_id}", params={"format": "full"}, owner_user_id=owner_user_id)
             headers = full_message.get("payload", {}).get("headers") or []
             subject = self._decode_header_value(headers, "Subject")
             sender = self._preferred_sender_address(headers, connected_email=connected_email)
@@ -321,11 +401,11 @@ class GmailOAuthClient:
             )
         return envelopes
 
-    def mark_seen(self, uid: str) -> None:
-        self._api_post(f"/messages/{uid}/modify", {"removeLabelIds": ["UNREAD"]})
+    def mark_seen(self, uid: str, owner_user_id: int | None = None) -> None:
+        self._api_post(f"/messages/{uid}/modify", {"removeLabelIds": ["UNREAD"]}, owner_user_id=owner_user_id)
 
-    def send_reply(self, *, recipient: str, subject: str, body: str, attachments: List[Path], in_reply_to: str = "", thread_id: str = "") -> None:
-        token_data = self.get_token_data()
+    def send_reply(self, *, recipient: str, subject: str, body: str, attachments: List[Path], in_reply_to: str = "", thread_id: str = "", owner_user_id: int | None = None) -> None:
+        token_data = self.get_token_data(owner_user_id=owner_user_id)
         if not token_data:
             raise RuntimeError("Gmail account is not connected. Use the email connection option to authorize access.")
 
@@ -355,4 +435,4 @@ class GmailOAuthClient:
         payload = {"raw": raw_message}
         if thread_id:
             payload["threadId"] = thread_id
-        self._api_post("/messages/send", payload)
+        self._api_post("/messages/send", payload, owner_user_id=owner_user_id)

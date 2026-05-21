@@ -19,6 +19,12 @@ router = APIRouter(prefix="/upload", tags=["upload"])
 PROCESSED_FILE_PATH = Path(__file__).resolve().parents[1] / "storage" / "processed_results.xlsx"
 
 
+def get_processed_file_path(owner_user_id: int | None = None) -> Path:
+    if owner_user_id is None:
+        return PROCESSED_FILE_PATH
+    return PROCESSED_FILE_PATH.with_name(f"processed_results_user_{owner_user_id}.xlsx")
+
+
 @router.post("", response_model=UploadResponse)
 async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db), _user=Depends(get_current_user)):
     if not file.filename:
@@ -31,11 +37,11 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
         parsed_students, processed_df = parse_uploaded_file(file_bytes, file.filename)
         parse_ms = int((time.perf_counter() - parse_start) * 1000)
         persist_students(db, parsed_students, owner_user_id=_user.id)
-        save_processed_excel(processed_df, PROCESSED_FILE_PATH)
+        save_processed_excel(processed_df, get_processed_file_path(_user.id))
         students = fetch_students(db, owner_user_id=_user.id)
         try:
             elastic_client = get_elasticsearch_client()
-            sync_students(elastic_client, students)
+            sync_students(elastic_client, students, owner_user_id=_user.id)
         except Exception as exc:
             logging.warning("Skipping Elasticsearch sync during upload: %s", exc)
         try:

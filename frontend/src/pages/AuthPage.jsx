@@ -49,9 +49,9 @@ export default function AuthPage({ mode = "login" }) {
         <div className="grid w-full gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <section className="rounded-[2rem] border border-white/70 bg-white/85 p-8 shadow-sm backdrop-blur">
             <p className="text-sm uppercase tracking-[0.3em] text-brand-700">Acadence AI</p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">Sign in to the multi-tenant workspace.</h1>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">Sign in to your workspace.</h1>
             <p className="mt-4 text-sm leading-7 text-slate-600">
-              Access authenticated dashboards, tenant-scoped uploads, and user-specific analytics with the same interface language already present in the app.
+              Access authenticated dashboards, tenant-scoped uploads, grounded chat, and user-specific automation with the same interface language already present in the app.
             </p>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl bg-slate-50 p-4">
@@ -64,7 +64,7 @@ export default function AuthPage({ mode = "login" }) {
               </div>
               <div className="rounded-2xl bg-slate-50 p-4">
                 <div className="text-xs uppercase tracking-[0.25em] text-slate-500">Retrieval</div>
-                <div className="mt-2 text-sm font-semibold text-slate-950">pgvector-backed search</div>
+                <div className="mt-2 text-sm font-semibold text-slate-950">pgvector + SQL grounding</div>
               </div>
               <div className="rounded-2xl bg-slate-50 p-4">
                 <div className="text-xs uppercase tracking-[0.25em] text-slate-500">Roles</div>

@@ -496,7 +496,7 @@ def _hybrid_lookup_by_name(db: Session, query: str, student_name: str, limit: in
     es_scores: Dict[str, float] = {}
     try:
         elastic_client = get_elasticsearch_client()
-        es_hits = search_students_by_name_ranked(elastic_client, student_name, limit=limit)
+        es_hits = search_students_by_name_ranked(elastic_client, student_name, limit=limit, owner_user_id=owner_user_id)
         es_scores = _normalize_scores({hit["usn"]: float(hit.get("score") or 0.0) for hit in es_hits})
     except Exception as exc:
         # Elasticsearch may be down or unreachable; continue with semantic/local fallbacks.

@@ -6,9 +6,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 import logging
+from sqlalchemy import select
 
 try:
     from . import agent_models
+    from . import models
     from .database import Base, SessionLocal, engine
     from .services import query_engine
     from .agents.email_agent import email_agent
@@ -25,6 +27,7 @@ except ImportError:
         sys.path.insert(0, str(repo_root))
 
     from backend import agent_models
+    from backend import models
     from backend.database import Base, SessionLocal, engine
     from backend.services import query_engine
     from backend.agents.email_agent import email_agent
@@ -71,13 +74,16 @@ def warm_query_index():
     db = SessionLocal()
     try:
         get_or_create_default_admin(db)
-        students = fetch_students(db)
-        if students:
+        users = list(db.scalars(select(models.User)).all())
+        for user in users:
+            students = fetch_students(db, owner_user_id=user.id)
+            if not students:
+                continue
             try:
-                ensure_query_index(students)
+                ensure_query_index(students, owner_user_id=user.id)
             except Exception as e:
                 # Fail safe: don't block app startup if index rebuild fails
-                print("Warning: ensure_query_index failed on startup:", e)
+                print(f"Warning: ensure_query_index failed on startup for user {user.id}:", e)
     finally:
         db.close()
 

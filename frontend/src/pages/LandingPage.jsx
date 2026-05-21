@@ -2,24 +2,24 @@ import { Link } from "react-router-dom";
 
 const highlights = [
   {
-    title: "Upload to insight",
-    description: "Drop in Excel or PDF result sheets and move through parsing, validation, and analytics in one flow.",
+    title: "Hybrid + Agentic RAG",
+    description: "Blend rule-based retrieval, semantic search, and LLM follow-ups so answers stay grounded in the current tenant's data.",
   },
   {
-    title: "Search with context",
-    description: "Use hybrid retrieval across the PostgreSQL semantic store and Elasticsearch when it is available.",
+    title: "SQL-grounded chat",
+    description: "Ask questions in plain English and resolve them against PostgreSQL-backed student, dataset, and result records.",
   },
   {
-    title: "Automated replies",
-    description: "Email-driven processing can attach reports and respond in-thread to the original sender.",
+    title: "User-scoped automation",
+    description: "Each account gets its own Gmail connector, processing pipeline, log stream, and report output directory.",
   },
 ];
 
 const stats = [
-  { label: "Data sources", value: "Excel + PDF" },
+  { label: "Auth", value: "Signup / Signin" },
+  { label: "Security", value: "JWT + RBAC" },
   { label: "Retrieval", value: "pgvector + ES" },
-  { label: "Delivery", value: "Reports + Replies" },
-  { label: "Automation", value: "Gmail Agent" },
+  { label: "Automation", value: "Tenant Gmail" },
 ];
 
 const workflow = [
@@ -30,18 +30,18 @@ const workflow = [
   },
   {
     step: "02",
-    title: "Normalize records",
-    description: "Parse student results, compute SGPA, and store structured rows in Postgres for reliable analysis.",
+    title: "Ground the data",
+    description: "Normalize records, store them in Postgres, and index each account's retrieval corpus separately.",
   },
   {
     step: "03",
     title: "Answer questions",
-    description: "Query the processed data through hybrid search, intent detection, and contextual fallbacks.",
+    description: "Use hybrid search, SQL-backed filters, semantic retrieval, and contextual fallbacks for grounded answers.",
   },
   {
     step: "04",
-    title: "Share reports",
-    description: "Generate Excel and PDF outputs, then reply in-thread with the processed analysis package.",
+    title: "Automate workflows",
+    description: "Generate Excel and PDF outputs, then reply in-thread with account-specific Gmail workflows and audit logs.",
   },
 ];
 
@@ -63,6 +63,36 @@ const demoSlides = [
     tag: "Reply",
     copy: "Reply in-thread with the analysis report, processed workbook, and a clean summary for the sender.",
     accent: "from-amber-300/25 via-white to-brand-500/20",
+  },
+];
+
+const featureBlocks = [
+  {
+    title: "Simple setup",
+    copy: "Open the app, connect Gmail, and keep every dashboard, query, upload, and log stream tied to one account.",
+  },
+  {
+    title: "Core features",
+    copy: "One codebase serves dashboards, sign in and sign up flows, analytics, role routing, and secure API access.",
+  },
+  {
+    title: "Private data",
+    copy: "Uploads, embeddings, retrievals, reports, and conversational memory stay tied to the signed-in user.",
+  },
+];
+
+const platformSections = [
+  {
+    title: "Tenant isolation",
+    copy: "Every account reads from its own datasets, semantic documents, agent logs, and Gmail connection state.",
+  },
+  {
+    title: "Hybrid retrieval",
+    copy: "Rule-based intent detection, pgvector retrieval, and Elasticsearch-backed name matching stay aligned.",
+  },
+  {
+    title: "AI operations",
+    copy: "Analytic dashboards, grounded chat, and automated email replies run from the same authenticated backend.",
   },
 ];
 
@@ -88,6 +118,18 @@ export default function LandingPage() {
               </div>
             </div>
             <nav className="flex flex-wrap gap-3">
+              <Link
+                to="/login"
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-200 hover:text-brand-800"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/signup"
+                className="rounded-full bg-brand-700 px-4 py-2 text-sm font-medium text-white shadow-soft transition hover:bg-brand-600"
+              >
+                Sign up
+              </Link>
               <a
                 href="#capabilities"
                 className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-200 hover:text-brand-800"
@@ -114,30 +156,17 @@ export default function LandingPage() {
           <section className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
             <div className="space-y-8">
               <div className="inline-flex rounded-full border border-brand-200 bg-white/80 px-4 py-2 text-sm font-medium text-brand-800 shadow-sm shadow-brand-100/50">
-                Upload → Parse → Query → Report
+                Sign in → Isolate → Automate → Report
               </div>
-              <div className="space-y-5">
-                <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-                  A modern home for academic data, automation, and search.
-                </h2>
-                <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-                  Process student result files, sync searchable intelligence, and surface answers from the same pipeline used by the dashboard and Gmail automation.
-                </p>
-              </div>
+              {/* Hero heading, description, and CTA buttons removed per request */}
 
-              <div className="flex flex-wrap gap-4" id="start">
-                <Link
-                  to="/upload"
-                  className="inline-flex items-center justify-center rounded-full bg-brand-700 px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-600"
-                >
-                  Start with Upload
-                </Link>
-                <Link
-                  to="/dashboard"
-                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand-200 hover:text-brand-800"
-                >
-                  View Dashboard
-                </Link>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {featureBlocks.map((block) => (
+                  <div key={block.title} className="rounded-3xl border border-white/70 bg-white/80 p-4 shadow-sm backdrop-blur">
+                    <div className="text-sm font-semibold text-slate-950">{block.title}</div>
+                    <div className="mt-2 text-sm leading-6 text-slate-600">{block.copy}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -150,11 +179,32 @@ export default function LandingPage() {
               ))}
               <div className="sm:col-span-2 rounded-[2rem] border border-white/70 bg-gradient-to-br from-brand-900 via-brand-700 to-brand-500 p-6 text-white shadow-soft">
                 <p className="text-sm uppercase tracking-[0.3em] text-brand-100">Now live</p>
-                <h3 className="mt-3 text-2xl font-semibold">Built for inbox-driven ingestion</h3>
+                <h3 className="mt-3 text-2xl font-semibold">Built for fast inbox ingestion and private data</h3>
                 <p className="mt-3 text-sm leading-6 text-brand-50">
-                  Gmail attachments can be parsed, normalized, stored in Postgres, and replied to with generated analysis reports.
+                  Gmail attachments can be parsed, normalized, stored in Postgres, and replied to with generated analysis reports, while each account keeps its own connection and logs.
                 </p>
               </div>
+            </div>
+          </section>
+
+          <section className="space-y-8">
+            <div className="max-w-2xl space-y-3">
+              <p className="text-sm uppercase tracking-[0.3em] text-brand-700">How it feels</p>
+              <h3 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+                Built to feel quick, focused, and easy to use.
+              </h3>
+              <p className="text-base leading-7 text-slate-600">
+                The product keeps authentication, analytics, retrieval, agent automation, and storage tied to the signed-in account.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {platformSections.map((section) => (
+                <div key={section.title} className="rounded-3xl border border-white/70 bg-white/85 p-6 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <h4 className="text-lg font-semibold text-slate-950">{section.title}</h4>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{section.copy}</p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -162,10 +212,10 @@ export default function LandingPage() {
             <div className="max-w-2xl space-y-3">
               <p className="text-sm uppercase tracking-[0.3em] text-brand-700">Capabilities</p>
               <h3 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
-                Built for the full result-analysis workflow.
+                Everything you need from file to answer.
               </h3>
               <p className="text-base leading-7 text-slate-600">
-                The interface focuses on a clear workflow: ingest files, normalize the data, explore the analytics, and send back a usable report.
+                The interface focuses on a clear flow: sign in, upload files, normalize the data, explore analytics, and send back a usable report.
               </p>
             </div>
 
@@ -186,7 +236,7 @@ export default function LandingPage() {
             <div className="max-w-2xl space-y-3">
               <p className="text-sm uppercase tracking-[0.3em] text-brand-700">Workflow</p>
               <h3 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
-                A simple path from file upload to answer.
+                A simple path from upload to answer.
               </h3>
             </div>
 

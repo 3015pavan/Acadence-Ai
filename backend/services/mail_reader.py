@@ -112,14 +112,14 @@ class MailReader:
         self.mailbox = os.getenv("IMAP_MAILBOX", "INBOX").strip() or "INBOX"
         self.gmail = GmailOAuthClient()
 
-    def is_connected(self) -> bool:
+    def is_connected(self, owner_user_id: int | None = None) -> bool:
         if self.provider == "gmail":
-            return self.gmail.is_connected()
+            return self.gmail.is_connected(owner_user_id=owner_user_id)
         return bool(self.host and self.username and self.password)
 
-    def connection_status(self) -> dict:
+    def connection_status(self, owner_user_id: int | None = None) -> dict:
         if self.provider == "gmail":
-            token_data = self.gmail.get_token_data(refresh=False)
+            token_data = self.gmail.get_token_data(refresh=False, owner_user_id=owner_user_id)
             return {
                 "provider": "gmail",
                 "connected": bool(token_data),
@@ -142,9 +142,9 @@ class MailReader:
         client.login(self.username, self.password)
         return client
 
-    def fetch_unread_result_emails(self) -> List[MailEnvelope]:
+    def fetch_unread_result_emails(self, owner_user_id: int | None = None) -> List[MailEnvelope]:
         if self.provider == "gmail":
-            gmail_messages = self.gmail.fetch_unread_result_emails()
+            gmail_messages = self.gmail.fetch_unread_result_emails(owner_user_id=owner_user_id)
             envelopes: List[MailEnvelope] = []
             for message in gmail_messages:
                 attachments = [
@@ -220,9 +220,9 @@ class MailReader:
                 pass
             client.logout()
 
-    def mark_seen(self, uid: str) -> None:
+    def mark_seen(self, uid: str, owner_user_id: int | None = None) -> None:
         if self.provider == "gmail":
-            self.gmail.mark_seen(uid)
+            self.gmail.mark_seen(uid, owner_user_id=owner_user_id)
             return
 
         client = self._connect()

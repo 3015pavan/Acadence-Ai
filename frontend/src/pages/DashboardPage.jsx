@@ -114,7 +114,7 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-2xl font-semibold text-slate-900">Dashboard</h2>
-          <p className="mt-1 text-sm text-slate-600">Explore the latest uploaded and processed academic result dataset.</p>
+          <p className="mt-1 text-sm text-slate-600">Explore the current account's processed datasets, summaries, grounded chat, and reports.</p>
         </div>
         <div className="w-full md:w-64">
           <FileDropdown value={selectedFiles} onChange={setSelectedFiles} label="Filter by files" />
@@ -155,7 +155,7 @@ export default function DashboardPage() {
         <p className="mt-2 text-sm text-slate-700">
           {selectedFiles.length
             ? `${selectedFiles.length} selected file(s) are driving the dashboard, query chat, grade distribution, and subject analysis.`
-            : "No file filter selected; the dashboard is using all uploaded files."}
+            : "No file filter selected; the dashboard is using the current account's uploaded files."}
         </p>
       </div>
 

@@ -30,8 +30,14 @@ pip-wheel-metadata/
 backend/logs/
 *.log
 *.jsonl
+backend_err.log
+backend_out.log
+uv_err.log
+uv_out.log
 
 # Persistent storage artifacts (vector indexes, tokens)
+backend/storage/agent_outputs/
+backend/storage/faiss/
 backend/storage/semantic/*.json
 backend/storage/semantic/*.index
 backend/storage/gmail_token.json

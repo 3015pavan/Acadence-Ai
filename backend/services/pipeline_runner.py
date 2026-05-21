@@ -21,7 +21,7 @@ from .analyzer import fetch_students
 from .elastic import get_elasticsearch_client, sync_students
 from .intelligence import ensure_query_index
 from .parser import ParsedStudent, parse_uploaded_file
-from .reporting import build_insights
+from .reporting import build_grade_analysis, build_grade_chart, build_insights, build_subject_analysis, build_subject_chart
 from .analyzer import persist_students, save_processed_excel
 from .metrics import log_event
 
@@ -61,15 +61,18 @@ def _dataset_hash(students: List[ParsedStudent]) -> str:
     return hashlib.sha256(key.encode("utf-8")).hexdigest()
 
 
-def _fetch_dataset(db: Session, dataset_name: str) -> Dataset:
-    dataset = db.scalar(select(Dataset).where(Dataset.name == dataset_name))
+def _fetch_dataset(db: Session, dataset_name: str, owner_user_id: int | None = None) -> Dataset:
+    query = select(Dataset).where(Dataset.name == dataset_name)
+    if owner_user_id is not None:
+        query = query.where(Dataset.owner_user_id == owner_user_id)
+    dataset = db.scalar(query)
     if dataset is None:
         raise RuntimeError(f"Dataset {dataset_name} was not created.")
     return dataset
 
 
-def _dataset_records(db: Session, dataset_name: str) -> List[DatasetStudentRecord]:
-    dataset = _fetch_dataset(db, dataset_name)
+def _dataset_records(db: Session, dataset_name: str, owner_user_id: int | None = None) -> List[DatasetStudentRecord]:
+    dataset = _fetch_dataset(db, dataset_name, owner_user_id=owner_user_id)
     stmt = (
         select(StudentSemester)
         .options(
@@ -146,7 +149,9 @@ def _generate_report_pdf(students: List[DatasetStudentRecord], summary: Dict[str
         "total_students": summary["total_students"],
         "failed_count": summary["failed_count"],
     }
-    insights = build_insights(insight_summary, top_students, failed_students, distribution)
+    subject_analysis = build_subject_analysis(students)
+    grade_analysis = build_grade_analysis(students)
+    insights = build_insights(insight_summary, top_students, failed_students, distribution, subject_analysis, grade_analysis)
 
     buffer = io.BytesIO()
     document = SimpleDocTemplate(buffer, pagesize=A4, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=36)
@@ -207,6 +212,58 @@ def _generate_report_pdf(students: List[DatasetStudentRecord], summary: Dict[str
     story.append(top_table)
     story.append(Spacer(1, 14))
 
+    story.append(Paragraph("Subject Analysis", styles["Heading2"]))
+    subject_rows = [["Subject", "Attempts", "Avg GP", "Fail %", "Dominant Grade"]]
+    for row in subject_analysis.get("rows", [])[:10]:
+        subject_rows.append(
+            [
+                row["subject"],
+                str(row["attempts"]),
+                f"{float(row['avg_gp']):.2f}" if row.get("avg_gp") is not None else "N/A",
+                f"{float(row['fail_rate']):.1f}",
+                row["dominant_grade"],
+            ]
+        )
+    subject_table = Table(subject_rows, colWidths=[210, 70, 70, 60, 90])
+    subject_table.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1d4ed8")),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#cbd5e1")),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#eff6ff"), colors.white]),
+                ("PADDING", (0, 0), (-1, -1), 7),
+            ]
+        )
+    )
+    story.append(subject_table)
+    story.append(Spacer(1, 14))
+
+    story.append(Paragraph("Subject Chart", styles["Heading2"]))
+    story.append(build_subject_chart(subject_analysis))
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph("Grade Analysis", styles["Heading2"]))
+    grade_rows = [["Grade", "Count"]] + [[grade, str(count)] for grade, count in grade_analysis.get("distribution", {}).items()]
+    grade_table = Table(grade_rows, colWidths=[150, 120])
+    grade_table.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#334155")),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#cbd5e1")),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#f8fafc"), colors.white]),
+                ("PADDING", (0, 0), (-1, -1), 7),
+            ]
+        )
+    )
+    story.append(grade_table)
+    story.append(Spacer(1, 14))
+
+    story.append(Paragraph("Grade Chart", styles["Heading2"]))
+    story.append(build_grade_chart(grade_analysis))
+    story.append(Spacer(1, 10))
+
     story.append(Paragraph("Grade Distribution", styles["Heading2"]))
     distribution_rows = [["Grade", "Count"]] + [[grade, str(count)] for grade, count in distribution.items()]
     distribution_table = Table(distribution_rows, colWidths=[150, 120])
@@ -231,9 +288,14 @@ def fetch_top_students_for_list(students: List[DatasetStudentRecord], limit: int
     return sorted(students, key=lambda student: (-student.sgpa, student.name))[:limit]
 
 
-def run_processing_pipeline(db: Session, attachment: SavedAttachment) -> PipelineRunResult:
+def run_processing_pipeline(db: Session, attachment: SavedAttachment, owner_user_id: int | None = None) -> PipelineRunResult:
     start = time.perf_counter()
     file_bytes = attachment.path.read_bytes()
+    from ..tenant_context import get_current_user_id
+
+    resolved_owner_user_id = owner_user_id if owner_user_id is not None else get_current_user_id()
+    if resolved_owner_user_id is None:
+        raise RuntimeError("Tenant context is required for email ingestion.")
     try:
         parse_start = time.perf_counter()
         parsed_students, processed_df = parse_uploaded_file(file_bytes, attachment.filename)
@@ -241,9 +303,14 @@ def run_processing_pipeline(db: Session, attachment: SavedAttachment) -> Pipelin
 
         dataset_hash = _dataset_hash(parsed_students)
 
-        existing = db.scalar(select(AgentProcessedDataset).where(AgentProcessedDataset.dataset_hash == dataset_hash))
+        existing = db.scalar(
+            select(AgentProcessedDataset).where(
+                AgentProcessedDataset.dataset_hash == dataset_hash,
+                AgentProcessedDataset.owner_user_id == resolved_owner_user_id,
+            )
+        )
         if existing:
-            students = _dataset_records(db, existing.dataset_name)
+            students = _dataset_records(db, existing.dataset_name, owner_user_id=resolved_owner_user_id)
             summary = _build_summary(students)
             log_event(
                 "ingestion",
@@ -274,37 +341,37 @@ def run_processing_pipeline(db: Session, attachment: SavedAttachment) -> Pipelin
 
         dataset_name = f"email-{Path(attachment.filename).stem[:24]}-{dataset_hash[:12]}"
         AGENT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        dataset_dir = AGENT_OUTPUT_DIR / dataset_name
+        dataset_dir = AGENT_OUTPUT_DIR / f"user_{resolved_owner_user_id}" / dataset_name
         dataset_dir.mkdir(parents=True, exist_ok=True)
         processed_excel_path = dataset_dir / "processed_results.xlsx"
         report_path = dataset_dir / "result_report.pdf"
 
         persist_start = time.perf_counter()
-        persist_students(db, parsed_students, dataset_name=dataset_name)
+        persist_students(db, parsed_students, dataset_name=dataset_name, owner_user_id=resolved_owner_user_id)
         save_processed_excel(processed_df, processed_excel_path)
         persist_ms = int((time.perf_counter() - persist_start) * 1000)
 
         report_start = time.perf_counter()
-        students = _dataset_records(db, dataset_name)
+        students = _dataset_records(db, dataset_name, owner_user_id=resolved_owner_user_id)
         summary = _build_summary(students)
         report_path.write_bytes(_generate_report_pdf(students, summary))
         report_ms = int((time.perf_counter() - report_start) * 1000)
 
-        from ..tenant_context import get_current_user_id
-        all_students = fetch_students(db, owner_user_id=get_current_user_id())
+        all_students = fetch_students(db, owner_user_id=resolved_owner_user_id)
         try:
             elastic_client = get_elasticsearch_client()
-            sync_students(elastic_client, all_students)
+            sync_students(elastic_client, all_students, owner_user_id=resolved_owner_user_id)
         except Exception as exc:
             logger.warning("Skipping Elasticsearch sync for email dataset %s: %s", dataset_name, exc)
 
         try:
-            ensure_query_index(all_students)
+            ensure_query_index(all_students, owner_user_id=resolved_owner_user_id)
         except Exception as exc:
             logger.warning("Skipping query index refresh for email dataset %s: %s", dataset_name, exc)
 
         db.add(
             AgentProcessedDataset(
+                owner_user_id=resolved_owner_user_id,
                 dataset_hash=dataset_hash,
                 dataset_name=dataset_name,
                 source_filename=attachment.filename,

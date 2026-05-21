@@ -1,6 +1,6 @@
 # Acadence AI
 
-Acadence AI is a production-grade AI-powered academic automation platform designed for large-scale tabular educational datasets. The system combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
+Acadence AI is a multi-tenant AI-powered academic automation platform designed for large-scale educational datasets. The system combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time while keeping tenant data isolated and secure.
 ---
 
 ## Quickstart
@@ -23,6 +23,9 @@ python -m pip install -r requirements.txt
 # apply database migrations
 alembic upgrade head
 
+# Optional: create initial tenants or run tenant-aware migrations
+# See "Configuration" below for tenant environment variables and example SQL to create an organization/tenant record.
+
 # run backend (development)
 cd backend
 python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
@@ -42,7 +45,7 @@ API endpoints:
 Data storage and indexes:
 
 - Processed workbook: `backend/storage/processed_results.xlsx`
-- Semantic store: `semantic_documents` in PostgreSQL with pgvector embeddings
+ - Semantic store: `semantic_documents` in PostgreSQL with `pgvector` embeddings (this project uses Postgres + `pgvector` by default). FAISS is supported as an optional local index when configured.
 - Database: configured via `DATABASE_URL` (Postgres)
 
 Environment variables (add to `.env`):
@@ -61,7 +64,7 @@ ACCESS_TOKEN_TTL_SECONDS=1800
 REFRESH_TOKEN_TTL_SECONDS=1209600
 ```
 
-For production, run the app behind Docker Compose with PostgreSQL + pgvector, the backend, frontend, and Nginx reverse proxy. Set HTTPS secrets and deploy with the provided GitHub Actions workflow.
+For production, run the app behind Docker Compose with PostgreSQL + `pgvector` (or configure FAISS for local vector indexes), the backend, frontend, and Nginx reverse proxy. Set HTTPS secrets and deploy with the provided GitHub Actions workflow.
 
 ---
 # Acadence AI
@@ -74,7 +77,7 @@ For production, run the app behind Docker Compose with PostgreSQL + pgvector, th
 [![Python](https://img.shields.io/badge/python-3.9+-3670A0?style=flat&logo=python)](/)
 [![React](https://img.shields.io/badge/react-18.0+-61DAFB?style=flat&logo=react)](/)
 
-Acadence AI is a production-grade AI-powered academic automation platform designed for large-scale tabular educational datasets. The system combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
+Acadence AI is a production-grade AI-powered academic automation platform designed for large-scale educational datasets. The system combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
 
 Built for real-world educational institutions, the platform enables teachers, students, parents, and administrators to query complex academic datasets naturally while minimizing hallucinations through database-verified responses and grounded retrieval pipelines.
 
@@ -84,7 +87,7 @@ Built for real-world educational institutions, the platform enables teachers, st
 
 ### Adaptive Hybrid + Agentic RAG
 
-## Intelligent Query Orchestration
+### Intelligent Query Orchestration
 
 * Adaptive LLM-driven query planning
 * Hybrid SQL + semantic retrieval orchestration
@@ -112,7 +115,7 @@ Supports natural language questions such as:
 The system dynamically determines whether the query requires:
 
 - SQL retrieval
-- semantic retrieval
+- semantic retrieval (FAISS or `pgvector`)
 - hybrid retrieval
 - analytics reasoning
 - multi-step orchestration
@@ -139,7 +142,7 @@ The system dynamically determines whether the query requires:
 
 ### Semantic Retrieval
 
-- FAISS-powered vector retrieval
+- Vector retrieval (FAISS or `pgvector`)
 - Context-aware semantic search
 - Similarity-based chunk retrieval
 - Reranking for high-confidence context selection
@@ -176,7 +179,7 @@ IF structured:
 → verified structured data
 
 IF semantic:
-→ FAISS retrieval
+→ FAISS or `pgvector` retrieval
 → reranker
 → grounded context
 
@@ -188,8 +191,6 @@ IF hybrid:
 → grounded LLM response
 ```
 
----
-
 ## Tech Stack
 
 | Layer              | Technology                |
@@ -197,7 +198,7 @@ IF hybrid:
 | Frontend           | React, Vite, Tailwind CSS |
 | Backend            | FastAPI, Python           |
 | Database           | PostgreSQL                |
-| Semantic Retrieval | FAISS                     |
+| Semantic Retrieval | Postgres (`pgvector`) [default] / FAISS (optional) |
 | AI Layer           | Gemini / LLM              |
 | Parsing            | LlamaParse, Pandas        |
 | Automation         | Gmail Automation          |
@@ -392,6 +393,13 @@ GEMINI_THINKING_LEVEL=low
 GMAIL_SERVICE_ACCOUNT_JSON=path/to/credentials.json
 GMAIL_INBOX_CHECK_INTERVAL=300  # seconds
 
+# Multi-tenant configuration
+# An example tenant-aware variable: when running a single-instance multi-tenant deployment,
+# tenants are represented in the database. Per-tenant storage paths and tokens are namespaced
+# by `owner_user_id` or `tenant_id` (e.g. `backend/storage/gmail_tokens/tenant_<id>.json`).
+# No global token files are used in production; ensure your deployment scripts create
+# per-tenant directories with correct permissions.
+
 # Search Backends (Optional)
 ELASTICSEARCH_URL=http://localhost:9200
 REDIS_URL=redis://localhost:6379
@@ -435,6 +443,10 @@ GMAIL_INBOX_CHECK_INTERVAL=300
 python backend/agents/email_agent.py
 ```
 
+Note: the email agent uses per-tenant token files and per-tenant job ids (e.g. `email-agent-poll-<tenant_id>`).
+If running multiple tenants on one host, ensure the agent is started in a way that isolates
+per-tenant tokens and storage directories (or run separate agent processes per tenant).
+
 ### Email Processing Workflow
 
 ```
@@ -455,7 +467,7 @@ python backend/agents/email_agent.py
 
 ## Performance & Scaling
 
-- **FAISS Indexing**: ~1M vectors, <100ms search latency
+- **FAISS / pgvector Indexing**: ~1M vectors, <100ms search latency (depends on storage and infra)
 - **Elasticsearch**: Full-text search over 100K+ documents
 - **PostgreSQL**: Sub-50ms indexed queries on 10K+ records
 - **LLM Response Time**: ~2-5s (including context retrieval)
@@ -647,11 +659,7 @@ The system is designed to answer arbitrary natural language questions over large
 
 ---
 
-## License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
----
 
 ## Author
 
@@ -666,3 +674,6 @@ Building production-grade AI systems focused on adaptive RAG architectures, inte
 **Have questions?** [Open an Issue](https://github.com/3015pavan/Acadence_Ai/issues) | [Start a Discussion](https://github.com/3015pavan/Acadence_Ai/discussions) | [Email Us](mailto:support@acadence.ai)
 
 ⭐ **If Acadence AI helps you, please star us on GitHub!** [⭐ Star](https://github.com/3015pavan/Acadence_Ai)
+
+---
+

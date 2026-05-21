@@ -12,7 +12,7 @@ from ..services.analyzer import build_summary, delete_dataset, fetch_students, s
 from ..services.query_engine import execute_query
 from ..services.reporting import generate_report_pdf
 from ..services.intelligence import INDEX_FILE, METADATA_FILE, ensure_query_index
-from .upload import PROCESSED_FILE_PATH
+from .upload import get_processed_file_path
 from ..services.metrics import log_event
 from ..services.elastic import get_elasticsearch_client, sync_students
 
@@ -152,8 +152,8 @@ def _run_query(payload: QueryRequest, db: Session, user_id: int | None) -> Query
 
 
 @router.post("/query", response_model=QueryResponse)
-def query_students(payload: QueryRequest, db: Session = Depends(get_db)):
-    return _run_query(payload, db, None)
+def query_students(payload: QueryRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    return _run_query(payload, db, user.id)
 
 
 @router.get("/datasets")
@@ -176,7 +176,7 @@ def remove_dataset(dataset_id: int, db: Session = Depends(get_db), _user=Depends
 
         try:
             elastic_client = get_elasticsearch_client()
-            sync_students(elastic_client, remaining_students)
+            sync_students(elastic_client, remaining_students, owner_user_id=_user.id)
         except Exception as exc:
             log_event(
                 "dataset_delete",
@@ -216,19 +216,19 @@ def remove_dataset(dataset_id: int, db: Session = Depends(get_db), _user=Depends
 
 
 @router.post("/query/", response_model=QueryResponse, include_in_schema=False)
-def query_students_with_trailing_slash(payload: QueryRequest, db: Session = Depends(get_db)):
-    return _run_query(payload, db, None)
+def query_students_with_trailing_slash(payload: QueryRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    return _run_query(payload, db, user.id)
 
 
 @router.post("", response_model=QueryResponse, include_in_schema=False)
-def query_students_router_root(payload: QueryRequest, db: Session = Depends(get_db)):
-    return _run_query(payload, db, None)
+def query_students_router_root(payload: QueryRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    return _run_query(payload, db, user.id)
 
 
 @router.post("/report")
 def create_report(db: Session = Depends(get_db), _user=Depends(get_current_user)):
     try:
-        pdf_bytes = generate_report_pdf(db)
+        pdf_bytes = generate_report_pdf(db, owner_user_id=_user.id)
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except Exception as exc:
@@ -264,10 +264,10 @@ def get_subject_wise_analysis(
             models.Result.subject,
             func.count(models.Result.id).label("total_count"),
             func.avg(models.Result.gp).label("avg_gp"),
-        )
+        ).join(models.Student).filter(models.Student.owner_user_id == _user.id)
         
         if ids:
-            query = query.join(models.Student).join(models.Dataset).filter(models.Dataset.id.in_(ids))
+            query = query.join(models.Dataset).filter(models.Dataset.id.in_(ids), models.Dataset.owner_user_id == _user.id)
         
         subject_stats = query.group_by(models.Result.subject).all()
         
@@ -278,10 +278,10 @@ def get_subject_wise_analysis(
             grade_query = db.query(
                 models.Result.grade,
                 func.count(models.Result.id).label("count"),
-            ).filter(models.Result.subject == subject)
+            ).join(models.Student).filter(models.Result.subject == subject, models.Student.owner_user_id == _user.id)
             
             if ids:
-                grade_query = grade_query.join(models.Student).join(models.Dataset).filter(models.Dataset.id.in_(ids))
+                grade_query = grade_query.join(models.Dataset).filter(models.Dataset.id.in_(ids), models.Dataset.owner_user_id == _user.id)
             
             grade_dist = {row[0]: row[1] for row in grade_query.group_by(models.Result.grade).all()}
             
@@ -309,24 +309,25 @@ def get_subject_wise_analysis(
 
 
 @router.get("/download/processed")
-def download_processed_file():
-    if not PROCESSED_FILE_PATH.exists():
+def download_processed_file(_user=Depends(get_current_user)):
+    processed_file_path = get_processed_file_path(_user.id)
+    if not processed_file_path.exists():
         raise HTTPException(status_code=404, detail="No processed file available yet.")
     return FileResponse(
-        path=PROCESSED_FILE_PATH,
+        path=processed_file_path,
         filename="processed_results.xlsx",
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
 
 
 @router.post("/reindex")
-def reindex_dataset(db: Session = Depends(get_db), _role: str = Depends(require_role(["admin"]))):
+def reindex_dataset(db: Session = Depends(get_db), user=Depends(require_role(["admin"]))):
     """Manually rebuild the semantic query index from current students."""
     try:
-        students = fetch_students(db, owner_user_id=_user.id)
+        students = fetch_students(db, owner_user_id=user.id)
         if not students:
             raise HTTPException(status_code=400, detail="No students available to index. Upload data first.")
-        ensure_query_index(students, owner_user_id=_user.id)
+        ensure_query_index(students, owner_user_id=user.id)
         return {"status": "ok", "indexed_documents": len(students)}
     except HTTPException:
         raise

@@ -56,7 +56,7 @@ export default function UploadPage() {
           <h2 className="text-2xl font-semibold text-slate-900">Upload Results File</h2>
           <p className="mt-2 text-sm text-slate-600">
             Supported formats are <span className="font-medium">.xlsx</span> and <span className="font-medium">.pdf</span>.
-            The backend detects headers dynamically, cleans the dataset, computes missing SGPA values, and syncs PostgreSQL, Elasticsearch, and the semantic intent store.
+            The backend detects headers dynamically, cleans the dataset, computes missing SGPA values, and syncs the current account's PostgreSQL, Elasticsearch, and semantic stores.
           </p>
 
           <form onSubmit={handleUpload} className="mt-6 space-y-4">
@@ -87,9 +87,9 @@ export default function UploadPage() {
         <div className="rounded-3xl border border-slate-200 bg-white p-6">
           <h3 className="text-lg font-semibold text-slate-900">What happens after upload</h3>
           <div className="mt-4 space-y-3 text-sm text-slate-600">
-            <p>The parser reads every sheet or table, resolves multi-row headers, removes empty rows, and normalizes student records.</p>
-            <p>Pandas computes missing SGPA values, marks failures when any grade equals F, and prepares the processed Excel output.</p>
-            <p>FastAPI stores the clean dataset in PostgreSQL, mirrors searchable student documents into Elasticsearch, and refreshes the semantic intent map.</p>
+            <p>The parser reads every sheet or table, resolves multi-row headers, removes empty rows, and normalizes student records for the signed-in account.</p>
+            <p>Pandas computes missing SGPA values, marks failures when any grade equals F, and prepares the processed Excel output in isolated storage.</p>
+            <p>FastAPI stores the clean dataset in PostgreSQL, mirrors searchable student documents into Elasticsearch, and refreshes the account-specific semantic intent map.</p>
           </div>
         </div>
       </div>

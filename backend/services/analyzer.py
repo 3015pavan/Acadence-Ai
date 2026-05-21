@@ -214,20 +214,36 @@ def delete_dataset(db: Session, dataset_id: int, owner_user_id: Optional[int] = 
             db.scalar(
                 select(func.count())
                 .select_from(models.Result)
-                .where(models.Result.student_semester_id.in_(semester_ids))
+                .where(models.Result.student_semester_id.in_(semester_ids), models.Result.owner_user_id == resolved_owner_id)
             )
             or 0
         )
-        db.execute(delete(models.Result).where(models.Result.student_semester_id.in_(semester_ids)))
-        db.execute(delete(models.StudentSemester).where(models.StudentSemester.id.in_(semester_ids)))
+        db.execute(
+            delete(models.Result).where(
+                models.Result.student_semester_id.in_(semester_ids),
+                models.Result.owner_user_id == resolved_owner_id,
+            )
+        )
+        db.execute(
+            delete(models.StudentSemester).where(
+                models.StudentSemester.id.in_(semester_ids),
+                models.StudentSemester.owner_user_id == resolved_owner_id,
+            )
+        )
 
     files_removed: List[str] = []
-    if dataset_source == "upload" and PROCESSED_EXCEL_PATH.exists():
-        PROCESSED_EXCEL_PATH.unlink()
-        files_removed.append(str(PROCESSED_EXCEL_PATH))
+    processed_excel_path = PROCESSED_EXCEL_PATH if resolved_owner_id is None else PROCESSED_EXCEL_PATH.with_name(f"processed_results_user_{resolved_owner_id}.xlsx")
+    if dataset_source == "upload" and processed_excel_path.exists():
+        processed_excel_path.unlink()
+        files_removed.append(str(processed_excel_path))
 
     if dataset_source == "email":
-        agent_dataset = db.scalar(select(AgentProcessedDataset).where(AgentProcessedDataset.dataset_name == dataset_name))
+        agent_dataset = db.scalar(
+            select(AgentProcessedDataset).where(
+                AgentProcessedDataset.dataset_name == dataset_name,
+                AgentProcessedDataset.owner_user_id == resolved_owner_id,
+            )
+        )
         if agent_dataset:
             for file_path in (agent_dataset.processed_excel_path, agent_dataset.report_path):
                 if file_path:
@@ -235,7 +251,7 @@ def delete_dataset(db: Session, dataset_id: int, owner_user_id: Optional[int] = 
                     if path_obj.exists():
                         path_obj.unlink()
                         files_removed.append(str(path_obj))
-            dataset_dir = AGENT_OUTPUT_DIR / dataset_name
+            dataset_dir = AGENT_OUTPUT_DIR / f"user_{resolved_owner_id}" / dataset_name
             if dataset_dir.exists():
                 shutil.rmtree(dataset_dir, ignore_errors=True)
                 files_removed.append(str(dataset_dir))
@@ -253,6 +269,7 @@ def delete_dataset(db: Session, dataset_id: int, owner_user_id: Optional[int] = 
                 ~select(models.Result.id)
                 .where(models.Result.student_id == models.Student.id)
                 .exists(),
+                models.Student.owner_user_id == resolved_owner_id,
             )
         ).all()
     )
