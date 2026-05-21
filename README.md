@@ -1,74 +1,5 @@
 # Acadence AI
 
-Acadence AI is a multi-tenant AI-powered academic automation platform designed for large-scale educational datasets. The system combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time while keeping tenant data isolated and secure.
----
-
-## Quickstart
-
-Prerequisites:
-
-- Python 3.9+ (3.11 recommended)
-- Node.js 18+ and npm/yarn
-- PostgreSQL running and reachable via `DATABASE_URL`
-
-From the repository root:
-
-```bash
-# create and activate a venv
-python -m venv .venv
-.
-# install backend deps
-python -m pip install -r requirements.txt
-
-# apply database migrations
-alembic upgrade head
-
-# Optional: create initial tenants or run tenant-aware migrations
-# See "Configuration" below for tenant environment variables and example SQL to create an organization/tenant record.
-
-# run backend (development)
-cd backend
-python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-# frontend
-cd ../frontend
-npm install
-npm run dev
-```
-
-API endpoints:
-
-- Health: `GET /health` (http://127.0.0.1:8000/health)
-- Docs: `http://127.0.0.1:8000/docs`
-- Upload: `POST /upload` (multipart/form-data)
-
-Data storage and indexes:
-
-- Processed workbook: `backend/storage/processed_results.xlsx`
- - Semantic store: `semantic_documents` in PostgreSQL with `pgvector` embeddings (this project uses Postgres + `pgvector` by default). FAISS is supported as an optional local index when configured.
-- Database: configured via `DATABASE_URL` (Postgres)
-
-Environment variables (add to `.env`):
-
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/acadence_ai_db
-AUTH_SECRET=change-me-in-production
-BOOTSTRAP_ADMIN_EMAIL=admin@example.com
-BOOTSTRAP_ADMIN_PASSWORD=change-me
-GCP_GEMINI_KEY=your_api_key_here
-GEMINI_MODEL=gemini-2.5-flash
-GEMINI_THINKING_LEVEL=low
-GMAIL_SERVICE_ACCOUNT_JSON=path/to/credentials.json
-ELASTICSEARCH_URL=http://localhost:9200
-ACCESS_TOKEN_TTL_SECONDS=1800
-REFRESH_TOKEN_TTL_SECONDS=1209600
-```
-
-For production, run the app behind Docker Compose with PostgreSQL + `pgvector` (or configure FAISS for local vector indexes), the backend, frontend, and Nginx reverse proxy. Set HTTPS secrets and deploy with the provided GitHub Actions workflow.
-
----
-# Acadence AI
-
 > AI-Powered Academic Intelligence Platform with Adaptive Hybrid + Agentic RAG
 
 [![Status](https://img.shields.io/badge/status-production-brightgreen)](/)
@@ -77,7 +8,9 @@ For production, run the app behind Docker Compose with PostgreSQL + `pgvector` (
 [![Python](https://img.shields.io/badge/python-3.9+-3670A0?style=flat&logo=python)](/)
 [![React](https://img.shields.io/badge/react-18.0+-61DAFB?style=flat&logo=react)](/)
 
-Acadence AI is a production-grade AI-powered academic automation platform designed for large-scale educational datasets. The system combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
+Acadence AI is a multi-tenant AI-powered academic automation platform designed for large-scale educational datasets. It combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
+
+The platform keeps each tenant's data, logs, and agent activity isolated so multiple institutions can use the same deployment without seeing each other's records.
 
 Built for real-world educational institutions, the platform enables teachers, students, parents, and administrators to query complex academic datasets naturally while minimizing hallucinations through database-verified responses and grounded retrieval pipelines.
 
@@ -212,76 +145,83 @@ IF hybrid:
 
 ### Prerequisites
 
-- **Python** 3.9+
-- **PostgreSQL** 12+
-- **Node.js** 16+
+- Python 3.9+ (3.11 recommended)
+- Node.js 18+ and npm/yarn
+- PostgreSQL 12+ running and reachable via `DATABASE_URL`
 - (Optional) Elasticsearch and Redis for advanced features
 
-### 1️⃣ Clone the Repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/3015pavan/Acadence_Ai.git 
-cd agent_edata
+git clone https://github.com/3015pavan/Acadence-Ai.git
+cd Acadence-Ai
 ```
 
-### 2️⃣ Setup Backend
+### 2. Configure the Environment
+
+Create a `.env` file in the repository root and set the required variables:
 
 ```bash
-# Create Python virtual environment
+DATABASE_URL=postgresql://user:password@localhost:5432/acadence_ai_db
+AUTH_SECRET=change-me-in-production
+BOOTSTRAP_ADMIN_EMAIL=admin@example.com
+BOOTSTRAP_ADMIN_PASSWORD=change-me
+GCP_GEMINI_KEY=your_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_THINKING_LEVEL=low
+GMAIL_SERVICE_ACCOUNT_JSON=path/to/credentials.json
+ELASTICSEARCH_URL=http://localhost:9200
+ACCESS_TOKEN_TTL_SECONDS=1800
+REFRESH_TOKEN_TTL_SECONDS=1209600
+```
+
+### 3. Install Dependencies
+
+```bash
+# Backend
 python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r requirements.txt
 
-# Activate environment
-.venv\Scripts\activate     # Windows
-source .venv/bin/activate  # macOS/Linux
-
-# Install dependencies
-pip install -r requirements.txt
+# Frontend
+cd frontend
+npm install
 ```
 
-### 3️⃣ Configure Environment
+### 4. Apply Database Migrations
 
 ```bash
-cp .env.example .env
-# Edit .env with your:
-# - PostgreSQL database URL
-# - Gemini API key (GCP_GEMINI_KEY)
-# - (Optional) Gmail service account credentials
+cd ..
+alembic upgrade head
 ```
 
-### 4️⃣ Initialize Database
+### 5. Start Services
 
-```bash
-python -c "from backend.database import engine; from backend import models; models.Base.metadata.create_all(engine)"
-```
-
-### 5️⃣ Start Services
-
-**Terminal 1 - Backend (FastAPI)**
+**Backend**
 
 ```bash
 cd backend
-python -m uvicorn main:app --reload
-# Backend runs on http://127.0.0.1:8000
+python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-**Terminal 2 - Frontend (React/Vite)**
+**Frontend**
 
 ```bash
 cd frontend
-npm install
 npm run dev
-# Frontend runs on http://127.0.0.1:5173
 ```
 
-**Terminal 3 - Email Agent (Optional)**
+**Email Agent (Optional)**
 
 ```bash
-# In a new terminal with activated venv:
 python backend/agents/email_agent.py
-# Automatically monitors Gmail for attachments
 ```
 
-✅ **Done!** Your Acadence AI instance is now running. Navigate to `http://127.0.0.1:5173`
+### 6. Verify the App
+
+- Health: `GET /health` at `http://127.0.0.1:8000/health`
+- Docs: `http://127.0.0.1:8000/docs`
+- Frontend: `http://127.0.0.1:5173`
 
 ---
 
@@ -642,8 +582,7 @@ curl http://127.0.0.1:8000/analytics/datasets
 
 ## Why Acadence AI?
 
-Unlike traditional rule-based academic chatbots, Acadence AI uses adaptive Hybrid + Agentic RAG to dynamically reason over structured and semantic academic data without depending on fixed query templates or brittle intent pipelines.
-
+Unlike traditional rule-based academic chatbots, Acadence AI uses adaptive Hybrid + Agentic RAG to dynamically reason over structured and semantic academic data.
 The system is designed to answer arbitrary natural language questions over large academic datasets while maintaining grounded, verifiable, and reliable responses.
 
 ---
