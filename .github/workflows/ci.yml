@@ -16,10 +16,9 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: acadence_test
-        ports:
-          - 5432:5432
+        # no host port mapping necessary — Actions exposes the service on localhost
         options: >-
-          --health-cmd pg_isready -U postgres -d acadence_test
+          --health-cmd "pg_isready -U postgres -d acadence_test"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -36,7 +35,7 @@ jobs:
       - name: Install system deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y postgresql-client
+          sudo apt-get install -y postgresql-client curl
 
       - name: Install Python deps
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
@@ -45,19 +44,26 @@ jobs:
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/acadence_test
           PGVECTOR_ENABLED: 'false'
+          PGPASSWORD: postgres
         run: |
-          # Wait until Postgres is ready
-          until pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done
+          set -e
+          echo "Waiting for Postgres to be ready..."
+          for i in {1..60}; do
+            pg_isready -h localhost -p 5432 -U postgres -d acadence_test && break || sleep 1
+          done
 
-          # Start the API server in the background for integration tests that hit /health and endpoints.
-          nohup python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 &>/dev/null &
+          echo "Starting API server in background (uvicorn)..."
+          nohup python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 > uv_out.log 2> uv_err.log &
 
-          # Wait for the app to be responsive
-          for i in {1..30}; do
-            if curl -sSf http://localhost:8000/health >/dev/null; then
+          echo "Waiting for /health to respond..."
+          for i in {1..60}; do
+            if curl -sSf http://localhost:8000/health >/dev/null 2>&1; then
               echo "API is up" && break
             fi
             sleep 1
           done
+
+          echo "uvicorn stderr (last 200 lines):" || true
+          tail -n 200 uv_err.log || true
 
           python -m pytest -q
