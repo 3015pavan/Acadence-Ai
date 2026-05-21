@@ -1,0 +1,283 @@
+{
+  "dataset_name": "email-CS_UG_IV_SEM-5ba07b9131e7",
+  "dataset_id": 12,
+  "processed_excel_path": "C:\\Users\\Pavan\\PROJECTX\\Acadence-Ai\\backend\\storage\\processed_results.xlsx",
+  "metrics": {
+    "Extraction Accuracy": {
+      "value": null,
+      "note": "No OCR ground truth available."
+    },
+    "Parsing Success Rate": {
+      "value": null,
+      "note": "From parse logs for latest file."
+    },
+    "OCR Accuracy": {
+      "value": null,
+      "note": "No OCR ground truth available."
+    },
+    "Table Detection Accuracy": {
+      "value": null,
+      "note": "No table detection ground truth available."
+    },
+    "Schema Mapping Accuracy": {
+      "value": 1.0,
+      "note": "Row-level USN/Name/SGPA presence."
+    },
+    "Validation Accuracy": {
+      "value": 0.0,
+      "note": "Row-level validation checks."
+    },
+    "Duplicate Detection Rate": {
+      "value": 0.0,
+      "note": "Duplicate USN ratio."
+    },
+    "Missing Value Ratio": {
+      "value": 0.0,
+      "note": "Missing USN/Name/SGPA ratio."
+    },
+    "Data Consistency Score": {
+      "value": 0.0,
+      "note": "Valid rows ratio."
+    },
+    "Data Integrity Score": {
+      "value": 1.0,
+      "note": "Non-missing critical fields ratio."
+    },
+    "ETL/ELT Processing Time": {
+      "value": null,
+      "note": "Average ingestion duration (ms)."
+    },
+    "Pipeline Success Rate": {
+      "value": null,
+      "note": "From ingestion logs."
+    },
+    "Data Freshness": {
+      "value": 406.17,
+      "note": "Hours since latest dataset created."
+    },
+    "Warehouse Sync Accuracy": {
+      "value": null,
+      "note": "No warehouse sync telemetry available."
+    },
+    "Ingestion Throughput": {
+      "value": null,
+      "note": "Rows per second from ingestion logs."
+    },
+    "Query Accuracy": {
+      "value": 0.42,
+      "note": "Pass rate on QA cases."
+    },
+    "SQL Generation Accuracy": {
+      "value": null,
+      "note": "No SQL generation pipeline present."
+    },
+    "SQL Execution Success Rate": {
+      "value": null,
+      "note": "No SQL execution logging available."
+    },
+    "Complex Query Accuracy": {
+      "value": 0.0,
+      "note": "Proxy using filter accuracy."
+    },
+    "Aggregation Accuracy": {
+      "value": 0.25,
+      "note": "Aggregation category pass rate."
+    },
+    "Ranking Accuracy": {
+      "value": 0.0,
+      "note": "Ranking category pass rate."
+    },
+    "Filtering Accuracy": {
+      "value": 0.0,
+      "note": "Filtering category pass rate."
+    },
+    "Multi-turn Context Accuracy": {
+      "value": null,
+      "note": "No multi-turn ground truth available."
+    },
+    "Query Resolution Accuracy": {
+      "value": 0.42,
+      "note": "Same as query pass rate."
+    },
+    "Context Retention Accuracy": {
+      "value": null,
+      "note": "No multi-turn ground truth available."
+    },
+    "Retrieval Precision": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Retrieval Recall": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Recall@K": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Precision@K": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Hit Rate": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Mean Reciprocal Rank (MRR)": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "NDCG (Normalized Discounted Cumulative Gain)": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Context Precision": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Context Recall": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Context Relevance Score": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Chunk Relevance Score": {
+      "value": null,
+      "note": "No relevance labels available."
+    },
+    "Semantic Similarity Score": {
+      "value": null,
+      "note": "No gold references beyond QA set."
+    },
+    "Reranker Accuracy": {
+      "value": null,
+      "note": "No reranker labels available."
+    },
+    "Groundedness Score": {
+      "value": null,
+      "note": "No grounding labels available."
+    },
+    "Faithfulness Score": {
+      "value": null,
+      "note": "No grounding labels available."
+    },
+    "Answer Relevancy": {
+      "value": 0.42,
+      "note": "Contains-match pass rate."
+    },
+    "Answer Correctness": {
+      "value": 0.42,
+      "note": "Pass rate on QA cases."
+    },
+    "Response Relevance": {
+      "value": 0.42,
+      "note": "Contains-match pass rate."
+    },
+    "Citation Accuracy": {
+      "value": null,
+      "note": "No citation labels available."
+    },
+    "Hallucination Rate": {
+      "value": 0.58,
+      "note": "1 - QA pass rate."
+    },
+    "Exact Match Score": {
+      "value": 0.0,
+      "note": "Exact-match rate on QA cases."
+    },
+    "BLEU Score": {
+      "value": 0.0256,
+      "note": "BLEU-1 on QA cases."
+    },
+    "ROUGE Score": {
+      "value": 0.4052,
+      "note": "ROUGE-L on QA cases."
+    },
+    "Context Utilization Score": {
+      "value": null,
+      "note": "Context usage not labeled."
+    },
+    "Multi-hop Reasoning Accuracy": {
+      "value": null,
+      "note": "No multi-hop labels available."
+    },
+    "Agent Task Completion Rate": {
+      "value": null,
+      "note": "Using ingestion success rate as proxy."
+    },
+    "Tool Invocation Accuracy": {
+      "value": null,
+      "note": "No tool-invocation labels available."
+    },
+    "Workflow Success Rate": {
+      "value": null,
+      "note": "Using ingestion success rate as proxy."
+    },
+    "Email Automation Success Rate": {
+      "value": 1.0,
+      "note": "From agent_processed_emails."
+    },
+    "File Classification Accuracy": {
+      "value": null,
+      "note": "No file classification labels available."
+    },
+    "Agent Routing Accuracy": {
+      "value": null,
+      "note": "No routing labels available."
+    },
+    "Conversation Success Rate": {
+      "value": 0.42,
+      "note": "QA pass rate proxy."
+    },
+    "User Satisfaction Score": {
+      "value": null,
+      "note": "No user feedback collected."
+    },
+    "Query Latency": {
+      "value": 1251.4,
+      "note": "Average end-to-end latency (ms)."
+    },
+    "Retrieval Latency": {
+      "value": 0.0,
+      "note": "Average context build time (ms)."
+    },
+    "SQL Execution Latency": {
+      "value": null,
+      "note": "No SQL execution telemetry."
+    },
+    "Generation Latency": {
+      "value": 0.0,
+      "note": "Average generation time (ms)."
+    },
+    "Upload Processing Time": {
+      "value": null,
+      "note": "Average ingestion duration (ms)."
+    },
+    "End-to-End Response Time": {
+      "value": 1251.4,
+      "note": "Average end-to-end latency (ms)."
+    },
+    "API Success Rate": {
+      "value": 0.42,
+      "note": "QA pass rate proxy."
+    },
+    "API Error Rate": {
+      "value": 0.58,
+      "note": "1 - QA pass rate proxy."
+    },
+    "System Uptime": {
+      "value": null,
+      "note": "No uptime telemetry available."
+    },
+    "Failure Recovery Rate": {
+      "value": null,
+      "note": "No recovery telemetry available."
+    },
+    "Database Query Performance": {
+      "value": null,
+      "note": "No DB timing telemetry available."
+    }
+  }
+}

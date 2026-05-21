@@ -1,0 +1,53 @@
+.env
+.env.*
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.err
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.coverage
+coverage.xml
+htmlcov/
+
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# Python packaging
+dist/
+build/
+*.egg-info/
+pip-wheel-metadata/
+
+# Logs and runtime files
+backend/logs/
+*.log
+*.jsonl
+
+# Persistent storage artifacts (vector indexes, tokens)
+backend/storage/faiss/*.index
+backend/storage/faiss/*.json
+backend/storage/gmail_token.json
+backend/storage/*.db
+backend/storage/*.sqlite*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+!.env.example

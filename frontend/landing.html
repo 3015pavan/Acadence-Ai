@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Acadence AI — Landing</title>
+    <style>
+      /* Match frontend/src/index.css theme */
+      :root{
+        --bg-1: #eef6f4;
+        --bg-2: #f8fafc;
+        --accent: #268d82; /* rgba(38,141,130) */
+        --muted: #5b6b6a;
+        --card: #ffffff;
+        --glass: rgba(18,56,52,0.04);
+      }
+      html,body{height:100%;margin:0;font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif}
+      body{background:
+        radial-gradient(circle at top left, rgba(38,141,130,0.08), transparent 30%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        display:flex;align-items:center;justify-content:center;color:#04282a}
+
+      .shell{width:100%;max-width:1100px;padding:28px}
+      .panel{background:var(--card);border-radius:14px;padding:28px;box-shadow:0 8px 30px rgba(11,22,24,0.06)}
+      header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+      .brand{display:flex;align-items:center;gap:12px}
+      .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;box-shadow:0 6px 18px rgba(38,141,130,0.18)}
+      .title{font-size:18px;font-weight:700;color:#07302f}
+      h1{margin:0 0 6px;font-size:30px;line-height:1.05;color:#04282a}
+      p.lead{margin:0 0 14px;color:var(--muted)}
+      .row{display:flex;gap:18px;align-items:flex-start}
+      .left{flex:1}
+      .right{width:320px}
+      .cta{display:flex;gap:12px;margin-top:12px}
+      .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;border:0;cursor:pointer}
+      .btn-primary{background:linear-gradient(90deg,var(--accent),#00bcd4);color:#04282a}
+      .btn-ghost{background:transparent;border:1px solid rgba(7,18,16,0.06);color:var(--muted)}
+      .card{background:var(--glass);padding:14px;border-radius:10px}
+      .carousel{position:relative;margin-top:18px}
+      .slides{display:grid;grid-auto-flow:column;grid-auto-columns:100%;gap:12px;overflow:hidden}
+      .slide{min-width:100%;transition:transform .45s cubic-bezier(.2,.9,.25,1);display:flex;gap:12px}
+      .feature{flex:1;padding:16px;border-radius:10px;background:linear-gradient(180deg,rgba(2,50,46,0.02),transparent);display:flex;flex-direction:column;gap:10px}
+      .dots{display:flex;gap:8px;margin-top:12px}
+      .dot{width:10px;height:10px;border-radius:50%;background:rgba(4,24,22,0.06);cursor:pointer}
+      .dot.active{background:var(--accent)}
+      .nav-controls{display:flex;gap:8px;margin-top:12px}
+      .nav-controls .btn{padding:8px 12px;font-weight:600}
+      footer{margin-top:18px;color:var(--muted);font-size:13px}
+      @media (max-width:820px){.row{flex-direction:column}.right{width:100%}}
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="panel">
+        <header>
+          <div class="brand">
+            <div class="logo">AAI</div>
+            <div>
+              <div class="title">Acadence AI</div>
+              <div style="color:var(--muted);font-size:13px">Upload → Parse → Query</div>
+            </div>
+          </div>
+          <nav>
+            <button class="btn btn-ghost" onclick="goBack()">Back</button>
+            <a class="btn btn-ghost" href="/" title="Open app">Open App</a>
+          </nav>
+        <script>
+          // Simple carousel logic with Next/Back and dots
+          (function(){
+            const slidesEl = document.getElementById('slides');
+            const slideCount = slidesEl.children.length;
+            let idx = 0;
+            const dotsEl = document.getElementById('dots');
+
+            function renderDots(){
+              dotsEl.innerHTML = '';
+              for(let i=0;i<slideCount;i++){
+                const d = document.createElement('div');
+                d.className = 'dot' + (i===idx? ' active':'');
+                d.addEventListener('click', ()=> goTo(i));
+                dotsEl.appendChild(d);
+              }
+            }
+            function goTo(i){ idx = Math.max(0, Math.min(i, slideCount-1)); update(); }
+            function next(){ if(idx<slideCount-1) idx++; else window.location.href='/'; update(); }
+            function prev(){ if(idx>0) idx--; else history.back(); update(); }
+            function update(){ slidesEl.style.transform = `translateX(${ -idx*100 }%)`; renderDots(); }
+            document.getElementById('next').addEventListener('click', next);
+            document.getElementById('prev').addEventListener('click', prev);
+            window.goBack = ()=> history.back();
+            renderDots();
+          })();
+        </script>
+                  </div>
+                </section>
+
+                <section class="slide">
+                  <div class="feature card">
+                    <strong>Email Automation</strong>
+                    <div style="color:var(--muted);margin-top:6px">Ingest attachments from Gmail, process them, and reply with an analysis report and download link.</div>
+                  </div>
+                  <div class="feature card">
+                    <strong>Thread-aware Replies</strong>
+                    <div style="color:var(--muted);margin-top:6px">Replies are sent in-thread and avoid loops by detecting the connected mailbox.</div>
+                  </div>
+                </section>
+
+                <section class="slide">
+                  <div class="feature card">
+                    <strong>Search & Retrieval</strong>
+                    <div style="color:var(--muted);margin-top:6px">Local FAISS-based semantic search with optional Elasticsearch sync for scaling.</div>
+                  </div>
+                  <div class="feature card">
+                    <strong>Reports & Exports</strong>
+                    <div style="color:var(--muted);margin-top:6px">Generate PDF reports and downloadable Excel summaries after processing.</div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="nav-controls">
+                <button class="btn btn-ghost" id="prev">Back</button>
+                <button class="btn btn-ghost" id="next">Next</button>
+              </div>
+
+              <div class="dots" id="dots"></div>
+            </div>
+
+          </div>
+
+          <aside class="right card">
+            <strong>Live Demo</strong>
+            <div style="color:var(--muted);margin-top:8px">Try the demo to upload a sample Excel and follow the pipeline: parse → preview → commit → search.</div>
+            <div style="margin-top:12px"><a class="btn btn-primary" href="/?demo=true">Start Demo</a></div>
+            <footer style="margin-top:18px;color:var(--muted);font-size:13px">Open file: <strong>/landing.html</strong></footer>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
