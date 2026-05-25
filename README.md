@@ -15,6 +15,8 @@ The platform keeps each tenant's data, logs, and agent activity isolated so mult
 Built for real-world educational institutions, the platform enables teachers, students, parents, and administrators to query complex academic datasets naturally while minimizing hallucinations through database-verified responses and grounded retrieval pipelines.
 
 ---
+<img width="1536" height="1024" alt="Acadene-AI_Archt" src="https://github.com/user-attachments/assets/cea45c99-356e-4918-8b53-d2c61a8cec7d" />
+
 
 ## Core Features
 
