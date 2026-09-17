@@ -1,6 +1,6 @@
 # Acadence AI
 
-> AI-Powered Academic Intelligence Platform with Adaptive Hybrid + Agentic RAG
+> Acadence AI — AI-Powered Academic Intelligence & Automation Platform
 
 [![Status](https://img.shields.io/badge/status-production-brightgreen)](/)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](/)
@@ -19,7 +19,6 @@ Built for real-world educational institutions, the platform enables teachers, st
 
 ## Core Features
 
-### Adaptive Hybrid + Agentic RAG
 
 ### Intelligent Query Orchestration
 
@@ -49,10 +48,9 @@ Supports natural language questions such as:
 The system dynamically determines whether the query requires:
 
 - SQL retrieval
-- semantic retrieval (FAISS or `pgvector`)
+- semantic retrieval (pgvector)
 - hybrid retrieval
 - analytics reasoning
-- multi-step orchestration
 
 
 ---
@@ -76,7 +74,7 @@ The system dynamically determines whether the query requires:
 
 ### Semantic Retrieval
 
-- Vector retrieval (FAISS or `pgvector`)
+- Vector retrieval (pgvector)
 - Context-aware semantic search
 - Similarity-based chunk retrieval
 - Reranking for high-confidence context selection
@@ -87,7 +85,7 @@ The system dynamically determines whether the query requires:
 - Retrieval orchestration agents
 - Analytics reasoning workflows
 - Email automation agents
-- Multi-step reasoning pipelines
+
 
 ### Email Automation
 
@@ -138,7 +136,7 @@ IF hybrid:
 | Automation         | Gmail Automation          |
 | Cloud              | GCP, Cloud Storage        |
 | Vector Embeddings  | Sentence Transformers     |
-| Orchestration      | Agentic RAG Workflows     |
+     |
 
 ---
 
