@@ -4,7 +4,6 @@
 
 [![Status](https://img.shields.io/badge/status-production-brightgreen)](/)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](/)
-[![License](https://img.shields.io/badge/license-MIT-green)](/)
 [![Python](https://img.shields.io/badge/python-3.9+-3670A0?style=flat&logo=python)](/)
 [![React](https://img.shields.io/badge/react-18.0+-61DAFB?style=flat&logo=react)](/)
 
