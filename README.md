@@ -24,7 +24,6 @@ Built for real-world educational institutions, the platform enables teachers, st
 
 * Adaptive LLM-driven query planning
 * Hybrid SQL + semantic retrieval orchestration
-* Multi-step reasoning workflows
 * Context reranking and validation
 * Conversational multi-turn memory
 * Hallucination prevention pipeline
