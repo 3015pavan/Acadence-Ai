@@ -51,16 +51,71 @@ flowchart TB
 
     FILES --> PARSER
     GMAIL --> PARSER
+
     PARSER --> VALIDATE
     VALIDATE --> PIPELINE
+
 
     %% =========================
     %% DATABASE
     %% =========================
 
-    POSTGRES[(PostgreSQL<br/>Academic Data + pgvector)]
+    POSTGRES[(PostgreSQL<br/>Academic Records)]
 
     PIPELINE --> POSTGRES
+
+
+    %% =========================
+    %% EMBEDDING
+    %% =========================
+
+    EMBEDDING[Local Embedding Model<br/>384-Dimensional Embeddings]
+
+    PGVECTOR[(pgvector<br/>Semantic Vectors)]
+
+    POSTGRES --> EMBEDDING
+    EMBEDDING --> PGVECTOR
+
+
+    %% =========================
+    %% ANALYTICS DASHBOARD
+    %% =========================
+
+    subgraph DASHBOARD["Analytics Dashboard"]
+
+        SUMMARY[/analytics/summary]
+
+        STUDENTS[/analytics/students]
+
+        DATASETS[/analytics/datasets]
+
+        SUBJECT[/analytics/subject-wise]
+
+        REPORT_API[/analytics/report]
+
+        ANALYTICS_UI[Student Analytics Dashboard]
+
+    end
+
+    POSTGRES --> SUMMARY
+    POSTGRES --> STUDENTS
+    POSTGRES --> DATASETS
+    POSTGRES --> SUBJECT
+    POSTGRES --> REPORT_API
+
+    SUMMARY --> ANALYTICS_UI
+    STUDENTS --> ANALYTICS_UI
+    DATASETS --> ANALYTICS_UI
+    SUBJECT --> ANALYTICS_UI
+
+    REPORT_API --> ANALYTICS_UI
+
+    BACKEND --> SUMMARY
+    BACKEND --> STUDENTS
+    BACKEND --> DATASETS
+    BACKEND --> SUBJECT
+    BACKEND --> REPORT_API
+
 
     %% =========================
     %% QUERY ENGINE
@@ -78,9 +133,7 @@ flowchart TB
 
         SEMANTIC[Semantic Retrieval]
 
-        HYBRID[Hybrid Retrieval]
-
-        ANALYTICS[Academic Analytics]
+        ANALYTICS_QUERY[Academic Analytics]
 
         CONTEXT[Context Construction]
 
@@ -93,26 +146,23 @@ flowchart TB
 
     PLANNER --> SQL
     PLANNER --> SEMANTIC
-    PLANNER --> HYBRID
-    PLANNER --> ANALYTICS
+    PLANNER --> ANALYTICS_QUERY
 
     SQL --> POSTGRES
-    SEMANTIC --> POSTGRES
-    HYBRID --> POSTGRES
-    ANALYTICS --> POSTGRES
+
+    SEMANTIC --> PGVECTOR
+
+    ANALYTICS_QUERY --> POSTGRES
 
     POSTGRES --> CONTEXT
+    PGVECTOR --> CONTEXT
+
 
     %% =========================
     %% AI LAYER
     %% =========================
 
-    EMBEDDING[Local Embedding Model<br/>384-Dimensional Embeddings]
-
     GEMINI[Gemini 2.5 Flash<br/>LLM]
-
-    POSTGRES --> EMBEDDING
-    EMBEDDING --> POSTGRES
 
     CONTEXT --> GEMINI
     PLANNER --> GEMINI
@@ -121,14 +171,16 @@ flowchart TB
 
     RESPONSE --> FRONTEND
 
+
     %% =========================
-    %% CACHE
+    %% REDIS CACHE
     %% =========================
 
     REDIS[(Redis<br/>Query Cache)]
 
-    BACKEND --> REDIS
     QUERY_INPUT --> REDIS
+    REDIS --> QUERY_INPUT
+
 
     %% =========================
     %% EMAIL AUTOMATION
@@ -140,6 +192,8 @@ flowchart TB
 
         ATTACHMENT[Attachment Processing]
 
+        PROCESS[Attachment Processing Pipeline]
+
         REPORT[Academic Report Generation]
 
         SMTP[Email Response]
@@ -147,21 +201,30 @@ flowchart TB
     end
 
     GMAIL --> AGENT
+
     AGENT --> ATTACHMENT
-    ATTACHMENT --> PARSER
+    ATTACHMENT --> PROCESS
+
+    PROCESS --> PARSER
 
     POSTGRES --> REPORT
     REPORT --> SMTP
     SMTP --> GMAIL
 
+
     %% =========================
-    %% REPORTING
+    %% REPORTING & INSIGHTS
     %% =========================
 
-    REPORTING[Academic Reporting]
+    REPORTING[Academic Reporting Service]
+
+    INSIGHTS[Academic Insights]
 
     POSTGRES --> REPORTING
-    REPORTING --> FRONTEND
+
+    REPORTING --> INSIGHTS
+    REPORTING --> ANALYTICS_UI
+
 
     %% =========================
     %% DEPLOYMENT
@@ -184,6 +247,7 @@ flowchart TB
     DOCKER --> WEB_CONTAINER
 
     API_CONTAINER --> DATABASE
+    WEB_CONTAINER --> API_CONTAINER
 ```
 
 
