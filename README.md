@@ -12,7 +12,260 @@ Built for real-world educational institutions, the platform enables teachers, st
 ---
 <img width="1536" height="1024" alt="Acadene-AI_Archt" src="https://github.com/user-attachments/assets/cea45c99-356e-4918-8b53-d2c61a8cec7d" />
 
+## System Design
 
+```mermaid
+flowchart TB
+
+    %% =========================
+    %% USERS & FRONTEND
+    %% =========================
+
+    USERS[Students / Teachers / Administrators]
+
+    FRONTEND[React + Vite + Tailwind CSS<br/>Web Application]
+
+    USERS --> FRONTEND
+
+    %% =========================
+    %% BACKEND
+    %% =========================
+
+    API[FastAPI Backend<br/>REST APIs]
+
+    FRONTEND -->|HTTP / JSON| API
+
+    AUTH[Authentication & Authorization<br/>JWT]
+    ROUTES[API Routes]
+    TENANT[Multi-Tenant Isolation]
+
+    API --> AUTH
+    API --> ROUTES
+    AUTH --> TENANT
+
+    %% =========================
+    %% DATA INGESTION
+    %% =========================
+
+    subgraph INGESTION["Data Ingestion & Processing"]
+
+        UPLOAD[File Upload<br/>CSV / Excel / PDF]
+
+        GMAIL[Gmail Integration<br/>Email + Attachments]
+
+        PARSER[Document Parser<br/>Pandas · PDFPlumber · LlamaParse]
+
+        NORMALIZE[Schema Normalization]
+
+        VALIDATE[Validation & Cleaning]
+
+        DEDUP[Duplicate Detection]
+
+    end
+
+    ROUTES --> UPLOAD
+    ROUTES --> GMAIL
+
+    UPLOAD --> PARSER
+    GMAIL --> PARSER
+
+    PARSER --> NORMALIZE
+    NORMALIZE --> VALIDATE
+    VALIDATE --> DEDUP
+
+    %% =========================
+    %% DATABASE
+    %% =========================
+
+    POSTGRES[(PostgreSQL<br/>Source of Truth)]
+
+    DEDUP --> POSTGRES
+
+    %% =========================
+    %% EMBEDDING & VECTOR SEARCH
+    %% =========================
+
+    EMBEDDING[Sentence Transformers<br/>Embedding Generation]
+
+    PGVECTOR[(pgvector<br/>Vector Store)]
+
+    POSTGRES --> EMBEDDING
+    EMBEDDING --> PGVECTOR
+
+    %% =========================
+    %% QUERY INTELLIGENCE
+    %% =========================
+
+    subgraph INTELLIGENCE["AI Query Intelligence"]
+
+        QUERY[Natural Language Query]
+
+        INTENT[Intent Detection]
+
+        PLANNER[LLM Query Planner]
+
+        ROUTER[Dynamic Query Routing]
+
+        SQLGEN[SQL Generation]
+
+        SEMANTIC[Semantic Retrieval]
+
+        HYBRID[Hybrid Retrieval]
+
+        ANALYTICS[Analytics Reasoning]
+
+        RERANK[Context Reranking]
+
+        CONTEXT[Context Fusion & Validation]
+
+        MEMORY[Conversation Memory]
+
+    end
+
+    FRONTEND -->|Natural Language Query| QUERY
+
+    QUERY --> INTENT
+    INTENT --> PLANNER
+    PLANNER --> ROUTER
+
+    ROUTER --> SQLGEN
+    ROUTER --> SEMANTIC
+    ROUTER --> HYBRID
+    ROUTER --> ANALYTICS
+
+    %% Structured retrieval
+
+    SQLGEN --> POSTGRES
+
+    %% Semantic retrieval
+
+    SEMANTIC --> PGVECTOR
+    PGVECTOR --> RERANK
+
+    %% Hybrid retrieval
+
+    HYBRID --> POSTGRES
+    HYBRID --> PGVECTOR
+
+    %% Analytics
+
+    ANALYTICS --> POSTGRES
+
+    %% Context construction
+
+    POSTGRES --> CONTEXT
+    RERANK --> CONTEXT
+    ANALYTICS --> CONTEXT
+
+    QUERY --> MEMORY
+    MEMORY --> CONTEXT
+
+    %% =========================
+    %% LLM
+    %% =========================
+
+    LLM[Gemini<br/>LLM Provider]
+
+    CONTEXT --> LLM
+
+    LLM --> VALIDATION[Response Validation<br/>Groundedness & Safety]
+
+    VALIDATION --> RESPONSE[Database-Grounded Response]
+
+    RESPONSE --> FRONTEND
+
+    %% =========================
+    %% REDIS
+    %% =========================
+
+    REDIS[(Redis<br/>Cache & State)]
+
+    API --> REDIS
+    QUERY --> REDIS
+    PLANNER --> REDIS
+
+    %% =========================
+    %% EMAIL AUTOMATION
+    %% =========================
+
+    subgraph EMAIL["Gmail Automation"]
+
+        AGENT[Email Agent]
+
+        ATTACHMENT[Attachment Detection]
+
+        PROCESS[Attachment Processing]
+
+        REPORT[PDF Report Generation]
+
+        NOTIFY[Email Notification / Reply]
+
+    end
+
+    GMAIL --> AGENT
+    AGENT --> ATTACHMENT
+    ATTACHMENT --> PROCESS
+    PROCESS --> PARSER
+
+    POSTGRES --> REPORT
+    REPORT --> NOTIFY
+    NOTIFY --> GMAIL
+
+    %% =========================
+    %% CLOUD STORAGE
+    %% =========================
+
+    STORAGE[GCP Cloud Storage]
+
+    PROCESS --> STORAGE
+
+    %% =========================
+    %% OBSERVABILITY
+    %% =========================
+
+    subgraph OBSERVABILITY["Application Monitoring"]
+
+        PROMETHEUS[Prometheus]
+
+        GRAFANA[Grafana]
+
+    end
+
+    API --> PROMETHEUS
+    PROMETHEUS --> GRAFANA
+
+    %% =========================
+    %% CI/CD
+    %% =========================
+
+    GITHUB[GitHub]
+
+    CI[GitHub Actions<br/>CI / Testing]
+
+    DOCKER[Docker]
+
+    DEPLOY[Application Deployment]
+
+    GITHUB --> CI
+    CI --> DOCKER
+    DOCKER --> DEPLOY
+    DEPLOY --> API
+
+    %% =========================
+    %% STYLING
+    %% =========================
+
+    classDef client fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+    classDef backend fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef data fill:#fff3e0,stroke:#ef6c00,stroke-width:2px;
+    classDef ai fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px;
+    classDef infra fill:#eceff1,stroke:#455a64,stroke-width:2px;
+
+    class USERS,FRONTEND client;
+    class API,AUTH,ROUTES,TENANT backend;
+    class POSTGRES,PGVECTOR,REDIS,STORAGE data;
+    class QUERY,INTENT,PLANNER,ROUTER,SQLGEN,SEMANTIC,HYBRID,ANALYTICS,RERANK,CONTEXT,MEMORY,LLM,VALIDATION ai;
+    class GITHUB,CI,DOCKER,DEPLOY,PROMETHEUS,GRAFANA infra;
 ## Core Features
 
 
