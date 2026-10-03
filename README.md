@@ -11,262 +11,181 @@ Built for real-world educational institutions, the platform enables teachers, st
 
 ---
 <img width="1536" height="1024" alt="Acadene-AI_Archt" src="https://github.com/user-attachments/assets/cea45c99-356e-4918-8b53-d2c61a8cec7d" />
-
 ## System Design
 
 ```mermaid
 flowchart TB
 
-    %% =========================
-    %% USERS & FRONTEND
-    %% =========================
+    USER[Students / Teachers / Administrators]
 
-    USERS[Students / Teachers / Administrators]
+    FRONTEND[React Frontend<br/>Vite + Tailwind CSS]
 
-    FRONTEND[React + Vite + Tailwind CSS<br/>Web Application]
+    BACKEND[FastAPI Backend<br/>REST APIs]
 
-    USERS --> FRONTEND
+    AUTH[JWT Authentication<br/>Access + Refresh Tokens]
 
-    %% =========================
-    %% BACKEND
-    %% =========================
-
-    API[FastAPI Backend<br/>REST APIs]
-
-    FRONTEND -->|HTTP / JSON| API
-
-    AUTH[Authentication & Authorization<br/>JWT]
-    ROUTES[API Routes]
-    TENANT[Multi-Tenant Isolation]
-
-    API --> AUTH
-    API --> ROUTES
-    AUTH --> TENANT
+    USER --> FRONTEND
+    FRONTEND --> BACKEND
+    BACKEND --> AUTH
 
     %% =========================
     %% DATA INGESTION
     %% =========================
 
-    subgraph INGESTION["Data Ingestion & Processing"]
+    subgraph INGESTION["Academic Data Ingestion"]
 
-        UPLOAD[File Upload<br/>CSV / Excel / PDF]
+        FILES[CSV / Excel / PDF]
 
-        GMAIL[Gmail Integration<br/>Email + Attachments]
+        GMAIL[Gmail<br/>Email + Attachments]
 
-        PARSER[Document Parser<br/>Pandas · PDFPlumber · LlamaParse]
+        PARSER[Document Parser<br/>Pandas + OpenPyXL + PDFPlumber + LlamaParse]
 
-        NORMALIZE[Schema Normalization]
+        VALIDATE[Validation & Normalization]
 
-        VALIDATE[Validation & Cleaning]
-
-        DEDUP[Duplicate Detection]
+        PIPELINE[Processing Pipeline]
 
     end
 
-    ROUTES --> UPLOAD
-    ROUTES --> GMAIL
+    BACKEND --> FILES
+    BACKEND --> GMAIL
 
-    UPLOAD --> PARSER
+    FILES --> PARSER
     GMAIL --> PARSER
-
-    PARSER --> NORMALIZE
-    NORMALIZE --> VALIDATE
-    VALIDATE --> DEDUP
+    PARSER --> VALIDATE
+    VALIDATE --> PIPELINE
 
     %% =========================
     %% DATABASE
     %% =========================
 
-    POSTGRES[(PostgreSQL<br/>Source of Truth)]
+    POSTGRES[(PostgreSQL<br/>Academic Data + pgvector)]
 
-    DEDUP --> POSTGRES
-
-    %% =========================
-    %% EMBEDDING & VECTOR SEARCH
-    %% =========================
-
-    EMBEDDING[Sentence Transformers<br/>Embedding Generation]
-
-    PGVECTOR[(pgvector<br/>Vector Store)]
-
-    POSTGRES --> EMBEDDING
-    EMBEDDING --> PGVECTOR
+    PIPELINE --> POSTGRES
 
     %% =========================
-    %% QUERY INTELLIGENCE
+    %% QUERY ENGINE
     %% =========================
 
-    subgraph INTELLIGENCE["AI Query Intelligence"]
+    subgraph QUERY["Query & Intelligence Engine"]
 
-        QUERY[Natural Language Query]
+        QUERY_INPUT[Natural Language Query]
 
         INTENT[Intent Detection]
 
-        PLANNER[LLM Query Planner]
+        PLANNER[Query Planning]
 
-        ROUTER[Dynamic Query Routing]
-
-        SQLGEN[SQL Generation]
+        SQL[SQL Retrieval]
 
         SEMANTIC[Semantic Retrieval]
 
         HYBRID[Hybrid Retrieval]
 
-        ANALYTICS[Analytics Reasoning]
+        ANALYTICS[Academic Analytics]
 
-        RERANK[Context Reranking]
-
-        CONTEXT[Context Fusion & Validation]
-
-        MEMORY[Conversation Memory]
+        CONTEXT[Context Construction]
 
     end
 
-    FRONTEND -->|Natural Language Query| QUERY
+    FRONTEND --> QUERY_INPUT
 
-    QUERY --> INTENT
+    QUERY_INPUT --> INTENT
     INTENT --> PLANNER
-    PLANNER --> ROUTER
 
-    ROUTER --> SQLGEN
-    ROUTER --> SEMANTIC
-    ROUTER --> HYBRID
-    ROUTER --> ANALYTICS
+    PLANNER --> SQL
+    PLANNER --> SEMANTIC
+    PLANNER --> HYBRID
+    PLANNER --> ANALYTICS
 
-    %% Structured retrieval
-
-    SQLGEN --> POSTGRES
-
-    %% Semantic retrieval
-
-    SEMANTIC --> PGVECTOR
-    PGVECTOR --> RERANK
-
-    %% Hybrid retrieval
-
+    SQL --> POSTGRES
+    SEMANTIC --> POSTGRES
     HYBRID --> POSTGRES
-    HYBRID --> PGVECTOR
-
-    %% Analytics
-
     ANALYTICS --> POSTGRES
 
-    %% Context construction
-
     POSTGRES --> CONTEXT
-    RERANK --> CONTEXT
-    ANALYTICS --> CONTEXT
-
-    QUERY --> MEMORY
-    MEMORY --> CONTEXT
 
     %% =========================
-    %% LLM
+    %% AI LAYER
     %% =========================
 
-    LLM[Gemini<br/>LLM Provider]
+    EMBEDDING[Local Embedding Model<br/>384-Dimensional Embeddings]
 
-    CONTEXT --> LLM
+    GEMINI[Gemini 2.5 Flash<br/>LLM]
 
-    LLM --> VALIDATION[Response Validation<br/>Groundedness & Safety]
+    POSTGRES --> EMBEDDING
+    EMBEDDING --> POSTGRES
 
-    VALIDATION --> RESPONSE[Database-Grounded Response]
+    CONTEXT --> GEMINI
+    PLANNER --> GEMINI
+
+    GEMINI --> RESPONSE[Grounded Academic Response]
 
     RESPONSE --> FRONTEND
 
     %% =========================
-    %% REDIS
+    %% CACHE
     %% =========================
 
-    REDIS[(Redis<br/>Cache & State)]
+    REDIS[(Redis<br/>Query Cache)]
 
-    API --> REDIS
-    QUERY --> REDIS
-    PLANNER --> REDIS
+    BACKEND --> REDIS
+    QUERY_INPUT --> REDIS
 
     %% =========================
     %% EMAIL AUTOMATION
     %% =========================
 
-    subgraph EMAIL["Gmail Automation"]
+    subgraph EMAIL["Email Automation"]
 
         AGENT[Email Agent]
 
-        ATTACHMENT[Attachment Detection]
+        ATTACHMENT[Attachment Processing]
 
-        PROCESS[Attachment Processing]
+        REPORT[Academic Report Generation]
 
-        REPORT[PDF Report Generation]
-
-        NOTIFY[Email Notification / Reply]
+        SMTP[Email Response]
 
     end
 
     GMAIL --> AGENT
     AGENT --> ATTACHMENT
-    ATTACHMENT --> PROCESS
-    PROCESS --> PARSER
+    ATTACHMENT --> PARSER
 
     POSTGRES --> REPORT
-    REPORT --> NOTIFY
-    NOTIFY --> GMAIL
+    REPORT --> SMTP
+    SMTP --> GMAIL
 
     %% =========================
-    %% CLOUD STORAGE
+    %% REPORTING
     %% =========================
 
-    STORAGE[GCP Cloud Storage]
+    REPORTING[Academic Reporting]
 
-    PROCESS --> STORAGE
+    POSTGRES --> REPORTING
+    REPORTING --> FRONTEND
 
     %% =========================
-    %% OBSERVABILITY
+    %% DEPLOYMENT
     %% =========================
 
-    subgraph OBSERVABILITY["Application Monitoring"]
+    subgraph DEPLOYMENT["Docker Deployment"]
 
-        PROMETHEUS[Prometheus]
+        DOCKER[Docker Compose]
 
-        GRAFANA[Grafana]
+        DATABASE[PostgreSQL + pgvector]
+
+        API_CONTAINER[FastAPI Backend]
+
+        WEB_CONTAINER[React Frontend]
 
     end
 
-    API --> PROMETHEUS
-    PROMETHEUS --> GRAFANA
+    DOCKER --> DATABASE
+    DOCKER --> API_CONTAINER
+    DOCKER --> WEB_CONTAINER
 
-    %% =========================
-    %% CI/CD
-    %% =========================
-
-    GITHUB[GitHub]
-
-    CI[GitHub Actions<br/>CI / Testing]
-
-    DOCKER[Docker]
-
-    DEPLOY[Application Deployment]
-
-    GITHUB --> CI
-    CI --> DOCKER
-    DOCKER --> DEPLOY
-    DEPLOY --> API
-
-    %% =========================
-    %% STYLING
-    %% =========================
-
-    classDef client fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
-    classDef backend fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-    classDef data fill:#fff3e0,stroke:#ef6c00,stroke-width:2px;
-    classDef ai fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px;
-    classDef infra fill:#eceff1,stroke:#455a64,stroke-width:2px;
-
-    class USERS,FRONTEND client;
-    class API,AUTH,ROUTES,TENANT backend;
-    class POSTGRES,PGVECTOR,REDIS,STORAGE data;
-    class QUERY,INTENT,PLANNER,ROUTER,SQLGEN,SEMANTIC,HYBRID,ANALYTICS,RERANK,CONTEXT,MEMORY,LLM,VALIDATION ai;
-    class GITHUB,CI,DOCKER,DEPLOY,PROMETHEUS,GRAFANA infra;
+    API_CONTAINER --> DATABASE
 ```
+
 
 ## Core Features
 
