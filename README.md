@@ -16,120 +16,99 @@ Built for real-world educational institutions, the platform enables teachers, st
 ```mermaid
 flowchart TB
 
-    USER[Students / Teachers / Administrators]
+    USER[Students Teachers Administrators]
 
-    FRONTEND[React Frontend<br/>Vite + Tailwind CSS]
+    FRONTEND[React Frontend]
 
-    BACKEND[FastAPI Backend<br/>REST APIs]
+    BACKEND[FastAPI Backend]
 
-    AUTH[JWT Authentication<br/>Access + Refresh Tokens]
+    AUTH[JWT Authentication]
 
     USER --> FRONTEND
     FRONTEND --> BACKEND
     BACKEND --> AUTH
 
-    %% =========================
-    %% DATA INGESTION
-    %% =========================
 
-    subgraph INGESTION["Academic Data Ingestion"]
+    subgraph INGESTION [Academic Data Ingestion]
 
-        FILES[CSV / Excel / PDF]
+        FILES[CSV Excel PDF]
 
-        GMAIL[Gmail<br/>Email + Attachments]
+        GMAIL[Gmail Email Attachments]
 
-        PARSER[Document Parser<br/>Pandas + OpenPyXL + PDFPlumber + LlamaParse]
+        PARSER[Document Parser]
 
-        VALIDATE[Validation & Normalization]
+        VALIDATION[Validation and Normalization]
 
         PIPELINE[Processing Pipeline]
 
+        FILES --> PARSER
+        GMAIL --> PARSER
+        PARSER --> VALIDATION
+        VALIDATION --> PIPELINE
+
     end
 
-    BACKEND --> FILES
+    FRONTEND --> FILES
     BACKEND --> GMAIL
 
-    FILES --> PARSER
-    GMAIL --> PARSER
 
-    PARSER --> VALIDATE
-    VALIDATE --> PIPELINE
+    DATABASE[(PostgreSQL)]
 
-
-    %% =========================
-    %% DATABASE
-    %% =========================
-
-    POSTGRES[(PostgreSQL<br/>Academic Records)]
-
-    PIPELINE --> POSTGRES
+    PIPELINE --> DATABASE
 
 
-    %% =========================
-    %% EMBEDDING
-    %% =========================
+    subgraph SEMANTIC [Semantic Search]
 
-    EMBEDDING[Local Embedding Model<br/>384-Dimensional Embeddings]
+        EMBEDDING[Local Embedding Model]
 
-    PGVECTOR[(pgvector<br/>Semantic Vectors)]
+        DOCUMENTS[(Semantic Documents)]
 
-    POSTGRES --> EMBEDDING
-    EMBEDDING --> PGVECTOR
-
-
-    %% =========================
-    %% ANALYTICS DASHBOARD
-    %% =========================
-
-    subgraph DASHBOARD["Analytics Dashboard"]
-
-        SUMMARY[/analytics/summary]
-
-        STUDENTS[/analytics/students]
-
-        DATASETS[/analytics/datasets]
-
-        SUBJECT[/analytics/subject-wise]
-
-        REPORT_API[/analytics/report]
-
-        ANALYTICS_UI[Student Analytics Dashboard]
+        EMBEDDING --> DOCUMENTS
 
     end
 
-    POSTGRES --> SUMMARY
-    POSTGRES --> STUDENTS
-    POSTGRES --> DATASETS
-    POSTGRES --> SUBJECT
-    POSTGRES --> REPORT_API
-
-    SUMMARY --> ANALYTICS_UI
-    STUDENTS --> ANALYTICS_UI
-    DATASETS --> ANALYTICS_UI
-    SUBJECT --> ANALYTICS_UI
-
-    REPORT_API --> ANALYTICS_UI
-
-    BACKEND --> SUMMARY
-    BACKEND --> STUDENTS
-    BACKEND --> DATASETS
-    BACKEND --> SUBJECT
-    BACKEND --> REPORT_API
+    PIPELINE --> EMBEDDING
+    DATABASE --> EMBEDDING
 
 
-    %% =========================
-    %% QUERY ENGINE
-    %% =========================
+    subgraph ANALYTICS [Academic Analytics]
 
-    subgraph QUERY["Query & Intelligence Engine"]
+        SUMMARY[Summary Analytics]
 
-        QUERY_INPUT[Natural Language Query]
+        STUDENTS[Student Analytics]
+
+        DATASETS[Dataset Analytics]
+
+        SUBJECTS[Subject Wise Analytics]
+
+        DASHBOARD[Analytics Dashboard]
+
+        DATABASE --> SUMMARY
+        DATABASE --> STUDENTS
+        DATABASE --> DATASETS
+        DATABASE --> SUBJECTS
+
+        SUMMARY --> DASHBOARD
+        STUDENTS --> DASHBOARD
+        DATASETS --> DASHBOARD
+        SUBJECTS --> DASHBOARD
+
+    end
+
+    DASHBOARD --> FRONTEND
+
+
+    subgraph QUERY [Natural Language Query]
+
+        QUESTION[Natural Language Question]
+
+        CACHE[Query Cache]
 
         INTENT[Intent Detection]
 
         PLANNER[Query Planning]
 
-        SQL[SQL Retrieval]
+        SQL[Structured Query]
 
         SEMANTIC[Semantic Retrieval]
 
@@ -137,119 +116,122 @@ flowchart TB
 
         CONTEXT[Context Construction]
 
+        QUESTION --> CACHE
+        CACHE --> INTENT
+        INTENT --> PLANNER
+
+        PLANNER --> SQL
+        PLANNER --> SEMANTIC
+        PLANNER --> ANALYTICS_QUERY
+
+        SQL --> DATABASE
+        SEMANTIC --> DOCUMENTS
+        ANALYTICS_QUERY --> DATABASE
+
+        DATABASE --> CONTEXT
+        DOCUMENTS --> CONTEXT
+
     end
 
-    FRONTEND --> QUERY_INPUT
-
-    QUERY_INPUT --> INTENT
-    INTENT --> PLANNER
-
-    PLANNER --> SQL
-    PLANNER --> SEMANTIC
-    PLANNER --> ANALYTICS_QUERY
-
-    SQL --> POSTGRES
-
-    SEMANTIC --> PGVECTOR
-
-    ANALYTICS_QUERY --> POSTGRES
-
-    POSTGRES --> CONTEXT
-    PGVECTOR --> CONTEXT
+    FRONTEND --> QUESTION
 
 
-    %% =========================
-    %% AI LAYER
-    %% =========================
+    GEMINI[Gemini 2.5 Flash]
 
-    GEMINI[Gemini 2.5 Flash<br/>LLM]
-
-    CONTEXT --> GEMINI
     PLANNER --> GEMINI
+    CONTEXT --> GEMINI
 
     GEMINI --> RESPONSE[Grounded Academic Response]
 
     RESPONSE --> FRONTEND
 
 
-    %% =========================
-    %% REDIS CACHE
-    %% =========================
+    subgraph REPORTING [Academic Reporting]
 
-    REDIS[(Redis<br/>Query Cache)]
+        GRADE[Grade Analysis]
 
-    QUERY_INPUT --> REDIS
-    REDIS --> QUERY_INPUT
+        SUBJECT[Subject Analysis]
+
+        GRADE_CHART[Grade Charts]
+
+        SUBJECT_CHART[Subject Charts]
+
+        INSIGHTS[Academic Insights]
+
+        PDF[PDF Report]
+
+        GRADE --> GRADE_CHART
+        SUBJECT --> SUBJECT_CHART
+
+        GRADE --> INSIGHTS
+        SUBJECT --> INSIGHTS
+
+        GRADE --> PDF
+        SUBJECT --> PDF
+
+    end
+
+    DATABASE --> GRADE
+    DATABASE --> SUBJECT
+
+    GRADE_CHART --> DASHBOARD
+    SUBJECT_CHART --> DASHBOARD
+    INSIGHTS --> DASHBOARD
+
+    PDF --> FRONTEND
 
 
-    %% =========================
-    %% EMAIL AUTOMATION
-    %% =========================
-
-    subgraph EMAIL["Email Automation"]
+    subgraph EMAIL [Email Automation]
 
         AGENT[Email Agent]
 
         ATTACHMENT[Attachment Processing]
 
-        PROCESS[Attachment Processing Pipeline]
+        EMAIL_REPORT[Academic Report]
 
-        REPORT[Academic Report Generation]
+        EMAIL_RESPONSE[Email Response]
 
-        SMTP[Email Response]
+        AGENT --> ATTACHMENT
+        ATTACHMENT --> PARSER
+
+        DATABASE --> EMAIL_REPORT
+        EMAIL_REPORT --> EMAIL_RESPONSE
 
     end
 
     GMAIL --> AGENT
-
-    AGENT --> ATTACHMENT
-    ATTACHMENT --> PROCESS
-
-    PROCESS --> PARSER
-
-    POSTGRES --> REPORT
-    REPORT --> SMTP
-    SMTP --> GMAIL
+    EMAIL_RESPONSE --> GMAIL
 
 
-    %% =========================
-    %% REPORTING & INSIGHTS
-    %% =========================
+    subgraph MANAGEMENT [Dataset Management]
 
-    REPORTING[Academic Reporting Service]
+        DATASET_MANAGEMENT[Dataset Management]
 
-    INSIGHTS[Academic Insights]
+        REINDEX[Semantic Index Rebuild]
 
-    POSTGRES --> REPORTING
-
-    REPORTING --> INSIGHTS
-    REPORTING --> ANALYTICS_UI
-
-
-    %% =========================
-    %% DEPLOYMENT
-    %% =========================
-
-    subgraph DEPLOYMENT["Docker Deployment"]
-
-        DOCKER[Docker Compose]
-
-        DATABASE[PostgreSQL + pgvector]
-
-        API_CONTAINER[FastAPI Backend]
-
-        WEB_CONTAINER[React Frontend]
+        DATASET_MANAGEMENT --> REINDEX
 
     end
 
-    DOCKER --> DATABASE
-    DOCKER --> API_CONTAINER
-    DOCKER --> WEB_CONTAINER
+    BACKEND --> DATASET_MANAGEMENT
+    DATASET_MANAGEMENT --> DATABASE
+    REINDEX --> EMBEDDING
+    EMBEDDING --> DOCUMENTS
 
-    API_CONTAINER --> DATABASE
-    WEB_CONTAINER --> API_CONTAINER
+
+    subgraph DEPLOYMENT [Docker Deployment]
+
+        DATABASE_CONTAINER[PostgreSQL Container]
+
+        BACKEND_CONTAINER[FastAPI Container]
+
+        FRONTEND_CONTAINER[React Container]
+
+        DATABASE_CONTAINER --> BACKEND_CONTAINER
+        BACKEND_CONTAINER --> FRONTEND_CONTAINER
+
+    end
 ```
-
 ## Core Features
 
 
