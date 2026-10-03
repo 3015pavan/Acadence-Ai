@@ -2,10 +2,8 @@
 
 > Acadence AI — AI-Powered Academic Intelligence & Automation Platform
 
-[![Python](https://img.shields.io/badge/python-3.9+-3670A0?style=flat&logo=python)](/)
-[![React](https://img.shields.io/badge/react-18.0+-61DAFB?style=flat&logo=react)](/)
 
-Acadence AI is a multi-tenant AI-powered academic automation platform designed for large-scale educational datasets. It combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
+Acadence AI is a multi-tenant AI-powered academic automation platform designed for Academic educational datasets. It combines adaptive Hybrid RAG, intelligent agents, SQL-grounded reasoning, semantic retrieval, and automation workflows to deliver accurate, grounded, and conversational insights over academic records in real time.
 
 The platform keeps each tenant's data, logs, and agent activity isolated so multiple institutions can use the same deployment without seeing each other's records.
 
